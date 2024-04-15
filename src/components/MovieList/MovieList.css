@@ -1,11 +1,24 @@
 .movie-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(266px, auto)) ;
+    grid-template-rows: repeat(2, minmax(400px, auto)) ;
+    column-gap: 24px;
+    row-gap: 20px;
+
 }
 
-.movie-item {
-    width: 30%;
-    margin-bottom: 80px;
+.movie-item{
+    border-radius: 120px;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+img:hover{
+    transition: 0.5s all;
+    box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1);
 }

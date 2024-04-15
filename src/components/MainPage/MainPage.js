@@ -8,7 +8,7 @@ import MovieListHeading from '../MovieList/MovieListHeading/MovieListHeading';
 
 const MainPage = ({ movies, setSearchValue }) => {
     return (
-        <div className="MainPage">
+        <div className="wrapper">
             <Header/>
             <div>
                 <h1>Главная страница</h1>

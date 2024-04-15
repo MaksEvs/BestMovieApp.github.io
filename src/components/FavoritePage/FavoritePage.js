@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import Header from "../Header/Header";
+import './FavoritesPage.css'
 
 const FavoritesPage = (props) => {
 	if (!props.isLoggedIn) {
@@ -8,8 +9,8 @@ const FavoritesPage = (props) => {
 	}
 
 	return (
-		<div>
-			<Header />
+		<div className="wrapper">
+			<Header/>
 			<div>
 				<h1>Избранное</h1>
 			</div>
