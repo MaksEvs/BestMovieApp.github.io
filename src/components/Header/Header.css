@@ -1,0 +1,32 @@
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(40px);
+    background: rgba(18, 24, 41, 0.8);
+    margin-bottom: 80px;
+}
+
+.header__content{
+    width: 428px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.header__link{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #A8AEBF
+}
+
+.header__logo{
+    height: 40px;
+    width: 40px;
+}
+
+

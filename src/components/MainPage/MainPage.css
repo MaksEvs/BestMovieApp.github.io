@@ -1,0 +1,22 @@
+.MainPage{
+    background: url('../../img/Background.png') center center/cover no-repeat;
+    height: 1752px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+h1 {
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 125%;
+    color: #EBEEF5;
+    margin-bottom: 16px;
+}
+
+.main__text{
+    width: 588px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #EBEEF5;
+    margin-bottom: 24px;
+}
