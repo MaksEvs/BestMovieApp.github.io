@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import RegisterPage from "./components/LoginPage/RegisterPage";
 import FavoritesPage from "./components/FavoritePage/FavoritePage";
 
+
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(
 		!!localStorage.getItem("username")
@@ -27,7 +28,8 @@ const App = () => {
 
 	return (
 		<Router>
-			<div>
+			
+				<div>
 				<Routes>
 					<Route
 						path="/"
@@ -47,7 +49,9 @@ const App = () => {
 						}
 					/>
 				</Routes>
-			</div>
+				</div>
+				
+			
 		</Router>
 	);
 };

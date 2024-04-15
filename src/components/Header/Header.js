@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import './Header.css'
+
 
 const Header = () => {
 	const location = useLocation();
@@ -20,48 +22,58 @@ const Header = () => {
 	let headerContent = null;
 	if (currentPage === "/") {
 		headerContent = (
-			<div>
-				<Link to="/">Главная</Link>
-				<Link to="/favorites">Избранное</Link>
+			<div className="header__content">
+				<Link to="/" className="header__link">Главная</Link>
+				<Link to="/favorites" className="header__link">Избранное</Link>
 				{isLoggedIn ? (
 					<div>
 						<span>{localStorage.getItem("username")}</span>
 						<button onClick={logoutHandler}>Выход</button>
 					</div>
 				) : (
-					<Link to="/login">Вход</Link>
+					<Link to="/login" className="header__link">Вход</Link>
 				)}
 			</div>
 		);
 	} else if (currentPage === "/login" || currentPage === "/register") {
 		headerContent = (
-			<div>
-				<Link to="/">Главная</Link>
+			<div className="header__content">
+				<Link to="/" className="header__link">Главная</Link>
 			</div>
 		);
 	} else if (currentPage === "/favorites") {
 		headerContent = (
-			<div>
-				<Link to="/">Главная</Link>
+			<div className="header__content">
+				<Link to="/" className="header__link">Главная</Link>
 				{isLoggedIn ? (
 					<div>
 						<span>{localStorage.getItem("username")}</span>
 						<button onClick={logoutHandler}>Выход</button>
 					</div>
 				) : (
-					<Link to="/login">Вход</Link>
+					<Link to="/login" className="header__link">Вход</Link>
 				)}
 			</div>
 		);
 	} else {
 		headerContent = (
-			<div>
-				<Link to="/">Главная</Link>
+			<div className="header__content">
+				<Link to="/" className="header__link">Главная</Link>
 			</div>
 		);
 	}
 
-	return <header>{headerContent}</header>;
+	return (
+	<header>
+		<div  className="header__logo">
+			<a href="#">
+				<img src="../../icons/logo.svg" alt="logo"></img>
+			</a>
+			
+		</div>
+		{headerContent}	
+	</header>
+);
 };
 
 export default Header;
