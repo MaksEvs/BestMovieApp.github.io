@@ -1,0 +1,37 @@
+
+header{
+    margin: 0;
+}
+.header__link{
+    text-decoration: none;
+}
+
+h1{
+    margin-bottom: 50px;
+}
+
+form{
+    margin-bottom: 50px;
+}
+
+input{
+    margin-right: 20px;
+}
+
+.log{
+    font-size: 20px;
+    border: 1px solid #EBEEF5;
+}
+.registration{
+    text-decoration: none;
+    font-size: 21px;
+    color: #EBEEF5;
+    border: 1px solid #EBEEF5;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.registration:hover{
+    transition: 0.5s all;
+    opacity: 0.7;
+}

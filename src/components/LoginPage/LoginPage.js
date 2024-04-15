@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import './LoginPage.css'
 
 const LoginPage = (props) => {
 	const [formData, setFormData] = useState({
@@ -27,12 +28,12 @@ const LoginPage = (props) => {
 	}
 
 	return (
-		<div>
+		<div className="wrapper">
 			<header>
-				<Link to="/">Главная</Link>
+				<Link to="/" className="header__link">Главная</Link>
 			</header>
 			<div>
-				<h1>Вход</h1>
+				<h1>Войдите или зарегистрируйтесь</h1>
 				<form onSubmit={loginHandler}>
 					<input
 						type="text"
@@ -48,9 +49,9 @@ const LoginPage = (props) => {
 						value={formData.password}
 						onChange={inputChangeHandler}
 					/>
-					<button type="submit">Вход</button>
+					<button type="submit" className="log">Вход</button>
 				</form>
-				<Link to="/register">Регистрация</Link>
+				<Link to="/register" className="registration">Регистрация</Link>
 			</div>
 		</div>
 	);

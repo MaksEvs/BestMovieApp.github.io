@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Header from "../Header/Header";
+import './RegisterPage.css'
 
 const RegisterPage = (props) => {
 	const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const RegisterPage = (props) => {
 	}
 
 	return (
-		<div>
+		<div className="wrapper">
 			<Header />
 			<div>
 				<h1>Форма регистрации</h1>
@@ -71,7 +72,7 @@ const RegisterPage = (props) => {
 						value={formData.repeatPassword}
 						onChange={inputChandeHandler}
 					/>
-					<button type="submit">Зарегистрироваться</button>
+					<button type="submit" className="register__button">Зарегистрироваться</button>
 				</form>
 				{error && <p style={{ color: "red" }}>{error}</p>}
 			</div>

@@ -24,9 +24,22 @@ header {
     color: #A8AEBF
 }
 
+.header__link:hover{
+    transition: 0.5s all;
+    opacity: 0.7;
+}
+
 .header__logo{
     height: 40px;
     width: 40px;
 }
 
+.username{
+    color: #EBEEF5;
+    font-size: 18px;
+    border: 1px solid #EBEEF5;
+    padding: 7px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1)
+}
 
