@@ -1,13 +1,17 @@
-import React from 'react';
-import './Input.css'
+import React, { useState } from 'react';
+import './Input.css';
 
-const Input = () => {
-
+const Input = ({ setSearchValue }) => {
     const onChangeInputHandler = (event) => {
-        console.log(event.currentTarget.value)
-    }
+        setSearchValue(event.currentTarget.value);
+    };
+
     return (
-       <input type="text" placeholder='Search Movies or TV Shows' onChange={onChangeInputHandler}></input>
+        <input
+            type="text"
+            placeholder='Search Movies or TV Shows'
+            onChange={onChangeInputHandler}
+        ></input>
     );
 };
 
