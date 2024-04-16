@@ -17,50 +17,45 @@ const Header = () => {
 	// Проверяем, залогинен ли пользователь
 	const isLoggedIn = localStorage.getItem("username");
 
-	// Содержимое заголовка в зависимости от текущей страницы и состояния авторизации
-	let headerContent = null;
-	if (currentPage === "/") {
-		headerContent = (
-			<div className="header__content">
-				<Link to="/" className="header__link">Главная</Link>
-				<Link to="/favorites" className="header__link">Избранное</Link>
-				{isLoggedIn ? (
-					<div>
-						<span className="username">{localStorage.getItem("username")}</span>
-						<button onClick={logoutHandler}>Выход</button>
-					</div>
-				) : (
-					<Link to="/login" className="header__link">Вход</Link>
-				)}
-			</div>
-		);
-	} else if (currentPage === "/login" || currentPage === "/register") {
-		headerContent = (
-			<div className="header__content">
-				<Link to="/" className="header__link">Главная</Link>
-			</div>
-		);
-	} else if (currentPage === "/favorites") {
-		headerContent = (
-			<div className="header__content">
-				<Link to="/" className="header__link">Главная</Link>
-				{isLoggedIn ? (
-					<div>
-						<span className="username">{localStorage.getItem("username")}</span>
-						<button onClick={logoutHandler}>Выход</button>
-					</div>
-				) : (
-					<Link to="/login" className="header__link">Вход</Link>
-				)}
-			</div>
-		);
-	} else {
-		headerContent = (
-			<div className="header__content">
-				<Link to="/" className="header__link">Главная</Link>
-			</div>
-		);
-	}
+// Содержимое заголовка в зависимости от текущей страницы и состояния авторизации
+let headerContent = null;
+if (currentPage === "/" || currentPage === "/favorites") {
+    headerContent = (
+        <div className="header__content">
+            <Link to="/" className="header__link">Главная</Link>
+            <Link to="/favorites" className="header__link">Избранное</Link>
+            {isLoggedIn ? (
+                <div>
+                    <span className="username">{localStorage.getItem("username")}</span>
+                    <button onClick={logoutHandler}>Выход</button>
+                </div>
+            ) : (
+                <Link to="/login" className="header__link">Вход</Link>
+            )}
+        </div>
+    );
+} else if (currentPage === "/login" || currentPage === "/register") {
+    headerContent = (
+        <div className="header__content">
+            <Link to="/" className="header__link">Главная</Link>
+            <Link to="/favorites" className="header__link">Избранное</Link>
+            {isLoggedIn ? (
+                <div>
+                    <span className="username">{localStorage.getItem("username")}</span>
+                    <button onClick={logoutHandler}>Выход</button>
+                </div>
+            ) : (
+                <Link to="/login" className="header__link">Вход</Link>
+            )}
+        </div>
+    );
+} else {
+    headerContent = (
+        <div className="header__content">
+            <Link to="/" className="header__link">Главная</Link>
+        </div>
+    );
+}
 
 	return (
 	<header>

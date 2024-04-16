@@ -30,7 +30,10 @@ const LoginPage = (props) => {
 	return (
 		<div className="wrapper">
 			<header>
-				<Link to="/" className="header__link">Главная</Link>
+				<div className="header__content">
+					<Link to="/" className="header__link">Главная</Link>
+					<Link to="/favorites" className="header__link">Избранное</Link>
+				</div>
 			</header>
 			<div>
 				<h1>Войдите или зарегистрируйтесь</h1>

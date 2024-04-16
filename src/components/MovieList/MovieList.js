@@ -4,8 +4,7 @@ import './MovieList.css';
 const MovieList = (props) => {
     const [randomMovies, setRandomMovies] = useState([]);
 
-    // Фильмы, которые отображаются на странице, пока запрос не был введён
-    // На данный момент не работает, а есть просто random фильмы
+    // Добавить по настоящему случайные фильмы
     const getRandomMovies = async () => {
         try {
             const url = 'http://www.omdbapi.com/?s=random&apikey=263d22d8';
@@ -35,6 +34,7 @@ const MovieList = (props) => {
             {moviesToDisplay.map((movie, index) => (
                 <div key={movie.imdbID} className="movie-item">
                     <img src={movie.Poster} alt='movie' />
+                    <p className="movie-title">{movie.Title}</p>
                 </div>
             ))}
         </div>
