@@ -9,9 +9,9 @@ const FavoritesPage = (props) => {
 	}
 
 	return (
-		<div className="wrapper">
+		<div>
 			<Header/>
-			<div>
+			<div className="wrapper">
 				<h1>Избранное</h1>
 			</div>
 		</div>

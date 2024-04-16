@@ -8,10 +8,9 @@ import MovieListHeading from '../MovieList/MovieListHeading/MovieListHeading';
 
 const MainPage = ({ movies, setSearchValue }) => {
     return (
-        <div className="wrapper">
+        <div >
             <Header/>
-            <div>
-                <h1>Главная страница</h1>
+            <div className="wrapper">
 
                 <div className="main__text">List of movies and TV Shows, I, Pramod Poudel have watched till date. Explore what I have watched and also feel free to make a suggestion. 😉</div>
 

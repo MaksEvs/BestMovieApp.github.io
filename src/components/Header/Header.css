@@ -5,11 +5,14 @@ header {
     align-items: center;
     backdrop-filter: blur(40px);
     background: rgba(18, 24, 41, 0.8);
-    margin-bottom: 80px;
+    padding-left: 120px;
+    padding-right: 120px;
+    margin-top: 80px;
+
 }
 
 .header__content{
-    width: 428px;
+    width: 350px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -19,7 +22,7 @@ header {
 .header__link{
     text-decoration: none;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 150%;
     color: #A8AEBF
 }
@@ -30,13 +33,19 @@ header {
 }
 
 .header__logo{
-    height: 40px;
-    width: 40px;
+    height: 55px;
+    width: 55px;
+}
+
+.header__img{
+    height: 100%;
+    width: 100%;
+
 }
 
 .username{
     color: #EBEEF5;
-    font-size: 18px;
+    font-size: 17px;
     border: 1px solid #EBEEF5;
     padding: 7px;
     border-radius: 12px;
