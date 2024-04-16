@@ -3,19 +3,20 @@
     height: 1752px;
     padding-left: 120px;
     padding-right: 120px;
+    padding-top: 50px;
 }
 h1 {
     font-weight: 600;
-    font-size: 64px;
+    font-size: 45px;
     line-height: 125%;
     color: #EBEEF5;
-    margin-bottom: 16px;
+    margin: 0;
 }
 
 .main__text{
     width: 588px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 150%;
     color: #EBEEF5;
     margin-bottom: 24px;

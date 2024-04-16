@@ -46,9 +46,9 @@ const RegisterPage = (props) => {
 	}
 
 	return (
-		<div className="wrapper">
+		<div >
 			<Header />
-			<div>
+			<div className="wrapper">
 				<h1>Форма регистрации</h1>
 				<form onSubmit={registerHandler}>
 					<input

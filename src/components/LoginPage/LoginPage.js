@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import './LoginPage.css'
+import Header from "../Header/Header";
 
 const LoginPage = (props) => {
 	const [formData, setFormData] = useState({
@@ -28,14 +29,9 @@ const LoginPage = (props) => {
 	}
 
 	return (
-		<div className="wrapper">
-			<header>
-				<div className="header__content">
-					<Link to="/" className="header__link">Главная</Link>
-					<Link to="/favorites" className="header__link">Избранное</Link>
-				</div>
-			</header>
-			<div>
+		<div >
+			<Header/>
+			<div className="wrapper">
 				<h1>Войдите или зарегистрируйтесь</h1>
 				<form onSubmit={loginHandler}>
 					<input
