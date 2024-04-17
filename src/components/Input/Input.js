@@ -9,7 +9,7 @@ const Input = ({ setSearchValue }) => {
     return (
         <input
             type="text"
-            placeholder='Search Movies or TV Shows'
+            placeholder='Поиск фильмов или сериалов'
             onChange={onChangeInputHandler}
         ></input>
     );
