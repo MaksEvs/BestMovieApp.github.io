@@ -1,9 +1,7 @@
 .wrapper{
     background: url('../../img/Background.png') center center/cover no-repeat;
-    height: 1752px;
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 50px;
+    max-height: 1550px;
+    padding: 50px 120px 50px 120px;
 }
 h1 {
     font-weight: 600;

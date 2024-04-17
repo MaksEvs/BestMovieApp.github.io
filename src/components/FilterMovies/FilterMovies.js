@@ -4,9 +4,9 @@ import './FilterMovies.css'
 const FilterMovies = () => {
     return (
         <div className='buttons'>
-            <button>All</button>
-            <button>Movies</button>
-            <button>TV Shows</button>
+            <button>Всё</button>
+            <button>Фильмы</button>
+            <button>Сериалы</button>
         </div>
     );
 };

@@ -12,9 +12,7 @@ const MainPage = ({ movies, setSearchValue }) => {
             <Header/>
             <div className="wrapper">
 
-                <div className="main__text">List of movies and TV Shows, I, Pramod Poudel have watched till date. Explore what I have watched and also feel free to make a suggestion. 😉</div>
-
-                <MovieListHeading heading="Discover Movies" />
+                <MovieListHeading heading="Откройте для себя мир кино" />
                 {setSearchValue && <Input setSearchValue={setSearchValue} />}
 				{/* компонент Input будет отображаться только в том случае, если setSearchValue была передана в компонент MainPage */}
 
