@@ -1,10 +1,12 @@
 .movie-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(266px, auto));
-    grid-template-rows: repeat(2, minmax(400px, auto));
+    grid-template-columns: repeat(5, minmax(243px, auto));
+    grid-template-rows: repeat(2, minmax(200px, auto));
     column-gap: 24px;
     row-gap: 20px;
 }
+
+
 
 .movie-item {
     position: relative;
@@ -27,12 +29,11 @@
 
 img {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
+    height: 100%;
     cursor: pointer;
 }
 
-img:hover {
-    transition: 0.5s all;
+.movie-item:hover {
+    transition: 0.3s all;
     box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1);
 }
