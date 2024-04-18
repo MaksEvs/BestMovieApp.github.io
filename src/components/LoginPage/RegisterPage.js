@@ -7,6 +7,7 @@ const RegisterPage = (props) => {
 	return (
 		<div className="wrapper">
 			<h1>Форма регистрации</h1>
+			{props.error && <p style={{ color: "red" }}>{props.error}</p>}
 			<form onSubmit={props.registerHandler}>
 				<input
 					type="text"
@@ -33,7 +34,6 @@ const RegisterPage = (props) => {
 					Зарегистрироваться
 				</button>
 			</form>
-			{props.error && <p style={{ color: "red" }}>{props.error}</p>}
 		</div>
 	);
 };

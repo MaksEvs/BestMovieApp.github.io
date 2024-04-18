@@ -1,37 +1,57 @@
-
-header{
-    margin: 0;
+header {
+	margin: 0;
 }
-.header__link{
-    text-decoration: none;
-}
-
-h1{
-    margin-bottom: 50px;
+.header__link {
+	text-decoration: none;
 }
 
-form{
-    margin-bottom: 50px;
+h1 {
+	margin-bottom: 50px;
 }
 
-input{
-    margin-right: 20px;
+form {
+	display: inline-block;
+	margin-bottom: 50px;
 }
 
-.log{
-    font-size: 20px;
-    border: 1px solid #EBEEF5;
+input {
+	display: block;
+	height: 50px;
+	margin-bottom: 20px;
 }
-.registration{
-    text-decoration: none;
-    font-size: 21px;
-    color: #EBEEF5;
-    border: 1px solid #EBEEF5;
-    padding: 8px;
-    border-radius: 8px;
+.button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: auto;
+	padding: 0;
+	width: 100%;
+	:hover {
+		background: white;
+		color: black;
+	}
+}
+.button button,
+.button a {
+	height: 45px;
+	line-height: 45px;
 }
 
-.registration:hover{
-    transition: 0.5s all;
-    opacity: 0.7;
+.log {
+	height: 40px;
+	font-size: 21px;
+	border: 1px solid #ebeef5;
+}
+.registration {
+	text-decoration: none;
+	font-size: 21px;
+	color: #ebeef5;
+	border: 1px solid #ebeef5;
+	padding: 1px 6px;
+	border-radius: 8px;
+}
+
+.registration:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
 }

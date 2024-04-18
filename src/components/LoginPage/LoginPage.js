@@ -21,13 +21,15 @@ const LoginPage = (props) => {
 					value={props.password}
 					onChange={props.inputChangeHandler}
 				/>
-				<button type="submit" className="log">
-					Вход
-				</button>
+				<div className="button">
+					<button type="submit" className="log">
+						Вход
+					</button>
+					<Link to="/register" className="registration">
+						Регистрация
+					</Link>
+				</div>
 			</form>
-			<Link to="/register" className="registration">
-				Регистрация
-			</Link>
 		</div>
 	);
 };
