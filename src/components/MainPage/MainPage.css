@@ -19,3 +19,9 @@ h1 {
 	color: #ebeef5;
 	margin-bottom: 24px;
 }
+
+h2 {
+	font-size: 40px;
+	color: #ebeef5;
+	margin-top: 0;
+}
