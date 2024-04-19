@@ -57,9 +57,11 @@ const Header = () => {
 					</Link>
 				) : null}
 				{isLoggedIn ? (
-					<div>
+					<div className="user-block">
 						<span className="username">{localStorage.getItem("username")}</span>
-						<button onClick={logoutHandler}>Выход</button>
+						<button onClick={logoutHandler} className="logout_button">
+							Выход
+						</button>
 					</div>
 				) : (
 					<Link to="/login" className="header__link">

@@ -11,6 +11,7 @@ const LoginPage = (props) => {
 					type="text"
 					name="username"
 					placeholder="Имя пользователя"
+					className="input-oval"
 					value={props.username}
 					onChange={props.inputChangeHandler}
 				/>
@@ -18,14 +19,15 @@ const LoginPage = (props) => {
 					type="password"
 					name="password"
 					placeholder="Пароль"
+					className="input-oval"
 					value={props.password}
 					onChange={props.inputChangeHandler}
 				/>
 				<div className="button">
-					<button type="submit" className="log">
+					<button type="submit" className="login">
 						Вход
 					</button>
-					<Link to="/register" className="registration">
+					<Link to="/register" className="register">
 						Регистрация
 					</Link>
 				</div>

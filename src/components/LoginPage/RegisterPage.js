@@ -1,5 +1,5 @@
 import React from "react";
-import "./RegisterPage.css";
+import "./LoginPage.css";
 
 const RegisterPage = (props) => {
 	// const { formData = , inputChangeHandler, registerHandler, error } = props;
@@ -13,6 +13,7 @@ const RegisterPage = (props) => {
 					type="text"
 					name="username"
 					placeholder="Имя пользователя"
+					className="input-oval"
 					value={props.formData.username}
 					onChange={props.inputChangeHandler}
 				/>
@@ -20,6 +21,7 @@ const RegisterPage = (props) => {
 					type="password"
 					name="password"
 					placeholder="Пароль"
+					className="input-oval"
 					value={props.formData.password}
 					onChange={props.inputChangeHandler}
 				/>
@@ -27,10 +29,11 @@ const RegisterPage = (props) => {
 					type="password"
 					name="repeatPassword"
 					placeholder="Повторите пароль"
+					className="input-oval"
 					value={props.formData.repeatPassword}
 					onChange={props.inputChangeHandler}
 				/>
-				<button type="submit" className="register__button">
+				<button type="submit" className="registration">
 					Зарегистрироваться
 				</button>
 			</form>
