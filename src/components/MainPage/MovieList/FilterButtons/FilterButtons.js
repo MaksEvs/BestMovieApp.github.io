@@ -1,27 +1,17 @@
 import React from "react";
 
-const FilterButtons = ({ randomMovies, setFilteredMovies }) => {
-	
-	const handleFilter = (type) => {
-		if (!type) {
+const FilterButtons = ({ handleFilterChange }) => {
+    const handleClick = (type) => {
+        handleFilterChange(type); // Передаем тип фильтрации обратно в родительский компонент
+    };
 
-			setFilteredMovies(randomMovies);
-		} else {
-	
-			const filtered = randomMovies.filter(
-				(movie) => movie.Type.toLowerCase() === type.toLowerCase()
-			);
-			setFilteredMovies(filtered);
-		}
-	};
-
-	return (
-		<div className="filter-buttons">
-			<button onClick={() => handleFilter("")}>Все</button>
-			<button onClick={() => handleFilter("series")}>Сериалы</button>
-			<button onClick={() => handleFilter("movie")}>Фильмы</button>
-		</div>
-	);
+    return (
+        <div className="filter-buttons">
+            <button onClick={() => handleClick("movie")}>Фильмы</button>
+            <button onClick={() => handleClick("tv_series")}>Сериалы</button>
+            <button onClick={() => handleClick("all")}>Все</button>
+        </div>
+    );
 };
 
 export default FilterButtons;

@@ -1,17 +1,16 @@
 import React from "react";
+import './MovieList.css'
 
 const MovieList = ({ movies, onMovieClick }) => {
 	return (
-		<div className="movie-list">
-			<ul>
+			<ul className="movie-list">
 				{movies.map((movie) => (
-					<li key={movie.filmId} onClick={() => onMovieClick(movie)}>
+					<li className="movie-item" key={movie.filmId} onClick={() => onMovieClick(movie)}>
 						<img src={movie.posterUrlPreview} alt={movie.nameRu} />
-						{/* <p>{movie.nameRu}</p> */}
+						<p className="movie-title">{movie.nameRu}</p>
 					</li>
 				))}
 			</ul>
-		</div>
 	);
 };
 
