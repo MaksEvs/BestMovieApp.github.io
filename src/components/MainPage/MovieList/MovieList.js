@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./MovieList.css";
 
-const MovieList = (props) => {
+const MovieList = ({ getMovieRequest, movies }) => {
 	const [randomMovies, setRandomMovies] = useState([]);
 
-	// Добавить по настоящему случайные фильмы
+	// Получить случайные фильмы
 	const getRandomMovies = async () => {
 		try {
 			const url = "http://www.omdbapi.com/?s=random&apikey=263d22d8";
@@ -20,15 +20,14 @@ const MovieList = (props) => {
 	};
 
 	useEffect(() => {
-		if (!props.movies || props.movies.length === 0) {
+		if (!movies || movies.length === 0) {
 			// Если основной массив фильмов пуст, получаем случайные фильмы
 			getRandomMovies();
 			console.log("getRandomMovies executed");
 		}
-	}, [props.movies]);
+	}, [movies]);
 
-	const moviesToDisplay =
-		props.movies && props.movies.length > 0 ? props.movies : randomMovies;
+	const moviesToDisplay = movies && movies.length > 0 ? movies : randomMovies;
 
 	return (
 		<div className="movie-list">

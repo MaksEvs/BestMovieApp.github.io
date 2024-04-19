@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
@@ -10,7 +10,6 @@ const App = () => {
 		!!localStorage.getItem("username")
 	);
 
-	const [movies, setMovies] = useState([]);
 	const [searchValue, setSearchValue] = useState("");
 
 	const handleLogin = (username) => {
@@ -28,21 +27,6 @@ const App = () => {
 		setIsLoggedIn(true);
 	};
 
-	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
-
-		const response = await fetch(url);
-		const responseJson = await response.json();
-
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
-		}
-	};
-
-	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
-
 	return (
 		<Router>
 			<div>
@@ -53,7 +37,6 @@ const App = () => {
 							<MainPage
 								isLoggedIn={isLoggedIn}
 								onLogout={handleLogout}
-								movies={movies}
 								searchValue={searchValue}
 								setSearchValue={setSearchValue}
 							/>

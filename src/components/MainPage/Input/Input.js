@@ -4,6 +4,7 @@ import "./Input.css";
 const Input = ({ setSearchValue }) => {
 	const onChangeInputHandler = (event) => {
 		setSearchValue(event.currentTarget.value);
+		console.log(event.currentTarget.value);
 	};
 
 	return (
