@@ -1,55 +1,71 @@
 header {
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(40px);
-    background: rgba(18, 24, 41, 0.8);
-    padding-left: 120px;
-    padding-right: 120px;
-    margin-top: 80px;
-    
-
+	height: 80px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	backdrop-filter: blur(40px);
+	background: rgba(18, 24, 41, 0.8);
+	padding-left: 120px;
+	padding-right: 120px;
+	margin-top: 80px;
 }
 
-.header__content{
-    width: 350px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
+.header__content {
+	width: 350px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
-.header__link{
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 150%;
-    color: #A8AEBF
+.header__link {
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 150%;
+	color: #a8aebf;
 }
 
-.header__link:hover{
-    transition: 0.5s all;
-    opacity: 0.7;
+.header__link:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
 }
 
-.header__logo{
-    height: 55px;
-    width: 55px;
+.header__logo {
+	height: 55px;
+	width: 55px;
 }
 
-.header__img{
-    height: 100%;
-    width: 100%;
-
+.header__img {
+	height: 100%;
+	width: 100%;
 }
 
-.username{
-    color: #EBEEF5;
-    font-size: 17px;
-    border: 1px solid #EBEEF5;
-    padding: 7px;
-    border-radius: 12px;
-    box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1)
+.username {
+	color: #ebeef5;
+	font-size: 17px;
+	border: 1px solid #ebeef5;
+	padding: 7px;
+	border-radius: 12px;
+	box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1);
 }
 
+.user-block {
+	display: flex;
+	width: 160px;
+	justify-content: space-between;
+	align-items: center;
+}
+.logout_button {
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 150%;
+	color: #a8aebf;
+	border: none; /* Убираем границы */
+	background: none;
+}
+
+.logout_button:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
+	cursor: pointer;
+}
