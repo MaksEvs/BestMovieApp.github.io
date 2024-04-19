@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./MovieList.css";
+import Input from "./Input/Input";
+import FilterButtons from "./FilterButtons/FilterButtons";
+import MovieSearch from "./MovieSearch/MovieSearch";
 
-const MovieList = ({ getMovieRequest, movies }) => {
+const MovieList = (props) => {
 	const [randomMovies, setRandomMovies] = useState([]);
+	const [filteredMovies, setFilteredMovies] = useState([]);
 
-	// Получить случайные фильмы
+
 	const getRandomMovies = async () => {
 		try {
 			const url = "http://www.omdbapi.com/?s=random&apikey=263d22d8";
@@ -13,6 +17,7 @@ const MovieList = ({ getMovieRequest, movies }) => {
 
 			if (responseJson.Search) {
 				setRandomMovies(responseJson.Search);
+				setFilteredMovies(responseJson.Search); 
 			}
 		} catch (error) {
 			console.error("Error fetching random movies:", error);
@@ -20,23 +25,22 @@ const MovieList = ({ getMovieRequest, movies }) => {
 	};
 
 	useEffect(() => {
-		if (!movies || movies.length === 0) {
-			// Если основной массив фильмов пуст, получаем случайные фильмы
-			getRandomMovies();
-			console.log("getRandomMovies executed");
-		}
-	}, [movies]);
+		getRandomMovies();
+	}, []);
 
-	const moviesToDisplay = movies && movies.length > 0 ? movies : randomMovies;
+
+	const handleSetFilteredMovies = (movies) => {
+		setFilteredMovies(movies);
+	};
 
 	return (
 		<div className="movie-list">
-			{moviesToDisplay.map((movie, index) => (
-				<div key={movie.imdbID} className="movie-item">
-					<img src={movie.Poster} alt="movie" />
-					<p className="movie-title">{movie.Title}</p>
-				</div>
-			))}
+			<Input setFilteredMovies={handleSetFilteredMovies} />
+			<FilterButtons
+				randomMovies={randomMovies}
+				setFilteredMovies={handleSetFilteredMovies}
+			/>
+			<MovieSearch filteredMovies={filteredMovies}/>
 		</div>
 	);
 };
