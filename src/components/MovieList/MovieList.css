@@ -1,10 +1,43 @@
-.movie-list {
+.movie-search {
     display: grid;
     grid-template-columns: repeat(5, minmax(243px, auto));
     grid-template-rows: repeat(2, minmax(200px, auto));
     column-gap: 24px;
     row-gap: 20px;
 }
+
+.filter-buttons{
+    margin-top: 88px;
+    padding: 8px;
+    width: 368px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(80px);
+    background: rgba(18, 24, 41, 0.8);
+    border-radius: 12px;
+    margin-bottom: 88px;
+}
+
+button {
+    width:118px;
+    height: 40px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #EBEEF5;
+    background: var(--black-10);
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    }
+    
+    button:hover{
+        transition: 0.5s all;
+        opacity: 0.7;
+    }
+    
 
 
 
