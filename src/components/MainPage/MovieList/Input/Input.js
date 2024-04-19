@@ -1,41 +1,22 @@
 import React, { useState } from "react";
 import './Input.css'
 
-const Input = ({ setFilteredMovies }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Input = ({ handleInputChange }) => {
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
-    const searchText = event.target.value.toLowerCase();
-    setSearchTerm(searchText);
-    filterMovies(searchText);
-
-    if(searchText === ''){
-      setFilteredMovies(0)
-    }
+    const value = event.target.value;
+    setInputValue(value);
+    handleInputChange(value); // Передаем значение введенное пользователем в родительский компонент
   };
-
-  const filterMovies = async (searchText) => {
-    try {
-      const url = `http://www.omdbapi.com/?s=${searchText}&apikey=263d22d8`;
-      const response = await fetch(url);
-      const responseJson = await response.json();
-
-      if (responseJson.Search) {
-        setFilteredMovies(responseJson.Search);
-      }
-    } catch (error) {
-      console.error("Error fetching movies:", error);
-    }
-  };
-  
 
   return (
-  
+
       <input
         type="text"
-        value={searchTerm}
+        value={inputValue}
         onChange={handleChange}
-        placeholder="Поиск фильмов"
+        placeholder="Поиск по названию фильма"
       />
 
   );
