@@ -1,20 +1,14 @@
-import React from "react";
 import Header from "../Header/Header";
-import './MainPage.css'
-import MovieList from './MovieList/MovieList';
-import MovieListHeading from './MovieList/MovieListHeading/MovieListHeading';
+import MovieListFetcher from "./MovieList/MovieListFetcher";
+import "./MainPage.css";
 
-
-
-const MainPage = ({ movies}) => {
-
+const MainPage = () => {
 	return (
 		<div>
 			<Header />
 			<div className="wrapper">
-				<MovieListHeading heading="Откройте для себя мир кино" />
-
-				<MovieList movies={movies} />
+				<h2>Отрой для себя мир кино</h2>
+				<MovieListFetcher />
 			</div>
 		</div>
 	);
