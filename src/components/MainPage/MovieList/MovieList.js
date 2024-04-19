@@ -40,7 +40,7 @@ const MovieList = (props) => {
 				randomMovies={randomMovies}
 				setFilteredMovies={handleSetFilteredMovies}
 			/>
-			<MovieSearch filteredMovies={filteredMovies}/>
+		<MovieSearch filteredMovies={filteredMovies.length ? filteredMovies : randomMovies} />
 		</div>
 	);
 };

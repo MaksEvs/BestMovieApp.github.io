@@ -8,6 +8,10 @@ const Input = ({ setFilteredMovies }) => {
     const searchText = event.target.value.toLowerCase();
     setSearchTerm(searchText);
     filterMovies(searchText);
+
+    if(searchText === ''){
+      setFilteredMovies(0)
+    }
   };
 
   const filterMovies = async (searchText) => {
@@ -23,6 +27,7 @@ const Input = ({ setFilteredMovies }) => {
       console.error("Error fetching movies:", error);
     }
   };
+  
 
   return (
   
