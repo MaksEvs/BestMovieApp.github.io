@@ -10,14 +10,25 @@ h1 {
 }
 
 form {
+	box-sizing: border-box;
 	display: inline-block;
 	margin-bottom: 50px;
+	height: auto;
+	width: 250px;
 }
 
 input {
 	display: block;
-	height: 50px;
+	box-sizing: border-box;
+	height: 70px;
+	width: 100%;
 	margin-bottom: 20px;
+	border: 1px solid #ebeef5;
+	outline: none;
+	background: transparent;
+	padding: 10px 15px;
+	border-radius: 20px;
+	font-size: 20px;
 }
 .button {
 	display: flex;
@@ -37,12 +48,23 @@ input {
 	line-height: 45px;
 }
 
-.log {
-	height: 40px;
+.login {
+	text-decoration: none;
 	font-size: 21px;
+	color: #ebeef5;
 	border: 1px solid #ebeef5;
+	padding: 1px 6px;
+	border-radius: 8px;
+	background: transparent;
+	width: 80px;
 }
-.registration {
+
+.login:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
+	cursor: pointer;
+}
+.register {
 	text-decoration: none;
 	font-size: 21px;
 	color: #ebeef5;
@@ -51,7 +73,34 @@ input {
 	border-radius: 8px;
 }
 
+.register:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
+}
+
+.input-oval::placeholder {
+	color: #999;
+}
+
+.input-oval:not(:placeholder-shown) {
+	color: black;
+	background-color: white;
+}
+.registration {
+	margin-top: 20px;
+	font-size: 20px;
+	color: #ebeef5;
+	border: 1px solid #ebeef5;
+	border-radius: 8px;
+	width: 100%;
+	height: 40px;
+	background: transparent;
+	cursor: pointer;
+}
+
 .registration:hover {
 	transition: 0.5s all;
 	opacity: 0.7;
+	background: white;
+	color: black;
 }
