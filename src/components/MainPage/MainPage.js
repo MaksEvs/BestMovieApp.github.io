@@ -4,6 +4,7 @@ import './MainPage.css'
 import Input from "../Input/Input";
 import MovieList from '../MovieList/MovieList';
 import MovieListHeading from '../MovieList/MovieListHeading/MovieListHeading';
+import FilterMovies from "../FilterMovies/FilterMovies";
 
 
 const MainPage = ({ movies, setSearchValue }) => {
@@ -15,8 +16,8 @@ const MainPage = ({ movies, setSearchValue }) => {
                 <MovieListHeading heading="Откройте для себя мир кино" />
                 {setSearchValue && <Input setSearchValue={setSearchValue} />}
 				{/* компонент Input будет отображаться только в том случае, если setSearchValue была передана в компонент MainPage */}
-{/* 
-                <FilterMovies/> */}
+{/* {
+                <FilterMovies/>} */}
 
 
 

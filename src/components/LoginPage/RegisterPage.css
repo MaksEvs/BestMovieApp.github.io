@@ -1,9 +1,8 @@
-.register__button{
-    margin-top: 50px;
-    font-size: 20px;
-    color: #EBEEF5;
-    border: 1px solid #EBEEF5;
-    border-radius: 8px;
-    width: 270px;
-
+.register__button {
+	margin-top: 20px;
+	font-size: 20px;
+	color: #ebeef5;
+	border: 1px solid #ebeef5;
+	border-radius: 8px;
+	width: 270px;
 }

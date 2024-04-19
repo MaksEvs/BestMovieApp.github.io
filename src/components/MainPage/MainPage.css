@@ -1,21 +1,21 @@
-.wrapper{
-    background: url('../../img/Background.png') center center/cover no-repeat;
-    max-height: 1550px;
-    padding: 50px 120px 50px 120px;
+.wrapper {
+	background: url("../../assets/Background.png") center center/cover no-repeat;
+	max-height: 1550px;
+	padding: 50px 120px 50px 120px;
 }
 h1 {
-    font-weight: 600;
-    font-size: 45px;
-    line-height: 125%;
-    color: #EBEEF5;
-    margin: 0;
+	font-weight: 600;
+	font-size: 45px;
+	line-height: 125%;
+	color: #ebeef5;
+	margin: 0;
 }
 
-.main__text{
-    width: 588px;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 150%;
-    color: #EBEEF5;
-    margin-bottom: 24px;
+.main__text {
+	width: 588px;
+	font-weight: 400;
+	font-size: 22px;
+	line-height: 150%;
+	color: #ebeef5;
+	margin-bottom: 24px;
 }

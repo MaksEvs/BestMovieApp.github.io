@@ -5,7 +5,6 @@ const MovieList = (props) => {
     const [randomMovies, setRandomMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
 
-    // Получение случайных фильмов
     const getRandomMovies = async () => {
         try {
             const url = 'http://www.omdbapi.com/?s=random&apikey=263d22d8';
