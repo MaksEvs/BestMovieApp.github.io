@@ -13,7 +13,7 @@
 
 .selected-wrapper{
     display: grid;
-    grid-template-columns: repeat(2, 480px);
+    grid-template-columns: repeat(2, 580px);
     grid-template-rows: 650px;
     column-gap: 80px;
     margin-top: 80px;
@@ -26,8 +26,15 @@ img{
 
 .selected-text{
     font-weight: 400;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 160%;
     color: #ebeef5;
     margin-top: 0;
+}
+
+.selected-description{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 160%;
+    color: #ebeef5;
 }

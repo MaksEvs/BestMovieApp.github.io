@@ -23,7 +23,7 @@ const MovieListFetcher = () => {
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
-                        "X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+                        "X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
                         "Content-Type": "application/json",
                     },
                 });
@@ -41,6 +41,10 @@ const MovieListFetcher = () => {
 
         fetchMovies();
     }, [currentPage, searchTerm]);
+
+
+
+    
 
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
@@ -65,6 +69,8 @@ const MovieListFetcher = () => {
         setMovies(filteredMovies);
     };
 
+
+
     // Определяем индексы для текущей страницы
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
@@ -76,7 +82,7 @@ const MovieListFetcher = () => {
     return (
         <div>
             {selectedMovie ? (
-                <SelectedMovie movie={selectedMovie} />
+                <SelectedMovie movieId={selectedMovie.filmId} selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />
             ) : (
                 <div>
                     <Input handleInputChange={handleInputChange} />
