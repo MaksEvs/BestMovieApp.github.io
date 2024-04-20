@@ -6,12 +6,13 @@ import Input from './Input/Input';
 import FilterButtons from './FilterButtons/FilterButtons';
 
 const MovieListFetcher = () => {
-    const [movies, setMovies] = useState([]); // Список отфильтрованных фильмов
-    const [allMovies, setAllMovies] = useState([]); // Полный список фильмов
+    const [movies, setMovies] = useState([]);
+    const [allMovies, setAllMovies] = useState([]); 
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [moviesPerPage] = useState(10);
-    const [searchTerm, setSearchTerm] = useState(""); // Состояние для хранения значения поля ввода
+    const [searchTerm, setSearchTerm] = useState(""); 
+    const [filterType, setFilterType] = useState("all"); 
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -32,8 +33,8 @@ const MovieListFetcher = () => {
                 }
                 const data = await response.json();
                 const fetchedMovies = data.films;
-                setAllMovies(fetchedMovies); // Сохраняем полный список фильмов
-                setMovies(fetchedMovies); // Отображаем все фильмы при загрузке страницы
+                setAllMovies(fetchedMovies); 
+                setMovies(fetchedMovies); 
             } catch (error) {
                 console.error(error);
             }
@@ -43,40 +44,39 @@ const MovieListFetcher = () => {
     }, [currentPage, searchTerm]);
 
 
+    useEffect(() => {
+        let filteredMovies = [];
+        if (filterType === "movie") {
+        
+            filteredMovies = allMovies.filter(movie => movie.type === "FILM");
+        } else if (filterType === "tv_series") {
 
-    
+            filteredMovies = allMovies.filter(movie => movie.type === "TV_SERIES");
+        } else {
+
+            filteredMovies = allMovies;
+        }
+        setMovies(filteredMovies);
+    }, [filterType, allMovies]);
 
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
     };
 
     const handleInputChange = (value) => {
-        setSearchTerm(value); // Обновляем состояние searchTerm при изменении значения поля ввода
+        setSearchTerm(value);
     };
 
     const handleFilterChange = (type) => {
-        let filteredMovies = [];
-        if (type === "movie") {
-            // Фильтрация только по фильмам
-            filteredMovies = allMovies.filter(movie => movie.type === "FILM");
-        } else if (type === "tv_series") {
-            // Фильтрация только по сериалам
-            filteredMovies = allMovies.filter(movie => movie.type === "TV_SERIES");
-        } else if (type === "all") {
-            // Показываем все фильмы
-            filteredMovies = allMovies;
-        }
-        setMovies(filteredMovies);
+        setFilterType(type); 
     };
 
 
-
-    // Определяем индексы для текущей страницы
     const indexOfLastMovie = currentPage * moviesPerPage;
     const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
     const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-    // Функция для изменения текущей страницы
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
