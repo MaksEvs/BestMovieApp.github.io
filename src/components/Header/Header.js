@@ -25,7 +25,7 @@ const Header = () => {
 	return (
 		<header>
 			<div className="header__logo">
-				<a href="/">
+				<Link to="/">
 					<svg
 						width="40"
 						height="40"
@@ -43,7 +43,7 @@ const Header = () => {
 							fill="#7B6EF6"
 						/>
 					</svg>
-				</a>
+				</Link>
 			</div>
 			<div className="header__content">
 				{(currentPage !== "/login" && currentPage !== "/register") ||
