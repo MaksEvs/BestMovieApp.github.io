@@ -78,7 +78,6 @@ const MovieListFetcher = () => {
 
     // Функция для изменения текущей страницы
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
     return (
         <div>
             {selectedMovie ? (
