@@ -12,6 +12,7 @@ const MovieListFetcher = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [moviesPerPage] = useState(10);
 	const [searchTerm, setSearchTerm] = useState(""); // Состояние для хранения значения поля ввода
+	const [filterType, setFilterType] = useState("all"); // Тип текущего фильтра
 
 	useEffect(() => {
 		const fetchMovies = async () => {
@@ -42,6 +43,22 @@ const MovieListFetcher = () => {
 		fetchMovies();
 	}, [currentPage, searchTerm]);
 
+	// Пересчет списка фильмов при изменении типа фильтрации
+	useEffect(() => {
+		let filteredMovies = [];
+		if (filterType === "movie") {
+			// Фильтрация только по фильмам
+			filteredMovies = allMovies.filter((movie) => movie.type === "FILM");
+		} else if (filterType === "tv_series") {
+			// Фильтрация только по сериалам
+			filteredMovies = allMovies.filter((movie) => movie.type === "TV_SERIES");
+		} else {
+			// Показываем все фильмы
+			filteredMovies = allMovies;
+		}
+		setMovies(filteredMovies);
+	}, [filterType, allMovies]);
+
 	const handleMovieClick = (movie) => {
 		setSelectedMovie(movie);
 	};
@@ -51,18 +68,7 @@ const MovieListFetcher = () => {
 	};
 
 	const handleFilterChange = (type) => {
-		let filteredMovies = [];
-		if (type === "movie") {
-			// Фильтрация только по фильмам
-			filteredMovies = allMovies.filter((movie) => movie.type === "FILM");
-		} else if (type === "tv_series") {
-			// Фильтрация только по сериалам
-			filteredMovies = allMovies.filter((movie) => movie.type === "TV_SERIES");
-		} else if (type === "all") {
-			// Показываем все фильмы
-			filteredMovies = allMovies;
-		}
-		setMovies(filteredMovies);
+		setFilterType(type); // Обновляем тип фильтрации
 	};
 
 	// Определяем индексы для текущей страницы
@@ -72,11 +78,14 @@ const MovieListFetcher = () => {
 
 	// Функция для изменения текущей страницы
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
 	return (
 		<div>
 			{selectedMovie ? (
-				<SelectedMovie movie={selectedMovie} />
+				<SelectedMovie
+					movieId={selectedMovie.filmId}
+					selectedMovie={selectedMovie}
+					setSelectedMovie={setSelectedMovie}
+				/>
 			) : (
 				<div>
 					<Input handleInputChange={handleInputChange} />
