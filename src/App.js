@@ -4,6 +4,7 @@ import MainPage from "./components/MainPage/MainPage";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
 import RegisterPageContainer from "./components/LoginPage/RegisterPageContainer";
 import FavoritesPage from "./components/FavoritePage/FavoritePage";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(
@@ -29,6 +30,7 @@ const App = () => {
 
 	
 	return (
+		<ThemeProvider>
 		<HashRouter>
 			<div>
 				<Routes>
@@ -60,6 +62,7 @@ const App = () => {
 				</Routes>
 			</div>
 		</HashRouter>
+		</ThemeProvider>
 	);
 };
 

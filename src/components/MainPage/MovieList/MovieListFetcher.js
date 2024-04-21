@@ -15,6 +15,7 @@ const MovieListFetcher = () => {
     const [filterType, setFilterType] = useState("all"); // Тип текущего фильтра
     const [filterBy, setFilterBy] = useState(""); // Тип фильтрации (по дате или рейтингу)
 
+
     useEffect(() => {
         const fetchMovies = async () => {
             try {
