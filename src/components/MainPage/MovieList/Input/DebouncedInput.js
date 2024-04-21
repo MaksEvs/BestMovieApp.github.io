@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import './DebouncedInput.css'
+import './DebouncedInput.css';
+import useDebounce from './useDebounce';
 
 const DebouncedInput = ({ handleInputChange, delay }) => {
     const [inputValue, setInputValue] = useState('');
-
-    const timerRef = React.useRef(null);
+    const [debouncedInputValue, handleDebounce] = useDebounce(delay);
 
     const handleChange = (event) => {
         const value = event.target.value;
         setInputValue(value);
-
-        if (timerRef.current) {
-            clearTimeout(timerRef.current);
+        if (value.trim() === '') {
+            handleInputChange(''); // Передаем пустое значение, если ввод пустой
+        } else {
+            handleDebounce(value, handleInputChange);
         }
-
-        timerRef.current = setTimeout(() => {
-            handleInputChange(value);
-        }, delay);
     };
 
     return (

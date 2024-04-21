@@ -8,7 +8,7 @@ const MainPage = () => {
 			<Header />
 
 			<div className="wrapper">
-			<h2>Отрой для себя мир кино</h2>
+			<h2>Открой для себя мир кино</h2>
 				<MovieListFetcher />
 			</div>
 		</div>
