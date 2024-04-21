@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import "./SelectedMovie.css";
 
 const SelectedMovie = ({ movieId, selectedMovie }) => {
-	const selectedMovieRef = useRef(null);
 	useEffect(() => {
 		const fetchMovie = async () => {
 			try {
@@ -19,33 +18,36 @@ const SelectedMovie = ({ movieId, selectedMovie }) => {
 					throw new Error("Failed to fetch movie");
 				}
 				const data = await response.json();
-				selectedMovieRef.current = data;
+				selectedMovie = data;
 			} catch (error) {
 				console.error(error);
 			}
 		};
 
 		fetchMovie();
-	}, [movieId]);
-
-	const movie = selectedMovieRef.current;
+	}, [movieId, selectedMovie]);
 
 	return (
 		<div className="selected-item">
 			{selectedMovie && (
 				<>
-					<p className="selected-title">{movie.nameRu}</p>
+					<p className="selected-title">{selectedMovie.nameRu}</p>
 					<div className="selected-wrapper">
-						<img src={movie.posterUrlPreview} alt={movie.nameRu} />
+						<img
+							src={selectedMovie.posterUrlPreview}
+							alt={selectedMovie.nameRu}
+						/>
 						<div className="selected-descr">
-							<p className="selected-description">{movie.description}</p>
-							<p className="selected-text">
-								Жанр: {movie.genres.map((genre) => `${genre.genre} `)}
+							<p className="selected-description">
+								{selectedMovie.description}
 							</p>
 							<p className="selected-text">
-								Оценка: {movie.rating || "Рейтинг отсутствует"}
+								Жанр: {selectedMovie.genres.map((genre) => `${genre.genre} `)}
 							</p>
-							<p className="selected-text">Год выхода: {movie.year}</p>
+							<p className="selected-text">
+								Оценка: {selectedMovie.rating || "Рейтинг отсутствует"}
+							</p>
+							<p className="selected-text">Год выхода: {selectedMovie.year}</p>
 						</div>
 					</div>
 				</>
