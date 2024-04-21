@@ -1,0 +1,33 @@
+select{
+    width: 250px;
+    height: 40px;
+    border-radius: 12px;
+     border: 1px solid #EBEEF5;
+    background: var(--black-10);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 114%;
+    color: #EBEEF5;
+    padding: 5px 15px;
+    cursor: pointer;
+    
+}
+
+.select-buttons{
+    margin-top: 88px;
+    padding: 8px;
+    width: 550px;
+    height: 56px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 12px;
+    margin-bottom: 88px;
+}
+
+option{
+    backdrop-filter: blur(40px);
+	background: rgba(18, 24, 41, 0.8);
+    counter-reset: #EBEEF5;
+}
+

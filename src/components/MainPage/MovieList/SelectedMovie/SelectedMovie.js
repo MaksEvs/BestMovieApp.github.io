@@ -2,30 +2,33 @@ import React, { useEffect } from "react";
 import "./SelectedMovie.css";
 
 const SelectedMovie = ({ movieId, selectedMovie }) => {
-	useEffect(() => {
-		const fetchMovie = async () => {
-			try {
-				const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${movieId}`;
 
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
-						"Content-Type": "application/json",
-					},
-				});
-				if (!response.ok) {
-					throw new Error("Failed to fetch movie");
-				}
-				const data = await response.json();
-				selectedMovie = data;
-			} catch (error) {
-				console.error(error);
-			}
-		};
+    useEffect(() => {
+        const fetchMovie = async () => {
+            try {
+                const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${movieId}`;
+    
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
+                        "Content-Type": "application/json",
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to fetch movie");
+                }
+                const data = await response.json();
+                selectedMovie = data;
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        fetchMovie();
+    }, [movieId, selectedMovie]);
 
-		fetchMovie();
-	}, [movieId, selectedMovie]);
+
 
 	return (
 		<div className="selected-item">
