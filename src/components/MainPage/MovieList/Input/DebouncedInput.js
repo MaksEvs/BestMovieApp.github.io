@@ -4,13 +4,13 @@ import useDebounce from './useDebounce';
 
 const DebouncedInput = ({ handleInputChange, delay }) => {
     const [inputValue, setInputValue] = useState('');
-    const [debouncedInputValue, handleDebounce] = useDebounce(delay);
+    const [, handleDebounce] = useDebounce(delay);
 
     const handleChange = (event) => {
         const value = event.target.value;
         setInputValue(value);
         if (value.trim() === '') {
-            handleInputChange(''); // Передаем пустое значение, если ввод пустой
+            handleInputChange('');
         } else {
             handleDebounce(value, handleInputChange);
         }

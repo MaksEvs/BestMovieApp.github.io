@@ -1,20 +1,21 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
+import { FiSun, FiMoon } from "react-icons/fi";
 import "./Header.css";
 
 const Header = () => {
+	const { theme, toggleTheme } = useTheme();
 	const location = useLocation();
 	const navigate = useNavigate();
-
 	const currentPage = location.pathname;
+	const isLoggedIn = localStorage.getItem("username");
+	const favoritesLink = isLoggedIn ? "/favorites" : "/login";
 
 	const logoutHandler = () => {
 		localStorage.removeItem("username");
 		navigate("/");
 	};
-
-	const isLoggedIn = localStorage.getItem("username");
-	const favoritesLink = isLoggedIn ? "/favorites" : "/login";
 
 	const favoritesClickHandler = () => {
 		if (!isLoggedIn) {
@@ -23,7 +24,7 @@ const Header = () => {
 	};
 
 	return (
-		<header>
+		<header className={`header ${theme === "light" ? "theme-light" : "theme-dark"}`}>
 			<div className="header__logo">
 				<Link to="/">
 					<svg
@@ -45,17 +46,14 @@ const Header = () => {
 					</svg>
 				</Link>
 			</div>
+
 			<div className="header__content">
-				{(currentPage !== "/login" && currentPage !== "/register") ||
-				!isLoggedIn ? (
-					<Link
-						to={favoritesLink}
-						className="header__link"
-						onClick={favoritesClickHandler}
-					>
+				{(currentPage !== "/login" && currentPage !== "/register") || !isLoggedIn ? (
+					<Link to={favoritesLink} className="header__link" onClick={favoritesClickHandler}>
 						Избранное
 					</Link>
 				) : null}
+
 				{isLoggedIn ? (
 					<div className="user-block">
 						<span className="username">{localStorage.getItem("username")}</span>
@@ -68,6 +66,10 @@ const Header = () => {
 						Вход
 					</Link>
 				)}
+
+				<button onClick={toggleTheme} className="theme-toggle-button">
+					{theme === "light" ? <FiMoon /> : <FiSun />}
+				</button>
 			</div>
 		</header>
 	);
