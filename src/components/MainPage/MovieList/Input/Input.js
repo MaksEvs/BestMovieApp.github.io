@@ -16,7 +16,7 @@ const Input = ({ handleInputChange }) => {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        placeholder="Поиск по названию фильма"
+        placeholder="Поиск по названию фильма или сериала"
       />
 
   );

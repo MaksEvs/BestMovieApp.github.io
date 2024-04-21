@@ -13,6 +13,7 @@ const MovieListFetcher = () => {
     const [moviesPerPage] = useState(10);
     const [searchTerm, setSearchTerm] = useState(""); // Состояние для хранения значения поля ввода
     const [filterType, setFilterType] = useState("all"); // Тип текущего фильтра
+    const [filterBy, setFilterBy] = useState(""); // Тип фильтрации (по дате или рейтингу)
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -21,10 +22,18 @@ const MovieListFetcher = () => {
                 if (searchTerm === "") {
                     url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
                 }
+    
+    
+                if (filterType === "date") {
+                    url += `&year=${filterBy}`;
+                } else if (filterType === "rating") {
+                    url += `&rating=${filterBy}`;
+                }
+    
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
-                        "X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
+                        "X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
                         "Content-Type": "application/json",
                     },
                 });
@@ -32,53 +41,56 @@ const MovieListFetcher = () => {
                     throw new Error("Failed to fetch movies");
                 }
                 const data = await response.json();
+                console.log(data)
                 const fetchedMovies = data.films;
-                setAllMovies(fetchedMovies); // Сохраняем полный список фильмов
-                setMovies(fetchedMovies); // Отображаем все фильмы при загрузке страницы
+                setAllMovies(fetchedMovies);
+                setMovies(fetchedMovies); 
             } catch (error) {
                 console.error(error);
             }
         };
-
+    
         fetchMovies();
-    }, [currentPage, searchTerm]);
+    }, [currentPage, searchTerm, filterType, filterBy]);
 
-    // Пересчет списка фильмов при изменении типа фильтрации
-    useEffect(() => {
-        let filteredMovies = [];
-        if (filterType === "movie") {
-            // Фильтрация только по фильмам
-            filteredMovies = allMovies.filter(movie => movie.type === "FILM");
-        } else if (filterType === "tv_series") {
-            // Фильтрация только по сериалам
-            filteredMovies = allMovies.filter(movie => movie.type === "TV_SERIES");
-        } else {
-            // Показываем все фильмы
-            filteredMovies = allMovies;
-        }
-        setMovies(filteredMovies);
-    }, [filterType, allMovies]);
+
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+  
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handleFilterChange = (type, value) => {
+        setFilterType(type); 
+        setFilterBy(value); 
+    };
+
+
+    const handleInputChange = (value) => {
+        setSearchTerm(value);
+    };
 
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
     };
 
-    const handleInputChange = (value) => {
-        setSearchTerm(value); // Обновляем состояние searchTerm при изменении значения поля ввода
-    };
+    useEffect(() => {
+        let filteredMovies = [...allMovies];
+    
 
-    const handleFilterChange = (type) => {
-        setFilterType(type); // Обновляем тип фильтрации
-    };
+        if (filterType === "date" && filterBy) {
+            filteredMovies = filteredMovies.filter(movie => new Date(movie.year).getFullYear() === parseInt(filterBy));
+        }
+ 
+        if (filterType === "rating" && filterBy) {
+            filteredMovies = filteredMovies.filter(movie => movie.rating && movie.rating >= parseInt(filterBy));
+        }
 
-    // Определяем индексы для текущей страницы
-    const indexOfLastMovie = currentPage * moviesPerPage;
-    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
-
-    // Функция для изменения текущей страницы
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+        setMovies(filteredMovies);
+    }, [filterType, filterBy, allMovies]);
+    
+    
     return (
         <div>
             {selectedMovie ? (
@@ -86,13 +98,22 @@ const MovieListFetcher = () => {
             ) : (
                 <div>
                     <Input handleInputChange={handleInputChange} />
-                    <FilterButtons handleFilterChange={handleFilterChange} />
-                    <MovieList movies={currentMovies} onMovieClick={handleMovieClick} />
-                    <Pagination
-                        moviesPerPage={moviesPerPage}
-                        totalMovies={allMovies.length}
-                        paginate={paginate}
-                    />
+                    <FilterButtons  handleFilterChange={handleFilterChange} />
+                    
+                    {currentMovies.length > 0 ? (
+                        <div>
+                            <MovieList movies={currentMovies} onMovieClick={handleMovieClick} />
+                            <Pagination
+                                moviesPerPage={moviesPerPage}
+                                totalMovies={allMovies.length}
+                                paginate={paginate}
+                            />
+                        </div>
+                    ) : (
+                        <div>
+                            <p className="subtitle">Данных фильмов нет</p>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

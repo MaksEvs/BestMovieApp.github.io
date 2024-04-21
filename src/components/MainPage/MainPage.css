@@ -10,6 +10,16 @@ h1 {
 	color: #ebeef5;
 	margin: 0;
 }
+.subtitle{
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 125%;
+	color: #ebeef5;
+	margin: 0 auto;
+	text-align: center;
+
+
+}
 
 .main__text {
 	width: 588px;
