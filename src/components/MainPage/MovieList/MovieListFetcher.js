@@ -33,7 +33,7 @@ const MovieListFetcher = () => {
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
-                        "X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
+                        "X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
                         "Content-Type": "application/json",
                     },
                 });

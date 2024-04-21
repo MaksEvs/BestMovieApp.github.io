@@ -6,9 +6,7 @@ const MainPage = () => {
 	return (
 		<div>
 			<Header />
-
 			<div className="wrapper">
-			
 				<MovieListFetcher />
 			</div>
 		</div>
