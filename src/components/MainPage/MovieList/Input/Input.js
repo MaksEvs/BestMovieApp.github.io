@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './Input.css'
 
 const Input = ({ handleInputChange }) => {
   const [inputValue, setInputValue] = useState("");

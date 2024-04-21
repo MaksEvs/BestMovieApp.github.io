@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import './SelectedMovie.css'
+import "./SelectedMovie.css";
 
 const SelectedMovie = ({ movieId, selectedMovie }) => {
+
     useEffect(() => {
         const fetchMovie = async () => {
             try {
@@ -27,24 +28,35 @@ const SelectedMovie = ({ movieId, selectedMovie }) => {
         fetchMovie();
     }, [movieId, selectedMovie]);
 
-    return (
-        <div className="selected-item">
-            {selectedMovie && (
-                <>
-                    <p className="selected-title">{selectedMovie.nameRu}</p>
-                    <div className="selected-wrapper">
-                        <img src={selectedMovie.posterUrlPreview} alt={selectedMovie.nameRu} />
-                        <div className="selected-descr">
-                            <p className="selected-description">{selectedMovie.description}</p>
-                            <p className="selected-text">Жанр: {selectedMovie.genres.map((genre) => `${genre.genre} `)}</p>
-                            <p className="selected-text">Оценка: {selectedMovie.rating || "Рейтинг отсутствует"}</p>
-                            <p className="selected-text">Год выхода: {selectedMovie.year}</p>
-                        </div>
-                    </div>
-                </>
-            )}
-        </div>
-    );
+
+
+	return (
+		<div className="selected-item">
+			{selectedMovie && (
+				<>
+					<p className="selected-title">{selectedMovie.nameRu}</p>
+					<div className="selected-wrapper">
+						<img
+							src={selectedMovie.posterUrlPreview}
+							alt={selectedMovie.nameRu}
+						/>
+						<div className="selected-descr">
+							<p className="selected-description">
+								{selectedMovie.description}
+							</p>
+							<p className="selected-text">
+								Жанр: {selectedMovie.genres.map((genre) => `${genre.genre} `)}
+							</p>
+							<p className="selected-text">
+								Оценка: {selectedMovie.rating || "Рейтинг отсутствует"}
+							</p>
+							<p className="selected-text">Год выхода: {selectedMovie.year}</p>
+						</div>
+					</div>
+				</>
+			)}
+		</div>
+	);
 };
 
 export default SelectedMovie;
