@@ -9,9 +9,20 @@
 	font-size: 45px;
 	line-height: 125%;
 	margin: 0;
-  }
-  
-  .main__text {
+
+.subtitle{
+	font-weight: 600;
+	font-size: 25px;
+	line-height: 125%;
+	color: #ebeef5;
+	margin: 0 auto;
+	text-align: center;
+
+
+}
+
+.main__text {
+
 	width: 588px;
 	font-weight: 400;
 	font-size: 22px;

@@ -20,8 +20,8 @@
 
 .selected-wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 580px);
-    grid-template-rows: 650px;
+    grid-template-columns: 400px 600px;
+    grid-template-rows: 600px;
     column-gap: 80px;
     margin-top: 80px;
     padding-left: 80px;
@@ -46,6 +46,7 @@ img {
 
 .theme-dark .selected-title.light {
     color: #ebeef5;
+
 }
 
 .theme-dark .selected-title.dark {
@@ -54,4 +55,5 @@ img {
 
 .theme-dark .selected-text, .theme-dark .selected-description {
     color: #FFFFFFBF; 
+
 }

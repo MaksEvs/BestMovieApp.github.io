@@ -26,7 +26,7 @@ const Header = () => {
 	return (
 		<header className={`header ${theme === "light" ? "theme-light" : "theme-dark"}`}>
 			<div className="header__logo">
-				<Link to="/">
+			<a href="/">
 					<svg
 						width="40"
 						height="40"
@@ -44,7 +44,7 @@ const Header = () => {
 							fill="#7B6EF6"
 						/>
 					</svg>
-				</Link>
+				</a>
 			</div>
 
 			<div className="header__content">

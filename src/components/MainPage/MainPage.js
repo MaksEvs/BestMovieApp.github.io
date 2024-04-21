@@ -5,6 +5,7 @@ import "./MainPage.css";
 import { useTheme } from "../../context/ThemeContext";
 
 const MainPage = () => {
+
   const { theme,  } = useTheme();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const MainPage = () => {
       </div>
     </div>
   );
+
 };
 
 export default MainPage;

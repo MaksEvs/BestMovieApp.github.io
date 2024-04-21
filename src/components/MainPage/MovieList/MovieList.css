@@ -7,19 +7,7 @@
     padding: 0;
 }
 
-.filter-buttons{
-    margin-top: 88px;
-    padding: 8px;
-    width: 368px;
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(80px);
-    background: rgba(18, 24, 41, 0.8);
-    border-radius: 12px;
-    margin-bottom: 88px;
-}
+
 
 button {
     width:118px;

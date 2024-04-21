@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "../../../../context/ThemeContext";
 import "./SelectedMovie.css";
 
+
 const SelectedMovie = ({ movieId }) => {
     const { theme } = useTheme();
     const [selectedMovie, setSelectedMovie] = useState(null);
+
 
     useEffect(() => {
         const fetchMovie = async () => {
             try {
                 const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${movieId}`;
 
+    
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
-                        "X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
+                        "X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
                         "Content-Type": "application/json",
                     },
                 });
@@ -22,11 +25,17 @@ const SelectedMovie = ({ movieId }) => {
                     throw new Error("Failed to fetch movie");
                 }
                 const data = await response.json();
-                setSelectedMovie(data.data);
+                selectedMovie = data;
             } catch (error) {
                 console.error(error);
             }
         };
+    
+        fetchMovie();
+    }, [movieId, selectedMovie]);
+
+
+
 
         fetchMovie();
     }, [movieId]);

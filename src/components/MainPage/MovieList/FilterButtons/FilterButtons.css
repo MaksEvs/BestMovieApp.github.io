@@ -1,0 +1,60 @@
+select{
+    width: 250px;
+    height: 40px;
+    border-radius: 12px;
+     border: 1px solid #EBEEF5;
+    background: var(--black-10);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 114%;
+    color: #EBEEF5;
+    padding: 5px 15px;
+    cursor: pointer;
+    
+}
+
+.select-wrapper{
+    padding: 8px;
+    width: 550px;
+    height: 56px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 12px;
+    margin-bottom: 88px;
+    margin: 88px auto;
+}
+
+.select-buttons{
+    padding: 8px;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(80px);
+    background: rgba(18, 24, 41, 0.8);
+    border-radius: 12px;
+}
+
+option{
+    backdrop-filter: blur(40px);
+	background: rgba(18, 24, 41, 0.8);
+    color: #EBEEF5;
+}
+
+.active{
+    color: red;
+}
+
+.select-title{
+    font-weight: 600;
+	font-size: 21px;
+	line-height: 125%;
+	color: #ebeef5;
+}
+
+.select-descr{
+    margin-right: 40px;
+    width: 300px;
+}
