@@ -12,12 +12,12 @@ const SelectedMovie = () => {
 	useEffect(() => {
 		const fetchMovie = async () => {
 			try {
-				const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`;
+				const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`;
 
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
+						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
 						"Content-Type": "application/json",
 					},
 				});
@@ -25,7 +25,7 @@ const SelectedMovie = () => {
 					throw new Error("Failed to fetch movie");
 				}
 				const data = await response.json();
-				setSelectedMovie(data.data);
+				setSelectedMovie(data);
 			} catch (error) {
 				console.error(error);
 			}
@@ -38,7 +38,7 @@ const SelectedMovie = () => {
 		<div className={`selected-item ${theme}`}>
 			<Header />
 			{selectedMovie && (
-				<>
+				<div className="wrapper">
 					<p
 						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
 					>
@@ -62,7 +62,7 @@ const SelectedMovie = () => {
 							<p className="selected-text">Год выхода: {selectedMovie.year}</p>
 						</div>
 					</div>
-				</>
+				</div>
 			)}
 		</div>
 	);
