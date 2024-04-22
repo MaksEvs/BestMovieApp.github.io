@@ -5,20 +5,20 @@ import "./MainPage.css";
 import { useTheme } from "../../context/ThemeContext";
 
 const MainPage = () => {
-  const { theme,  } = useTheme();
+	const { theme } = useTheme();
 
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+	useEffect(() => {
+		document.body.className = theme;
+	}, [theme]);
 
-  return (
-    <div className="main-page">
-      <Header />
-      <div className={`wrapper ${theme === 'light' ? 'light' : 'dark'}`}>
-        <MovieListFetcher />
-      </div>
-    </div>
-  );
+	return (
+		<div className="main-page">
+			<Header />
+			<div className={`wrapper ${theme === "light" ? "light" : "dark"}`}>
+				<MovieListFetcher />
+			</div>
+		</div>
+	);
 };
 
 export default MainPage;
