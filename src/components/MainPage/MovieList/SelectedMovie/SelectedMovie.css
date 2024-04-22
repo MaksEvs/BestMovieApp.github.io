@@ -20,7 +20,7 @@
 
 .selected-wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 580px);
+    grid-template-columns: 450px 550px;
     grid-template-rows: 650px;
     column-gap: 80px;
     margin-top: 80px;

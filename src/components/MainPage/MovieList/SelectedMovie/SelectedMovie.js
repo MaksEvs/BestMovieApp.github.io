@@ -9,7 +9,7 @@ const SelectedMovie = ({ movieId }) => {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${movieId}`;
+                const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${movieId}`;
 
                 const response = await fetch(url, {
                     method: "GET",
@@ -22,7 +22,8 @@ const SelectedMovie = ({ movieId }) => {
                     throw new Error("Failed to fetch movie");
                 }
                 const data = await response.json();
-                setSelectedMovie(data.data);
+                console.log(data)
+                setSelectedMovie(data);
             } catch (error) {
                 console.error(error);
             }
@@ -30,6 +31,8 @@ const SelectedMovie = ({ movieId }) => {
 
         fetchMovie();
     }, [movieId]);
+
+    console.log(selectedMovie)
 
     return (
         <div className={`selected-item ${theme}`}>
@@ -51,7 +54,7 @@ const SelectedMovie = ({ movieId }) => {
                                 Жанр: {selectedMovie.genres ? selectedMovie.genres.map((genre) => `${genre.genre} `) : ""}
                             </p>
                             <p className="selected-text">
-                                Оценка: {selectedMovie.rating || "Рейтинг отсутствует"}
+                                Оценка: {selectedMovie.ratingKinopoisk}
                             </p>
                             <p className="selected-text">Год выхода: {selectedMovie.year}
                             </p>
