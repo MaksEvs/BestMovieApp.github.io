@@ -28,40 +28,42 @@ const App = () => {
 		setIsLoggedIn(true);
 	};
 
-	
 	return (
 		<ThemeProvider>
-		<HashRouter>
-			<div>
-				<Routes>
-					<Route
-						path="/"
-						element={
-							<MainPage
-								isLoggedIn={isLoggedIn}
-								onLogout={handleLogout}
-								searchValue={searchValue}
-								setSearchValue={setSearchValue}
-							/>
-						}
-					/>
-					<Route
-						path="/login"
-						element={<LoginPageContainer onLogin={handleLogin} />}
-					/>
-					<Route
-						path="/register"
-						element={<RegisterPageContainer onRegister={handleRegister} />}
-					/>
-					<Route
-						path="/favorites"
-						element={
-							<FavoritesPage isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-						}
-					/>
-				</Routes>
-			</div>
-		</HashRouter>
+			<HashRouter>
+				<div>
+					<Routes>
+						<Route
+							path="/"
+							element={
+								<MainPage
+									isLoggedIn={isLoggedIn}
+									onLogout={handleLogout}
+									searchValue={searchValue}
+									setSearchValue={setSearchValue}
+								/>
+							}
+						/>
+						<Route
+							path="/login"
+							element={<LoginPageContainer onLogin={handleLogin} />}
+						/>
+						<Route
+							path="/register"
+							element={<RegisterPageContainer onRegister={handleRegister} />}
+						/>
+						<Route
+							path="/favorites"
+							element={
+								<FavoritesPage
+									isLoggedIn={isLoggedIn}
+									onLogout={handleLogout}
+								/>
+							}
+						/>
+					</Routes>
+				</div>
+			</HashRouter>
 		</ThemeProvider>
 	);
 };
