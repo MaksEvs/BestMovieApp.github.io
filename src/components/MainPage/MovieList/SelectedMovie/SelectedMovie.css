@@ -45,15 +45,3 @@ img {
     font-size: 18px;
     line-height: 160%;
 }
-
-.theme-dark .selected-title.light {
-    color: #ebeef5;
-}
-
-.theme-dark .selected-title.dark {
-    color: #ebeef5;
-}
-
-.theme-dark .selected-text, .theme-dark .selected-description {
-    color: #FFFFFFBF; 
-}

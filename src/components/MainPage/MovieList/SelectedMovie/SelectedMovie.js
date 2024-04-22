@@ -6,8 +6,12 @@ import Header from "../../../Header/Header";
 
 const SelectedMovie = () => {
 	const { id } = useParams(); // Получаем параметр :id из URL
-	const { theme } = useTheme();
 	const [selectedMovie, setSelectedMovie] = useState(null);
+	const { theme } = useTheme();
+
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
 
 	useEffect(() => {
 		const fetchMovie = async () => {

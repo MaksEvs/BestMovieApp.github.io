@@ -1,4 +1,4 @@
-input{
+input {
     width: 344px;
     height: 64px;
     border-radius: 12px;
@@ -9,4 +9,12 @@ input{
     font-size: 20px;
     line-height: 114%;
     color: #EBEEF5;
+}
+
+.input-oval.light {
+	color:#1c1f25;
+}
+
+.input-oval.dark {
+	color: white;
 }

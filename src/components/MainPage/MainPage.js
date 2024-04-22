@@ -14,8 +14,8 @@ const MainPage = () => {
 	return (
 		<div className="main-page">
 			<Header />
-			<div className={`wrapper ${theme === "light" ? "light" : "dark"}`}>
-				<MovieListFetcher />
+			<div className={`wrapper ${theme === "dark" ? "dark" : "light"}`}>
+    			<MovieListFetcher />
 			</div>
 		</div>
 	);

@@ -11,14 +11,6 @@
 	margin: 0;
   }
   
-  .main__text {
-	width: 588px;
-	font-weight: 400;
-	font-size: 22px;
-	line-height: 150%;
-	margin-bottom: 24px;
-  }
-  
   h2 {
 	font-size: 40px;
 	margin-top: 0;
@@ -33,3 +25,5 @@
 	color: #ebeef5; /* Цвет текста для темной темы */
 	background-color: #121829; /* Цвет фона для темной темы */
   }
+
+  
