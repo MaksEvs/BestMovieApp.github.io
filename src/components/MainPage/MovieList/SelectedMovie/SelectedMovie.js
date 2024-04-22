@@ -16,12 +16,12 @@ const SelectedMovie = () => {
 	useEffect(() => {
 		const fetchMovie = async () => {
 			try {
-				const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`;
+				const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`;
 
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
+						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
 						"Content-Type": "application/json",
 					},
 				});
@@ -29,7 +29,7 @@ const SelectedMovie = () => {
 					throw new Error("Failed to fetch movie");
 				}
 				const data = await response.json();
-				setSelectedMovie(data.data);
+				setSelectedMovie(data);
 			} catch (error) {
 				console.error(error);
 			}
