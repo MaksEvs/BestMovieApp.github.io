@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useTheme } from "../../../../context/ThemeContext";
 import "./SelectedMovie.css";
+import Header from "../../../Header/Header";
 
-const SelectedMovie = ({ movieId }) => {
+const SelectedMovie = () => {
+	const { id } = useParams(); // Получаем параметр :id из URL
 	const { theme } = useTheme();
 	const [selectedMovie, setSelectedMovie] = useState(null);
 
 	useEffect(() => {
 		const fetchMovie = async () => {
 			try {
-				const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${movieId}`;
+				const url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`;
 
 				const response = await fetch(url, {
 					method: "GET",
@@ -29,10 +32,11 @@ const SelectedMovie = ({ movieId }) => {
 		};
 
 		fetchMovie();
-	}, [movieId]);
+	}, [id]);
 
 	return (
 		<div className={`selected-item ${theme}`}>
+			<Header />
 			{selectedMovie && (
 				<>
 					<p
@@ -53,7 +57,7 @@ const SelectedMovie = ({ movieId }) => {
 									: ""}
 							</p>
 							<p className="selected-text">
-								Оценка: {selectedMovie.rating || "Рейтинг отсутствует"}
+								Оценка: {selectedMovie.ratingKinopoisk}
 							</p>
 							<p className="selected-text">Год выхода: {selectedMovie.year}</p>
 						</div>

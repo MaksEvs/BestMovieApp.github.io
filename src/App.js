@@ -4,6 +4,7 @@ import MainPage from "./components/MainPage/MainPage";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
 import RegisterPageContainer from "./components/LoginPage/RegisterPageContainer";
 import FavoritesPage from "./components/FavoritePage/FavoritePage";
+import SelectedMovie from "./components/MainPage/MovieList/SelectedMovie/SelectedMovie";
 import { ThemeProvider } from "./context/ThemeContext";
 
 const App = () => {
@@ -61,6 +62,7 @@ const App = () => {
 								/>
 							}
 						/>
+						<Route path="/film/:id" element={<SelectedMovie />} />
 					</Routes>
 				</div>
 			</HashRouter>

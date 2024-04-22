@@ -24,7 +24,9 @@ const Header = () => {
 	};
 
 	return (
-		<header className={`header ${theme === "light" ? "theme-light" : "theme-dark"}`}>
+		<header
+			className={`header ${theme === "light" ? "theme-light" : "theme-dark"}`}
+		>
 			<div className="header__logo">
 				<Link to="/">
 					<svg
@@ -48,8 +50,13 @@ const Header = () => {
 			</div>
 
 			<div className="header__content">
-				{(currentPage !== "/login" && currentPage !== "/register") || !isLoggedIn ? (
-					<Link to={favoritesLink} className="header__link" onClick={favoritesClickHandler}>
+				{(currentPage !== "/login" && currentPage !== "/register") ||
+				!isLoggedIn ? (
+					<Link
+						to={favoritesLink}
+						className="header__link"
+						onClick={favoritesClickHandler}
+					>
 						Избранное
 					</Link>
 				) : null}
