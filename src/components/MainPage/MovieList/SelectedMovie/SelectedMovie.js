@@ -6,8 +6,12 @@ import Header from "../../../Header/Header";
 
 const SelectedMovie = () => {
 	const { id } = useParams(); // Получаем параметр :id из URL
-	const { theme } = useTheme();
 	const [selectedMovie, setSelectedMovie] = useState(null);
+	const { theme } = useTheme();
+
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
 
 	useEffect(() => {
 		const fetchMovie = async () => {
@@ -17,7 +21,7 @@ const SelectedMovie = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "5cb2c529-2c32-4ec9-8ff8-a488a598b672",
+						"X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
 						"Content-Type": "application/json",
 					},
 				});
@@ -38,7 +42,7 @@ const SelectedMovie = () => {
 		<div className={`selected-item ${theme}`}>
 			<Header />
 			{selectedMovie && (
-				<>
+				<div className="wrapper">
 					<p
 						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
 					>
@@ -62,7 +66,7 @@ const SelectedMovie = () => {
 							<p className="selected-text">Год выхода: {selectedMovie.year}</p>
 						</div>
 					</div>
-				</>
+				</div>
 			)}
 		</div>
 	);
