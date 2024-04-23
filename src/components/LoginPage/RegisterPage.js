@@ -1,11 +1,16 @@
-import React from "react";
-import "./LoginPage.css";
+import React, {useEffect} from "react";
+import "./RegisterPage.css";
+import { useTheme } from '../../context/ThemeContext';
 
 const RegisterPage = (props) => {
-	// const { formData = , inputChangeHandler, registerHandler, error } = props;
+	const { theme } = useTheme();
+	
+	useEffect(() => {
+		document.body.className = theme;
+	}, [theme]);
 
 	return (
-		<div className="wrapper">
+		<div className={`wrapper ${theme}`}>
 			<h1>Форма регистрации</h1>
 			{props.error && <p style={{ color: "red" }}>{props.error}</p>}
 			<form onSubmit={props.registerHandler}>
@@ -13,7 +18,7 @@ const RegisterPage = (props) => {
 					type="text"
 					name="username"
 					placeholder="Имя пользователя"
-					className="input-oval"
+					className={`input-oval ${theme}`}
 					value={props.formData.username}
 					onChange={props.inputChangeHandler}
 				/>
@@ -21,7 +26,7 @@ const RegisterPage = (props) => {
 					type="password"
 					name="password"
 					placeholder="Пароль"
-					className="input-oval"
+					className={`input-oval ${theme}`}
 					value={props.formData.password}
 					onChange={props.inputChangeHandler}
 				/>
@@ -29,12 +34,12 @@ const RegisterPage = (props) => {
 					type="password"
 					name="repeatPassword"
 					placeholder="Повторите пароль"
-					className="input-oval"
+					className={`input-oval ${theme}`}
 					value={props.formData.repeatPassword}
 					onChange={props.inputChangeHandler}
 				/>
-				<button type="submit" className="registration">
-					Зарегистрироваться
+				<button type="submit" className={`registration ${theme === 'light' ? 'light-theme' : 'dark-theme'}`}>
+    				Зарегистрироваться
 				</button>
 			</form>
 		</div>
