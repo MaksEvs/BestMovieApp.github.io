@@ -88,38 +88,38 @@ const MovieListFetcher = () => {
 	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
 	const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-	return (
-		<div>
-			{selectedMovie ? (
-				<SelectedMovie
-					movieId={selectedMovie.filmId}
-					selectedMovie={selectedMovie}
-					setSelectedMovie={setSelectedMovie}
-				/>
-			) : (
-				<>
-					<h2>Открой для себя мир кино</h2>
-					<DebouncedInput handleInputChange={handleInputChange} delay={500} />
-					<FilterButtons handleFilterChange={handleFilterChange} />
-					{isLoading ? (
-						<Loader />
-					) : (
-						<>
-							<MovieList
-								movies={currentMovies}
-								onMovieClick={handleMovieClick}
-							/>
-							<Pagination
-								moviesPerPage={moviesPerPage}
-								totalMovies={allMovies.length}
-								paginate={paginate}
-							/>
-						</>
-					)}
-				</>
-			)}
-		</div>
-	);
+    return (
+        <div>
+            {selectedMovie ? (
+                <SelectedMovie
+                    movieId={selectedMovie.filmId}
+                    selectedMovie={selectedMovie}
+                    setSelectedMovie={setSelectedMovie}
+                />
+            ) : (
+                <>
+                    <h2>Открой для себя мир кино</h2>
+                    <DebouncedInput handleInputChange={handleInputChange} delay={500} />
+                    <FilterButtons handleFilterChange={handleFilterChange} filterType={filterType} sortOrder={sortOrder}  />
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <>
+                            <MovieList
+                                movies={currentMovies}
+                                onMovieClick={handleMovieClick}
+                            />
+                            <Pagination
+                                moviesPerPage={moviesPerPage}
+                                totalMovies={allMovies.length}
+                                paginate={paginate}
+                            />
+                        </>
+                    )}
+                </>
+            )}
+        </div>
+    );
 };
 
 export default MovieListFetcher;
