@@ -105,7 +105,7 @@ const MovieListFetcher = () => {
                 <>
                     <h2>Открой для себя мир кино</h2>
                     <DebouncedInput handleInputChange={handleInputChange} delay={500} />
-                    <FilterButtons handleFilterChange={handleFilterChange} />
+                    <FilterButtons handleFilterChange={handleFilterChange} filterType={filterType} sortOrder={sortOrder}  />
                     {isLoading ? (
                         <Loader />
                     ) : (
