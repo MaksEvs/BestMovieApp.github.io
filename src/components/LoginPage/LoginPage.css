@@ -1,5 +1,5 @@
-.wrapper-login{
-	height: 739px;
+.wrapper-login {
+	height: 740px;
 }
 header {
 	margin: 0;
@@ -113,37 +113,34 @@ input {
 	color: black;
 }
 
-/* Styles for light theme */
 .light-theme {
 	background: rgba(32, 40, 62, 0.8);
 	color: black;
 }
 
 .light-theme .input-oval::placeholder {
-    color: black; /* Цвет placeholder текста в инпуте при светлой теме */
+	color: black;
 }
 
 .light-theme input {
-	color: black; /* Цвет текста в инпуте при светлой теме */
+	color: black;
 }
-
 .light-theme .button:hover {
 	background: white;
 	color: black;
 }
 
-/* Styles for dark theme */
 .dark-theme {
 	background: #1c1f25;
 	color: black;
 }
 
 .dark-theme .input-oval::placeholder {
-    color: black; /* Цвет placeholder текста в инпуте при темной теме */
+	color: black;
 }
 
 .dark-theme input {
-	color: white; /* Цвет текста в инпуте при темной теме */
+	color: white;
 }
 
 .dark-theme .button:hover {
@@ -151,9 +148,8 @@ input {
 	color: black;
 }
 
-/* Input-oval styles */
 .input-oval.light {
-	color:#1c1f25;
+	color: #1c1f25;
 }
 
 .input-oval.dark {

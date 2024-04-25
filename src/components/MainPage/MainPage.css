@@ -2,28 +2,27 @@
 	background: url("../../assets/Background.png") center center/cover no-repeat;
 	max-height: 1550px;
 	padding: 50px 120px 50px 120px;
-  }
-  
-  h1 {
+	height: auto;
+}
+
+h1 {
 	font-weight: 600;
 	font-size: 45px;
 	line-height: 125%;
 	margin: 0;
-  }
-  
-  h2 {
+}
+
+h2 {
 	font-size: 40px;
 	margin-top: 0;
-  }
-  
-  .light .wrapper {
-	color: #333; /* Цвет текста для светлой темы */
-	background-color: #fff; /* Цвет фона для светлой темы */
-  }
-  
-  .dark .wrapper {
-	color: #ebeef5; /* Цвет текста для темной темы */
-	background-color: #121829; /* Цвет фона для темной темы */
-  }
+}
 
-  
+.light .wrapper {
+	color: #333;
+	background-color: #fff;
+}
+
+.dark .wrapper {
+	color: #ebeef5;
+	background-color: #121829;
+}
