@@ -1,0 +1,17 @@
+.wrapper-favorites{
+    padding: 50px 120px 50px 120px;
+    background: url("../../assets/Background.png") center center/cover no-repeat;
+	height: 100%;
+}
+
+.wrapper-favorites.light {
+	color: #333;
+	background-color: #fff;
+	height: 100vh;
+}
+
+.wrapper-favorites.dark {
+	color: #ebeef5;
+	background-color: #121829;
+	height: 100vh;
+}

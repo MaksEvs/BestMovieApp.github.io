@@ -42,7 +42,7 @@ const SelectedMovie = () => {
 		<div className={`selected-items ${theme}`}>
 			<Header />
 			{selectedMovie && (
-				<div className={`selected-wrapper ${theme === "dark" ? "dark" : "light"}`}>
+				<div className={`wrapper ${theme === "dark" ? "dark" : "light"}`}>
 					<p
 						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
 					>

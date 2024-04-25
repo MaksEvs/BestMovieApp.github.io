@@ -1,5 +1,20 @@
-.wrapper {
-	height: 740px;
+.wrapper-registr {
+	background: url("../../assets/Background.png") center center/cover no-repeat;
+	padding: 50px 120px 10px 120px;
+	height: 100%;
+}
+
+.light .wrapper-registr {
+	color: #333;
+	background-color: #fff;
+	height: 100vh;
+
+}
+
+.dark .wrapper-registr {
+	color: #ebeef5;
+	background-color: #121829;
+	height: 100vh;
 }
 
 h1 {

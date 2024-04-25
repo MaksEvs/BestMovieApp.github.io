@@ -1,7 +1,7 @@
 .wrapper {
 	background: url("../../assets/Background.png") center center/cover no-repeat;
-	min-height: 1200px;
-	padding: 50px 120px 50px 120px;
+	padding: 50px 120px 10px 120px;
+	height: 100%;
 }
 
 h1 {
@@ -19,9 +19,11 @@ h2 {
 .light .wrapper {
 	color: #333;
 	background-color: #fff;
+	height: 100%;
 }
 
 .dark .wrapper {
 	color: #ebeef5;
 	background-color: #121829;
+	height: 100%;
 }
