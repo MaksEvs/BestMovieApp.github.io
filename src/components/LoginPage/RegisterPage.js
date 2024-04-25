@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./RegisterPage.css";
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from "../../context/ThemeContext";
 
 const RegisterPage = (props) => {
 	const { theme } = useTheme();
-	
+
 	useEffect(() => {
 		document.body.className = theme;
 	}, [theme]);
@@ -38,8 +38,13 @@ const RegisterPage = (props) => {
 					value={props.formData.repeatPassword}
 					onChange={props.inputChangeHandler}
 				/>
-				<button type="submit" className={`registration ${theme === 'light' ? 'light-theme' : 'dark-theme'}`}>
-    				Зарегистрироваться
+				<button
+					type="submit"
+					className={`registration ${
+						theme === "light" ? "light-theme" : "dark-theme"
+					}`}
+				>
+					Зарегистрироваться
 				</button>
 			</form>
 		</div>

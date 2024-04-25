@@ -1,5 +1,5 @@
 .wrapper {
-	height: 739px;
+	height: 740px;
 }
 
 h1 {
@@ -48,7 +48,6 @@ input {
 	color: black;
 	border: 1px solid #000;
 }
-
 
 .dark-theme.registration {
 	color: white;
