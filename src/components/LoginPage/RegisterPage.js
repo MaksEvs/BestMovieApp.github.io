@@ -10,7 +10,7 @@ const RegisterPage = (props) => {
 	}, [theme]);
 
 	return (
-		<div className={`wrapper ${theme}`}>
+		<div className={`wrapper-registr ${theme === "dark" ? "dark" : "light"}`}>
 			<h1>Форма регистрации</h1>
 			{props.error && <p style={{ color: "red" }}>{props.error}</p>}
 			<form onSubmit={props.registerHandler}>
