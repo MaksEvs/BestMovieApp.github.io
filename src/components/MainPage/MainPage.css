@@ -1,8 +1,7 @@
 .wrapper {
 	background: url("../../assets/Background.png") center center/cover no-repeat;
-	max-height: 1550px;
+	min-height: 1200px;
 	padding: 50px 120px 50px 120px;
-	height: auto;
 }
 
 h1 {

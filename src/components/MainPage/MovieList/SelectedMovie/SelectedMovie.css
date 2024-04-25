@@ -1,4 +1,16 @@
+.selected-wrapper{
+	padding: 50px 120px 50px 120px;
+}
 
+.selected-wrapper.dark{
+    color: #ebeef5;
+	background-color: #121829;
+}
+
+.selected-wrapper.light{
+	color: #333;
+	background-color: #fff;
+}
 
 .selected-title {
     font-weight: 600;
@@ -20,7 +32,7 @@
     color: #ebeef5;
 }
 
-.selected-wrapper {
+.selected-item {
     display: grid;
     grid-template-columns: 450px 550px;
     grid-template-rows: 650px;
@@ -38,10 +50,21 @@ img {
     font-size: 20px;
     line-height: 160%;
     margin-top: 0;
+    color: #ebeef5;
+}
+
+.selected-text.light{
+    color: black
 }
 
 .selected-description {
     font-weight: 400;
     font-size: 18px;
     line-height: 160%;
+    color: #ebeef5;
+    margin: 0;
+}
+
+.selected-description.light{
+    color: black
 }
