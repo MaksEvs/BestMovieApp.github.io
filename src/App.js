@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./components/MainPage/MainPage";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
 import RegisterPageContainer from "./components/LoginPage/RegisterPageContainer";
 import FavoritesPage from "./components/FavoritePage/FavoritePage";
 import SelectedMovie from "./components/MainPage/MovieList/SelectedMovie/SelectedMovie";
 import { ThemeProvider } from "./context/ThemeContext";
+import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(
@@ -31,7 +32,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider>
-			<HashRouter>
+			<BrowserRouter>
 				<div>
 					<Routes>
 						<Route
@@ -63,9 +64,11 @@ const App = () => {
 							}
 						/>
 						<Route path="/film/:id" element={<SelectedMovie />} />
+						<Route path="/not-found" element={<NotFoundPage />} />
+						<Route path="*" element={<Navigate to="/not-found" />} />
 					</Routes>
 				</div>
-			</HashRouter>
+			</BrowserRouter>
 		</ThemeProvider>
 	);
 };
