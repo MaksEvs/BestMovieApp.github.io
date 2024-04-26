@@ -21,7 +21,7 @@ const SelectedMovie = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "3fc2842c-a40f-463a-806b-531db07f0746",
+						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
 						"Content-Type": "application/json",
 					},
 				});

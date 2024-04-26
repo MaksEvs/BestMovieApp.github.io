@@ -1,116 +1,131 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import Loader from "./Loader/Loader";
-import LazyMovieListContent from "./MovieListContent";
-import LazyDebouncedInput from "./InputSearch/DebouncedInput";
-import LazySelectedMovie from "./SelectedMovie/SelectedMovie";
-import LazyPagination from "./Pagination/Pagination";
-import FilterButtonsContainer from "./FilterButtons/FilterButtonsContainer";
+import MovieListContent from "./MovieListContent";
+import DebouncedInput from "./InputSearch/DebouncedInput";
+import FilterButtons from "./FilterButtons/FilterButtons";
+import Pagination from "./Pagination/Pagination";
+
+const LazySelectedMovie = React.lazy(() => import("./SelectedMovie/SelectedMovie"));
 
 const MovieListFetcher = () => {
-	const [movies, setMovies] = useState([]);
-	const [allMovies, setAllMovies] = useState([]);
-	const [selectedMovie, setSelectedMovie] = useState(null);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [moviesPerPage] = useState(10);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [filterType, setFilterType] = useState("all");
-	const [sortOrder, setSortOrder] = useState("asc");
-	const [isLoading, setIsLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+    const [allMovies, setAllMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [moviesPerPage] = useState(10);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filterType, setFilterType] = useState("all");
+    const [isLoading, setIsLoading] = useState(true);
+    const [sortOrder, setSortOrder] = useState("asc");
 
-	useEffect(() => {
-		const fetchMovies = async () => {
-			setIsLoading(true);
-			try {
-				let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
-				if (searchTerm === "") {
-					url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
-				}
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"X-API-KEY": "3fc2842c-a40f-463a-806b-531db07f0746",
-						"Content-Type": "application/json",
-					},
-				});
-				if (!response.ok) {
-					throw new Error("Failed to fetch movies");
-				}
-				const data = await response.json();
-				const fetchedMovies = data.films;
-				setAllMovies(fetchedMovies);
-				setMovies(fetchedMovies);
-				setIsLoading(false);
-			} catch (error) {
-				console.error(error);
-				setIsLoading(false);
-			}
-		};
+    useEffect(() => {
+        const fetchMovies = async () => {
+            setIsLoading(true);
+            try {
+                let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
+                if (searchTerm === "") {
+                    url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
+                }
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
+                        "Content-Type": "application/json",
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to fetch movies");
+                }
+                const data = await response.json();
+                const fetchedMovies = data.films;
+                setAllMovies(fetchedMovies);
+                setMovies(fetchedMovies);
+                setIsLoading(false);
+            } catch (error) {
+                console.error(error);
+                setIsLoading(false);
+            }
+        };
 
-		fetchMovies();
-	}, [currentPage, searchTerm]);
+        fetchMovies();
+    }, [currentPage, searchTerm]);
 
-	const handleMovieClick = (movie) => {
-		setSelectedMovie(movie);
-	};
+    useEffect(() => {
+        let sortedMovies = [...allMovies];
 
-	const handleInputChange = (value) => {
-		setSearchTerm(value);
-	};
+        if (filterType === "year") {
+            sortedMovies.sort((a, b) => {
+                return sortOrder === "asc"
+                    ? parseInt(a.year, 10) - parseInt(b.year, 10)
+                    : parseInt(b.year, 10) - parseInt(a.year, 10);
+            });
+        } else if (filterType === "rating") {
+            sortedMovies.sort((a, b) => {
+                return sortOrder === "asc"
+                    ? parseFloat(a.rating) - parseFloat(b.rating)
+                    : parseFloat(b.rating) - parseFloat(a.rating);
+            });
+        }
 
-	const handleFilterChange = (type) => {
-		setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
-		setFilterType(type);
-	};
+        setMovies(sortedMovies);
+    }, [filterType, allMovies, sortOrder]);
 
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const handleMovieClick = (movie) => {
+        setSelectedMovie(movie);
+    };
 
-	const indexOfLastMovie = currentPage * moviesPerPage;
-	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-	const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+    const handleInputChange = (value) => {
+        setSearchTerm(value);
+    };
 
-	return (
-		<div>
-			<Suspense fallback={<Loader />}>
-				{selectedMovie ? (
-					<LazySelectedMovie
-						movieId={selectedMovie.filmId}
-						selectedMovie={selectedMovie}
-						setSelectedMovie={setSelectedMovie}
-					/>
-				) : (
-					<>
-						<h2>Открой для себя мир кино</h2>
-						<LazyDebouncedInput
-							handleInputChange={handleInputChange}
-							delay={500}
-						/>
-						<FilterButtonsContainer
-							handleFilterChange={handleFilterChange}
-							filterType={filterType}
-							sortOrder={sortOrder}
-							allMovies={allMovies}
-							setMovies={setMovies}
-						/>
-						{isLoading ? (
-							<Loader />
-						) : (
-							<>
-								<LazyMovieListContent
-									movies={currentMovies}
-									onMovieClick={handleMovieClick}
-								/>
-								<LazyPagination
-									moviesPerPage={moviesPerPage}
-									totalMovies={allMovies.length}
-									paginate={paginate}
-								/>
-							</>
-						)}
-					</>
-				)}
-			</Suspense>
-		</div>
-	);
+    const handleFilterChange = (type) => {
+        setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
+        setFilterType(type);
+    };
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+    return (
+        <div>
+          
+                {selectedMovie ? (
+				<Suspense fallback={<Loader />}>
+                    <LazySelectedMovie
+                        movieId={selectedMovie.filmId}
+                        selectedMovie={selectedMovie}
+                        setSelectedMovie={setSelectedMovie}
+                    />
+				</Suspense>
+                ) : (
+                    <>
+                        <h2>Открой для себя мир кино</h2>
+                        <DebouncedInput handleInputChange={handleInputChange} delay={500} />
+                        <FilterButtons
+                            handleFilterChange={handleFilterChange}
+                            filterType={filterType}
+                            sortOrder={sortOrder}
+                        />
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                <MovieListContent movies={currentMovies} onMovieClick={handleMovieClick} />
+                                <Pagination
+                                    moviesPerPage={moviesPerPage}
+                                    totalMovies={allMovies.length}
+                                    paginate={paginate}
+                                />
+                            </>
+                        )}
+                    </>
+                )}
+
+        </div>
+    );
 };
 
 export default MovieListFetcher;
