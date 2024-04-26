@@ -4,8 +4,13 @@ import MovieListContent from "./MovieListContent";
 import DebouncedInput from "./InputSearch/DebouncedInput";
 import FilterButtons from "./FilterButtons/FilterButtons";
 import Pagination from "./Pagination/Pagination";
+import SelectedMovie from './SelectedMovie/SelectedMovie'
 
-const LazySelectedMovie = React.lazy(() => import("./SelectedMovie/SelectedMovie"));
+
+
+
+
+
 
 const MovieListFetcher = () => {
     const [movies, setMovies] = useState([]);
@@ -93,13 +98,13 @@ const MovieListFetcher = () => {
         <div>
           
                 {selectedMovie ? (
-				<Suspense fallback={<Loader />}>
-                    <LazySelectedMovie
+
+                    <SelectedMovie
                         movieId={selectedMovie.filmId}
                         selectedMovie={selectedMovie}
                         setSelectedMovie={setSelectedMovie}
                     />
-				</Suspense>
+
                 ) : (
                     <>
                         <h2>Открой для себя мир кино</h2>
