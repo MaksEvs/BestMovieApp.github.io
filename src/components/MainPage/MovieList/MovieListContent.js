@@ -11,6 +11,7 @@ const MovieListContent = ({ movies, onMovieClick }) => {
 	return (
 		<ul className="movie-list">
 			{movies.map((movie) => (
+				
 				<li
 					className="movie-item"
 					key={movie.filmId}
@@ -30,7 +31,7 @@ MovieListContent.propTypes = {
     movies: PropTypes.arrayOf(
         PropTypes.shape({
             filmId: PropTypes.number,
-            posterUrlPreview: PropTypes,
+            posterUrlPreview: PropTypes.string,
             nameRu: PropTypes.string
         })
     ),
