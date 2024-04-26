@@ -21,7 +21,7 @@ const SelectedMovie = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+						"X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
 						"Content-Type": "application/json",
 					},
 				});
@@ -51,20 +51,38 @@ const SelectedMovie = () => {
 					<div className="selected-item">
 						<img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} />
 						<div className="selected-descr">
-							<p className={`selected-description ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-description ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								{selectedMovie.description}
 							</p>
 							<br></br>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								Жанр:{" "}
 								{selectedMovie.genres
 									? selectedMovie.genres.map((genre) => `${genre.genre} `)
 									: ""}
 							</p>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								Оценка: {selectedMovie.ratingKinopoisk}
 							</p>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>Год выхода: {selectedMovie.year}</p>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
+								Год выхода: {selectedMovie.year}
+							</p>
 						</div>
 					</div>
 				</div>

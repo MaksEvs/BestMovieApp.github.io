@@ -37,8 +37,7 @@ const FilterButtons = ({ handleFilterChange, filterType, sortOrder }) => {
 FilterButtons.propTypes = {
 	handleFilterChange: PropTypes.func,
 	filterType: PropTypes.string,
-	sortOrder: PropTypes.string
-}
-
+	sortOrder: PropTypes.string,
+};
 
 export default FilterButtons;

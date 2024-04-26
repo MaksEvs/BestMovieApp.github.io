@@ -27,15 +27,14 @@ const MovieListContent = ({ movies, onMovieClick }) => {
 };
 
 MovieListContent.propTypes = {
-    movies: PropTypes.arrayOf(
-        PropTypes.shape({
-            filmId: PropTypes.number,
-            posterUrlPreview: PropTypes,
-            nameRu: PropTypes.string
-        })
-    ),
-    onMovieClick: PropTypes.func
+	movies: PropTypes.arrayOf(
+		PropTypes.shape({
+			filmId: PropTypes.number,
+			posterUrlPreview: PropTypes.string,
+			nameRu: PropTypes.string,
+		})
+	),
+	onMovieClick: PropTypes.func,
 };
-
 
 export default MovieListContent;
