@@ -69,3 +69,8 @@ img {
 	transition: 0.3s all;
 	box-shadow: 0px 0px 4px 1px rgba(195, 179, 243, 1);
 }
+
+.missing-movie {
+	text-align: center;
+	font-size: 50px;
+}
