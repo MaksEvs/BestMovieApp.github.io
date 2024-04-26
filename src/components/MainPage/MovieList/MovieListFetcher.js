@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import MovieList from "./MovieList";
-import SelectedMovie from "./SelectedMovie/SelectedMovie";
-import Pagination from "./Pagination/Pagination";
-import FilterButtons from "./FilterButtons/FilterButtons";
-import DebouncedInput from "./Input//DebouncedInput";
+import React, { useState, useEffect, Suspense} from "react";
 import Loader from "./Loader/Loader";
+
+const LazyMovieListContent = React.lazy(() => import("./MovieListContent"));
+const LazyDebouncedInput = React.lazy(() => import("./Input/DebouncedInput"));
+const LazyFilterButtons = React.lazy(() => import("./FilterButtons/FilterButtons"));
+const LazySelectedMovie = React.lazy(() => import("./SelectedMovie/SelectedMovie"));
+const LazyPagination = React.lazy(() => import("./Pagination/Pagination"));
 
 const MovieListFetcher = () => {
 	const [movies, setMovies] = useState([]);
@@ -90,34 +91,40 @@ const MovieListFetcher = () => {
 
     return (
         <div>
-            {selectedMovie ? (
-                <SelectedMovie
-                    movieId={selectedMovie.filmId}
-                    selectedMovie={selectedMovie}
-                    setSelectedMovie={setSelectedMovie}
-                />
-            ) : (
-                <>
-                    <h2>Открой для себя мир кино</h2>
-                    <DebouncedInput handleInputChange={handleInputChange} delay={500} />
-                    <FilterButtons handleFilterChange={handleFilterChange} filterType={filterType} sortOrder={sortOrder}  />
-                    {isLoading ? (
-                        <Loader />
-                    ) : (
-                        <>
-                            <MovieList
-                                movies={currentMovies}
-                                onMovieClick={handleMovieClick}
-                            />
-                            <Pagination
-                                moviesPerPage={moviesPerPage}
-                                totalMovies={allMovies.length}
-                                paginate={paginate}
-                            />
-                        </>
-                    )}
-                </>
-            )}
+            <Suspense fallback={<Loader />}>
+                {selectedMovie ? (
+                    <LazySelectedMovie
+                        movieId={selectedMovie.filmId}
+                        selectedMovie={selectedMovie}
+                        setSelectedMovie={setSelectedMovie}
+                    />
+                ) : (
+                    <>
+                        <h2>Открой для себя мир кино</h2>
+                        <LazyDebouncedInput handleInputChange={handleInputChange} delay={500} />
+                        <LazyFilterButtons
+                            handleFilterChange={handleFilterChange}
+                            filterType={filterType}
+                            sortOrder={sortOrder}
+                        />
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                <LazyMovieListContent
+                                    movies={currentMovies}
+                                    onMovieClick={handleMovieClick}
+                                />
+                                <LazyPagination
+                                    moviesPerPage={moviesPerPage}
+                                    totalMovies={allMovies.length}
+                                    paginate={paginate}
+                                />
+                            </>
+                        )}
+                    </>
+                )}
+            </Suspense>
         </div>
     );
 };

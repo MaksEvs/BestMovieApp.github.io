@@ -8,7 +8,6 @@
 	color: #333;
 	background-color: #fff;
 	height: 100vh;
-
 }
 
 .dark .wrapper-login {
@@ -76,10 +75,12 @@ input {
 }
 
 .login.light {
+	border: 1px solid black;
 	color: black;
 }
 
 .register.light {
+	border: 1px solid black;
 	color: black;
 }
 
@@ -165,9 +166,9 @@ input {
 }
 
 .input-oval.light {
-	color: #1c1f25;
+	border: 1px solid black;
 }
 
 .input-oval.dark {
-	color: white;
+	color: white !important;
 }
