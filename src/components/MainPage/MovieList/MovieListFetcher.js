@@ -107,9 +107,6 @@ const MovieListFetcher = () => {
                             filterType={filterType}
                             sortOrder={sortOrder}
                         />
-                        {isLoading ? (
-                            <Loader />
-                        ) : (
                             <>
                                 <LazyMovieListContent
                                     movies={currentMovies}
@@ -121,7 +118,6 @@ const MovieListFetcher = () => {
                                     paginate={paginate}
                                 />
                             </>
-                        )}
                     </>
                 )}
             </Suspense>
