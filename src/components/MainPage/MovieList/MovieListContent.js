@@ -4,7 +4,7 @@ import "./MovieList.css";
 
 const MovieListContent = ({ movies, onMovieClick }) => {
 	if (!movies || movies.length === 0) {
-		return <div>Нет доступных фильмов.</div>;
+		return <div className="missing-movie">Нет доступных фильмов.</div>;
 	}
 
 	return (
