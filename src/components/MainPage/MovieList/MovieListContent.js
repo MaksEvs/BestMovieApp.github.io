@@ -38,5 +38,4 @@ MovieListContent.propTypes = {
     onMovieClick: PropTypes.func
 };
 
-
 export default MovieListContent;

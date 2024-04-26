@@ -51,20 +51,38 @@ const SelectedMovie = () => {
 					<div className="selected-item">
 						<img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} />
 						<div className="selected-descr">
-							<p className={`selected-description ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-description ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								{selectedMovie.description}
 							</p>
 							<br></br>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								Жанр:{" "}
 								{selectedMovie.genres
 									? selectedMovie.genres.map((genre) => `${genre.genre} `)
 									: ""}
 							</p>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
 								Оценка: {selectedMovie.ratingKinopoisk}
 							</p>
-							<p className={`selected-text ${theme === "dark" ? "dark" : "light"}`}>Год выхода: {selectedMovie.year}</p>
+							<p
+								className={`selected-text ${
+									theme === "dark" ? "dark" : "light"
+								}`}
+							>
+								Год выхода: {selectedMovie.year}
+							</p>
 						</div>
 					</div>
 				</div>
