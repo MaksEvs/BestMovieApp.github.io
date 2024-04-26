@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MovieList from "./MovieList";
+import MovieListContent from "./MovieListContent";
 import SelectedMovie from "./SelectedMovie/SelectedMovie";
 import Pagination from "./Pagination/Pagination";
 import FilterButtons from "./FilterButtons/FilterButtons";
@@ -109,7 +109,7 @@ const MovieListFetcher = () => {
 						<Loader />
 					) : (
 						<>
-							<MovieList
+							<MovieListContent
 								movies={currentMovies}
 								onMovieClick={handleMovieClick}
 							/>
