@@ -29,7 +29,7 @@ const MovieListFetcher = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+						"X-API-KEY": "3fc2842c-a40f-463a-806b-531db07f0746",
 						"Content-Type": "application/json",
 					},
 				});
@@ -89,7 +89,7 @@ const MovieListFetcher = () => {
 	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
 	const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-    return (
+	return (
         <div>
             <Suspense fallback={<Loader />}>
                 {selectedMovie ? (
@@ -107,6 +107,9 @@ const MovieListFetcher = () => {
                             filterType={filterType}
                             sortOrder={sortOrder}
                         />
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
                             <>
                                 <LazyMovieListContent
                                     movies={currentMovies}
@@ -118,6 +121,7 @@ const MovieListFetcher = () => {
                                     paginate={paginate}
                                 />
                             </>
+                        )}
                     </>
                 )}
             </Suspense>
