@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./MovieList.css";
 
@@ -24,5 +25,17 @@ const MovieListContent = ({ movies, onMovieClick }) => {
 		</ul>
 	);
 };
+
+MovieListContent.propTypes = {
+    movies: PropTypes.arrayOf(
+        PropTypes.shape({
+            filmId: PropTypes.number,
+            posterUrlPreview: PropTypes,
+            nameRu: PropTypes.string
+        })
+    ),
+    onMovieClick: PropTypes.func
+};
+
 
 export default MovieListContent;

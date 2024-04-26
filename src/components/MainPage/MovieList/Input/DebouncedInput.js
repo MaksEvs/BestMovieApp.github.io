@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import './DebouncedInput.css';
 import useDebounce from './useDebounce';
 import { useTheme } from "../../../../context/ThemeContext";
@@ -15,10 +16,11 @@ const DebouncedInput = ({ handleInputChange, delay }) => {
 
     const handleChange = (event) => {
         const value = event.target.value;
-        setInputValue(value);
         if (value.trim() === '') {
+            setInputValue('');
             handleInputChange('');
         } else {
+            setInputValue(value); 
             handleDebounce(value, handleInputChange);
         }
     };
@@ -33,5 +35,11 @@ const DebouncedInput = ({ handleInputChange, delay }) => {
         />
     );
 };
+
+DebouncedInput.propTypes = {
+    handleInputChange: PropTypes.func,
+    delay: PropTypes.number
+}
+
 
 export default DebouncedInput;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./FilterButtons.css";
 
 const FilterButtons = ({ handleFilterChange, filterType, sortOrder }) => {
@@ -32,5 +33,12 @@ const FilterButtons = ({ handleFilterChange, filterType, sortOrder }) => {
 		</div>
 	);
 };
+
+FilterButtons.propTypes = {
+	handleFilterChange: PropTypes.func,
+	filterType: PropTypes.string,
+	sortOrder: PropTypes.string
+}
+
 
 export default FilterButtons;

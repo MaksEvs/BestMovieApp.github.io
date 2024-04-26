@@ -2,6 +2,7 @@ import React from "react";
 import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 import MovieListContent from "./MovieListContent";
 
+
 const MovieList = ({ movies, onMovieClick }) => {
 	return (
 		<ErrorBoundary>
@@ -9,5 +10,6 @@ const MovieList = ({ movies, onMovieClick }) => {
 		</ErrorBoundary>
 	);
 };
+
 
 export default MovieList;
