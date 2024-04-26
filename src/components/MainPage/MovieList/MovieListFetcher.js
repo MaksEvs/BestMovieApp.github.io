@@ -1,11 +1,11 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import Loader from "./Loader/Loader";
 import DebouncedInput from "./InputSearch/DebouncedInput";
-import FilterButtons from "./FilterButtons/FilterButtons";
+import SelectedMovie from "./SelectedMovie/SelectedMovie";
 import Pagination from "./Pagination/Pagination";
+import FilterButtonsContainer from "./FilterButtons/FilterButtonsContainer";
 
-const SelectedMovie = React.lazy(() => import("./SelectedMovie/SelectedMovie"));
-const MovieListContent = React.lazy(() => import("./MovieListContent"));
+const MovieListContent = lazy(() => import("./MovieListContent"));
 
 const MovieListFetcher = () => {
 	const [movies, setMovies] = useState([]);
@@ -15,8 +15,8 @@ const MovieListFetcher = () => {
 	const [moviesPerPage] = useState(10);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filterType, setFilterType] = useState("all");
-	const [isLoading, setIsLoading] = useState(true);
 	const [sortOrder, setSortOrder] = useState("asc");
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchMovies = async () => {
@@ -29,7 +29,7 @@ const MovieListFetcher = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
+						"X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
 						"Content-Type": "application/json",
 					},
 				});
@@ -40,9 +40,9 @@ const MovieListFetcher = () => {
 				const fetchedMovies = data.films;
 				setAllMovies(fetchedMovies);
 				setMovies(fetchedMovies);
+				setIsLoading(false);
 			} catch (error) {
 				console.error(error);
-			} finally {
 				setIsLoading(false);
 			}
 		};
@@ -72,35 +72,34 @@ const MovieListFetcher = () => {
 	return (
 		<div>
 			<h2>Открой для себя мир кино</h2>
-			<DebouncedInput handleInputChange={handleInputChange} delay={500} />
-			<FilterButtons
-				handleFilterChange={handleFilterChange}
-				filterType={filterType}
-				sortOrder={sortOrder}
-			/>
-			<Suspense fallback={<Loader />}>
-				{!isLoading && selectedMovie && (
-					<SelectedMovie
-						movieId={selectedMovie.filmId}
-						selectedMovie={selectedMovie}
-						setSelectedMovie={setSelectedMovie}
+			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
+			{selectedMovie && (
+				<SelectedMovie
+					movieId={selectedMovie.filmId}
+					selectedMovie={selectedMovie}
+					setSelectedMovie={setSelectedMovie}
+				/>
+			)}
+			{!isLoading && (
+				<Suspense fallback={<Loader />}>
+					<FilterButtonsContainer
+						handleFilterChange={handleFilterChange}
+						filterType={filterType}
+						sortOrder={sortOrder}
+						allMovies={allMovies}
+						setMovies={setMovies}
 					/>
-				)}
-				{!isLoading && (
 					<MovieListContent
 						movies={currentMovies}
 						onMovieClick={handleMovieClick}
 					/>
-				)}
-				{!isLoading && (
 					<Pagination
 						moviesPerPage={moviesPerPage}
 						totalMovies={allMovies.length}
 						paginate={paginate}
 					/>
-				)}
-			</Suspense>
-			{isLoading && <Loader />}
+				</Suspense>
+			)}
 		</div>
 	);
 };

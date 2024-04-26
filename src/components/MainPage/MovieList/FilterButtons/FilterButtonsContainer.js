@@ -9,7 +9,7 @@ const FilterButtonsContainer = ({
 	allMovies,
 	setMovies,
 }) => {
-	const handleClick = (type) => {
+	const clickHandle = (type) => {
 		const sortedMovies = [...allMovies];
 		if (type === "year") {
 			sortedMovies.sort((a, b) => {
@@ -30,7 +30,7 @@ const FilterButtonsContainer = ({
 
 	return (
 		<FilterButtons
-			handleFilterChange={handleClick}
+			handleFilterChange={clickHandle}
 			filterType={filterType}
 			sortOrder={sortOrder}
 		/>
