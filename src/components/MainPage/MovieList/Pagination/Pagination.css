@@ -17,3 +17,11 @@
     background: rgba(32, 40, 62, 0.8);
     margin-right: 20px;
 }
+
+@media screen and (max-width: 768px) {
+    .pagination{
+        width: 200px;
+        justify-content: center;
+    }
+}
+

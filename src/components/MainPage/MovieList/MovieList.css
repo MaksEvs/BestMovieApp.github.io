@@ -1,6 +1,6 @@
 .movie-list {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(243px, auto));
+	grid-template-columns: repeat(5, minmax(220px, auto));
 	grid-template-rows: repeat(2, minmax(200px, auto));
 	column-gap: 24px;
 	row-gap: 20px;
@@ -41,4 +41,47 @@ img {
 .missing-movie {
 	text-align: center;
 	font-size: 50px;
+}
+
+@media screen and (max-width: 1439px) {
+    .movie-list {
+        grid-template-columns: repeat(4, minmax(210px, auto));
+        column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .movie-list {
+        grid-template-columns: repeat(4, minmax(150px, auto));
+        column-gap: 20px;
+    }
+	.movie-title {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width: 992px) {
+    .movie-list {
+        grid-template-columns: repeat(3, minmax(150px, auto));
+        column-gap: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .movie-list {
+        grid-template-columns: repeat(2, minmax(120px, auto));
+        column-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .movie-list {
+		display: flex;
+		flex-direction: column;
+		width: 200px;
+		margin: 15px auto;
+
+
+
+    }
 }
