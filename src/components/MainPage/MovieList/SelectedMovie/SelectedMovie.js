@@ -42,14 +42,14 @@ const SelectedMovie = () => {
 		<div className={`selected-items ${theme}`}>
 			<Header />
 			{selectedMovie && (
-				<div className={`wrapper ${theme === "dark" ? "dark" : "light"}`}>
+				<div className={`selected-wrapper ${theme === "dark" ? "dark" : "light"}`}>
 					<p
 						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
 					>
 						{selectedMovie.nameRu}
 					</p>
 					<div className="selected-item">
-						<img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} />
+						<div className="selected-img"><img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} /></div>
 						<div className="selected-descr">
 							<p
 								className={`selected-description ${

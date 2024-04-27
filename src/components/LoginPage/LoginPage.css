@@ -172,3 +172,30 @@ input {
 .input-oval.dark {
 	color: white !important;
 }
+
+@media screen and (max-width: 992px) {
+	.login-title{
+		font-size: 25px;
+	}
+}
+
+
+@media screen and (max-width: 768px) {
+    .wrapper-login {
+        padding: 30px;
+    }
+
+    form {
+        width: 200px;
+    }
+
+    input {
+        height: 60px;
+    }
+
+	.login{
+		margin-right: 15px;
+	}
+
+
+}

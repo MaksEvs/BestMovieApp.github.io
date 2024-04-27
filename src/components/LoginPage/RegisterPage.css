@@ -54,3 +54,17 @@ form {
 	border: 1px solid #ebeef5;
 	background: transparent;
 }
+
+@media screen and (max-width: 768px) {
+    .wrapper-registr {
+        padding: 30px;
+    }
+
+    form {
+        width: 200px;
+    }
+
+    .registration {
+        font-size: 18px;
+    }
+}
