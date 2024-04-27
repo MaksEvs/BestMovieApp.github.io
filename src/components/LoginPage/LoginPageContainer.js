@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { login } from "../../store/authSlice";
 import LoginPage from "./LoginPage";
 import Header from "../Header/Header";
 
-const LoginPageContainer = (props) => {
+const LoginPageContainer = () => {
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
 	});
-	const [loggedIn, setLoggedIn] = useState(false);
+	const dispatch = useDispatch();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
 	const inputChangeHandler = (event) => {
 		const { name, value } = event.target;
@@ -20,14 +23,15 @@ const LoginPageContainer = (props) => {
 
 	const loginHandler = (event) => {
 		event.preventDefault();
-		const { username, password } = formData;
-		if (localStorage.getItem(username) === JSON.stringify({ password })) {
-			props.onLogin(username);
-			setLoggedIn(true);
+		const { username } = formData;
+		const userExists = !!localStorage.getItem(username);
+		if (userExists) {
+			dispatch(login({ username }));
+			localStorage.setItem("username", username);
 		}
 	};
 
-	if (loggedIn) {
+	if (isLoggedIn) {
 		return <Navigate to="/" />;
 	}
 

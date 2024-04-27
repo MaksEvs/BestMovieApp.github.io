@@ -25,12 +25,11 @@ const MovieListFetcher = () => {
 				let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
 				if (searchTerm === "") {
 					url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
-					
 				}
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
 						"Content-Type": "application/json",
 					},
 				});
@@ -57,7 +56,6 @@ const MovieListFetcher = () => {
 
 	const handleInputChange = (value) => {
 		setSearchTerm(value);
-
 	};
 
 	const handleFilterChange = (type) => {
@@ -85,12 +83,12 @@ const MovieListFetcher = () => {
 			)}
 
 			<FilterButtonsContainer
-						handleFilterChange={handleFilterChange}
-						filterType={filterType}
-						sortOrder={sortOrder}
-						allMovies={allMovies}
-						setMovies={setMovies}
-					/>
+				handleFilterChange={handleFilterChange}
+				filterType={filterType}
+				sortOrder={sortOrder}
+				allMovies={allMovies}
+				setMovies={setMovies}
+			/>
 			{!isLoading && (
 				<Suspense fallback={<Loader />}>
 					<MovieListContent

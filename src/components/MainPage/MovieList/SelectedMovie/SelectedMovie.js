@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTheme } from "../../../../context/ThemeContext";
 import "./SelectedMovie.css";
 import Header from "../../../Header/Header";
+import LikeButton from "./LikeButton/LikeButton";
 
 const SelectedMovie = () => {
 	const { id } = useParams();
@@ -21,7 +22,7 @@ const SelectedMovie = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
 						"Content-Type": "application/json",
 					},
 				});
@@ -37,7 +38,6 @@ const SelectedMovie = () => {
 
 		fetchMovie();
 	}, [id]);
-
 	return (
 		<div className={`selected-items ${theme}`}>
 			<Header />
@@ -83,6 +83,7 @@ const SelectedMovie = () => {
 							>
 								Год выхода: {selectedMovie.year}
 							</p>
+							<LikeButton movieId={selectedMovie.kinopoiskId} />
 						</div>
 					</div>
 				</div>

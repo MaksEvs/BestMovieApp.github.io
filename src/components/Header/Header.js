@@ -1,18 +1,23 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { FiSun, FiMoon } from "react-icons/fi";
 import "./Header.css";
+import { logout } from "../../store/authSlice";
 
 const Header = () => {
 	const { theme, toggleTheme } = useTheme();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const currentPage = location.pathname;
-	const isLoggedIn = localStorage.getItem("username");
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const username = useSelector((state) => state.auth.username);
 	const favoritesLink = isLoggedIn ? "/favorites" : "/login";
+	const dispatch = useDispatch();
 
 	const logoutHandler = () => {
+		dispatch(logout());
 		localStorage.removeItem("username");
 		navigate("/");
 	};
@@ -63,7 +68,7 @@ const Header = () => {
 
 				{isLoggedIn ? (
 					<div className="user-block">
-						<span className="username">{localStorage.getItem("username")}</span>
+						<span className="username">{username}</span>
 						<button onClick={logoutHandler} className="logout_button">
 							Выход
 						</button>

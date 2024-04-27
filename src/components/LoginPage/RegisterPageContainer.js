@@ -1,16 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { register } from "../../store/authSlice";
 import RegisterPage from "./RegisterPage";
 import Header from "../Header/Header";
 
-const RegisterPageContainer = (props) => {
+const RegisterPageContainer = () => {
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
 		repeatPassword: "",
 	});
 	const [error, setError] = useState("");
-	const [registered, setRegistered] = useState(false);
+	const dispatch = useDispatch();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
@@ -20,8 +23,8 @@ const RegisterPageContainer = (props) => {
 	const registerHandler = (e) => {
 		e.preventDefault();
 		const { username, password, repeatPassword } = formData;
-
-		if (localStorage.getItem(username)) {
+		const userExists = !!localStorage.getItem(username);
+		if (userExists) {
 			setError("Пользователь с таким никнеймом уже существует");
 			return;
 		}
@@ -35,13 +38,16 @@ const RegisterPageContainer = (props) => {
 			setError("Пароли не совпадают");
 			return;
 		}
-
-		localStorage.setItem(username, JSON.stringify({ password }));
-		props.onRegister(username);
-		setRegistered(true);
+		const userData = {
+			password,
+			favorites: [],
+		};
+		localStorage.setItem(username, JSON.stringify(userData));
+		dispatch(register({ username }));
+		localStorage.setItem("username", username);
 	};
 
-	if (registered) {
+	if (isLoggedIn) {
 		return <Navigate to="/" />;
 	}
 
