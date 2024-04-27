@@ -1,111 +1,133 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Loader from "./Loader/Loader";
 import DebouncedInput from "./InputSearch/DebouncedInput";
 import SelectedMovie from "./SelectedMovie/SelectedMovie";
 import Pagination from "./Pagination/Pagination";
 import FilterButtonsContainer from "./FilterButtons/FilterButtonsContainer";
-
+import { fetchMoviesStart, fetchMoviesSuccess, fetchMoviesFailure, setFilterType, setSortOrder } from "../../../store/movies-slice";
 const MovieListContent = lazy(() => import("./MovieListContent"));
 
 const MovieListFetcher = () => {
-	const [movies, setMovies] = useState([]);
-	const [allMovies, setAllMovies] = useState([]);
-	const [selectedMovie, setSelectedMovie] = useState(null);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [moviesPerPage] = useState(10);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [filterType, setFilterType] = useState("all");
-	const [sortOrder, setSortOrder] = useState("asc");
-	const [isLoading, setIsLoading] = useState(true);
+    const filterType = useSelector((state) => state.movies.filterType);
+    const sortOrder = useSelector((state) => state.movies.sortOrder);
+    const dispatch = useDispatch();
+    const movies = useSelector((state) => state.movies.list);
+    const isLoading = useSelector((state) => state.movies.loading);
 
-	useEffect(() => {
-		const fetchMovies = async () => {
-			setIsLoading(true);
-			try {
-				let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
-				if (searchTerm === "") {
-					url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
-					
-				}
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
-						"Content-Type": "application/json",
-					},
-				});
-				if (!response.ok) {
-					throw new Error("Failed to fetch movies");
-				}
-				const data = await response.json();
-				const fetchedMovies = data.films;
-				setAllMovies(fetchedMovies);
-				setMovies(fetchedMovies);
-				setIsLoading(false);
-			} catch (error) {
-				console.error(error);
-				setIsLoading(false);
-			}
-		};
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const moviesPerPage = 10;
+    const [searchTerm, setSearchTerm] = useState("");
 
-		fetchMovies();
-	}, [currentPage, searchTerm]);
+    useEffect(() => {
+        dispatch(fetchMoviesStart());
+        const fetchMovies = async () => {
+            try {
+                let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
+                if (searchTerm === "") {
+                    url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
+                }
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "X-API-KEY": "3fc2842c-a40f-463a-806b-531db07f0746",
+                        "Content-Type": "application/json",
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to fetch movies");
+                }
+                const data = await response.json();
+                dispatch(fetchMoviesSuccess(data.films));
+            } catch (error) {
+                console.error(error);
+                dispatch(fetchMoviesFailure(error.message));
+            }
+        };
 
-	const handleMovieClick = (movie) => {
-		setSelectedMovie(movie);
-	};
+        fetchMovies();
+    }, [dispatch, currentPage, searchTerm]);
 
-	const handleInputChange = (value) => {
-		setSearchTerm(value);
 
-	};
+    const handleMovieClick = (movie) => {
+        setSelectedMovie(movie);
+    };
 
-	const handleFilterChange = (type) => {
-		setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
-		setFilterType(type);
-	};
 
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const handleInputChange = (value) => {
+        setSearchTerm(value);
+    };
 
-	const indexOfLastMovie = currentPage * moviesPerPage;
-	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-	const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+    const handleFilterChange = (type) => {
+        dispatch(setFilterType(type));
+        dispatch(setSortOrder(type !== 'all' ? (sortOrder === 'asc' ? 'desc' : 'asc') : 'asc'));
+        setCurrentPage(1);
+    };
+  
+    let filteredMovies = [...movies];
+    if (filterType !== "all") {
+        filteredMovies = filteredMovies.filter(movie => {
+            if (filterType === "year") {
+                return true;
+            } else if (filterType === "rating") {
+                return true;
+            } else {
+                return movie.type === filterType;
+            }
+        });
+    }
 
-	return (
-		<div>
-			<h1>Открой для себя мир кино</h1>
-			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
-			{isLoading && <Loader />}
-			{selectedMovie && (
-				<SelectedMovie
-					movieId={selectedMovie.filmId}
-					selectedMovie={selectedMovie}
-					setSelectedMovie={setSelectedMovie}
-				/>
-			)}
 
-			<FilterButtonsContainer
-						handleFilterChange={handleFilterChange}
-						filterType={filterType}
-						sortOrder={sortOrder}
-						allMovies={allMovies}
-						setMovies={setMovies}
-					/>
-			{!isLoading && (
-				<Suspense fallback={<Loader />}>
-					<MovieListContent
-						movies={currentMovies}
-						onMovieClick={handleMovieClick}
-					/>
-					<Pagination
-						moviesPerPage={moviesPerPage}
-						totalMovies={allMovies.length}
-						paginate={paginate}
-					/>
-				</Suspense>
-			)}
-		</div>
-	);
+    const sortedMovies = filteredMovies.slice().sort((a, b) => {
+        if (filterType === "year") {
+            return sortOrder === "asc" ? a.year - b.year : b.year - a.year;
+        } else if (filterType === "rating") {
+            return sortOrder === "asc" ? parseFloat(a.rating) - parseFloat(b.rating) : parseFloat(b.rating) - parseFloat(a.rating);
+        } else {
+            return 0;
+        }
+    });
+
+    const indexOfLastMovie = currentPage * moviesPerPage;
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+    const currentMovies = sortedMovies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    return (
+        <div>
+            <h2>Открой для себя мир кино</h2>
+            <DebouncedInput handleInputChange={handleInputChange} delay={1000} />
+            {selectedMovie && (
+                <SelectedMovie
+                    movieId={selectedMovie.filmId}
+                    selectedMovie={selectedMovie}
+                    setSelectedMovie={setSelectedMovie}
+                />
+            )}
+            {!isLoading && (
+                <Suspense fallback={<Loader />}>
+                    <FilterButtonsContainer
+                        handleFilterChange={handleFilterChange}
+                        filterType={filterType}
+                        sortOrder={sortOrder}
+                        allMovies={filteredMovies}
+                    />
+                    <MovieListContent
+                        movies={currentMovies}
+                        onMovieClick={handleMovieClick}
+                    />
+                    <Pagination
+                        moviesPerPage={moviesPerPage}
+                        totalMovies={filteredMovies.length}
+                        paginate={paginate}
+                    />
+                </Suspense>
+            )}
+        </div>
+    );
+
 };
 
 export default MovieListFetcher;
