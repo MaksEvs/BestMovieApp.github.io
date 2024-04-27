@@ -25,11 +25,12 @@ const MovieListFetcher = () => {
 				let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
 				if (searchTerm === "") {
 					url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
+					
 				}
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "be9f6d65-d4ac-468a-bb70-97ac247c7cfe",
+						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
 						"Content-Type": "application/json",
 					},
 				});
@@ -56,6 +57,7 @@ const MovieListFetcher = () => {
 
 	const handleInputChange = (value) => {
 		setSearchTerm(value);
+
 	};
 
 	const handleFilterChange = (type) => {
@@ -71,8 +73,9 @@ const MovieListFetcher = () => {
 
 	return (
 		<div>
-			<h2>Открой для себя мир кино</h2>
+			<h1>Открой для себя мир кино</h1>
 			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
+			{isLoading && <Loader />}
 			{selectedMovie && (
 				<SelectedMovie
 					movieId={selectedMovie.filmId}
@@ -80,15 +83,16 @@ const MovieListFetcher = () => {
 					setSelectedMovie={setSelectedMovie}
 				/>
 			)}
-			{!isLoading && (
-				<Suspense fallback={<Loader />}>
-					<FilterButtonsContainer
+
+			<FilterButtonsContainer
 						handleFilterChange={handleFilterChange}
 						filterType={filterType}
 						sortOrder={sortOrder}
 						allMovies={allMovies}
 						setMovies={setMovies}
 					/>
+			{!isLoading && (
+				<Suspense fallback={<Loader />}>
 					<MovieListContent
 						movies={currentMovies}
 						onMovieClick={handleMovieClick}
