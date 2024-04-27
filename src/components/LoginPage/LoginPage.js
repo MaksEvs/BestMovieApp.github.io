@@ -12,7 +12,7 @@ const LoginPage = (props) => {
 
 	return (
 		<div className={`wrapper-login ${theme === "dark" ? "dark" : "light"}`}>
-			<h1>Войдите или зарегистрируйтесь</h1>
+			<h1 className="login-title">Войдите или зарегистрируйтесь</h1>
 			<form onSubmit={props.loginHandler}>
 				<input
 					type="text"

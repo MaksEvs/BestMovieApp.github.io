@@ -21,7 +21,7 @@ const SelectedMovie = () => {
 				const response = await fetch(url, {
 					method: "GET",
 					headers: {
-						"X-API-KEY": "9f23075d-6761-46d1-ac4c-abbe40c01461",
+						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
 						"Content-Type": "application/json",
 					},
 				});
@@ -42,14 +42,14 @@ const SelectedMovie = () => {
 		<div className={`selected-items ${theme}`}>
 			<Header />
 			{selectedMovie && (
-				<div className={`wrapper ${theme === "dark" ? "dark" : "light"}`}>
+				<div className={`selected-wrapper ${theme === "dark" ? "dark" : "light"}`}>
 					<p
 						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
 					>
 						{selectedMovie.nameRu}
 					</p>
 					<div className="selected-item">
-						<img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} />
+						<div className="selected-img"><img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} /></div>
 						<div className="selected-descr">
 							<p
 								className={`selected-description ${
