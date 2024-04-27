@@ -4,7 +4,7 @@ import './DebouncedInput.css';
 import useDebounce from './useDebounce';
 import { useTheme } from "../../../../context/ThemeContext";
 
-const DebouncedInput = ({ handleInputChange, delay }) => {
+const DebouncedInput = ({ handleInputChange, delay}) => {
     
     const [inputValue, setInputValue] = useState('');
     const [, handleDebounce] = useDebounce(delay);
@@ -16,9 +16,12 @@ const DebouncedInput = ({ handleInputChange, delay }) => {
 
     const handleChange = (event) => {
         const value = event.target.value;
-        if (value.trim() === '') {
+        console.log(value)
+        if (value.trim() === '' && value.length !== 0 ) {
             setInputValue('');
             handleInputChange('');
+            
+            
         } else {
             setInputValue(value); 
             handleDebounce(value, handleInputChange);

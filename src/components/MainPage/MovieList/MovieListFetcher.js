@@ -49,9 +49,11 @@ const MovieListFetcher = () => {
         fetchMovies();
     }, [dispatch, currentPage, searchTerm]);
 
+
     const handleMovieClick = (movie) => {
         setSelectedMovie(movie);
     };
+
 
     const handleInputChange = (value) => {
         setSearchTerm(value);
@@ -62,7 +64,7 @@ const MovieListFetcher = () => {
         dispatch(setSortOrder(type !== 'all' ? (sortOrder === 'asc' ? 'desc' : 'asc') : 'asc'));
         setCurrentPage(1);
     };
-
+  
     let filteredMovies = [...movies];
     if (filterType !== "all") {
         filteredMovies = filteredMovies.filter(movie => {
@@ -75,6 +77,7 @@ const MovieListFetcher = () => {
             }
         });
     }
+
 
     const sortedMovies = filteredMovies.slice().sort((a, b) => {
         if (filterType === "year") {
@@ -124,6 +127,7 @@ const MovieListFetcher = () => {
             )}
         </div>
     );
+
 };
 
 export default MovieListFetcher;

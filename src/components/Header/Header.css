@@ -131,3 +131,11 @@ header {
 .theme-dark .theme-toggle-button svg {
 	color: #fff;
 }
+
+
+@media screen and (max-width: 768px) {
+	header {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
