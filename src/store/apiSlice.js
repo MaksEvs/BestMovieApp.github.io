@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const apiKey = '60d88c1c-9dd4-447c-a020-cbd9ef01e010';
+const apiKey = '5cb2c529-2c32-4ec9-8ff8-a488a598b672';
 
 const apiSlice = createApi({
   reducerPath: 'api',

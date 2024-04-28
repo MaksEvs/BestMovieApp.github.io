@@ -10,28 +10,11 @@ const FilterButtonsContainer = ({
 }) => {
 
     const handleFilterButtonClick = (type) => {
-        let filteredMovies = [...allMovies]; // Создаем копию allMovies
+        let filteredMovies = [...allMovies];
 
         if (type !== 'all') {
-            const filterConditions = {
-                "year": (a, b) => a.year - b.year,
-                "rating": (a, b) => parseFloat(a.rating) - parseFloat(b.rating),
-            };
-
             filteredMovies = filteredMovies.filter(movie => {
-                if (type in filterConditions) {
-                    return true;
-                } else {
-                    return movie.type === type;
-                }
-            });
-
-            filteredMovies.sort((a, b) => {
-                if (type in filterConditions) {
-                    return sortOrder === "asc" ? filterConditions[type](a, b) : filterConditions[type](b, a);
-                } else {
-                    return 0;
-                }
+                return movie.type === type;
             });
         }
 
