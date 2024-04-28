@@ -1,55 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTheme } from "../../../../context/ThemeContext";
 import "./SelectedMovie.css";
 import Header from "../../../Header/Header";
 import LikeButton from "./LikeButton/LikeButton";
+import { useGetMovieByIdQuery } from "../../../../store/apiSlice";
 
 const SelectedMovie = () => {
 	const { id } = useParams();
-	const [selectedMovie, setSelectedMovie] = useState(null);
+	const { data: selectedMovie, error, isLoading } = useGetMovieByIdQuery(id);
 	const { theme } = useTheme();
 
 	useEffect(() => {
 		document.body.className = theme;
 	}, [theme]);
 
-	useEffect(() => {
-		const fetchMovie = async () => {
-			try {
-				const url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`;
+	if (isLoading) return <div>Loading...</div>;
+	if (error) return <div>Error: {error.message}</div>;
 
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"X-API-KEY": "60d88c1c-9dd4-447c-a020-cbd9ef01e010",
-						"Content-Type": "application/json",
-					},
-				});
-				if (!response.ok) {
-					throw new Error("Failed to fetch movie");
-				}
-				const data = await response.json();
-				setSelectedMovie(data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchMovie();
-	}, [id]);
 	return (
 		<div className={`selected-items ${theme}`}>
 			<Header />
 			{selectedMovie && (
 				<div className={`selected-wrapper ${theme === "dark" ? "dark" : "light"}`}>
-					<p
-						className={`selected-title ${theme === "dark" ? "dark" : "light"}`}
-					>
+					<p className={`selected-title ${theme === "dark" ? "dark" : "light"}`}>
 						{selectedMovie.nameRu}
 					</p>
 					<div className="selected-item">
-						<div className="selected-img"><img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} /></div>
+						<div className="selected-img">
+							<img src={selectedMovie.posterUrl} alt={selectedMovie.nameRu} />
+						</div>
 						<div className="selected-descr">
 							<p
 								className={`selected-description ${
