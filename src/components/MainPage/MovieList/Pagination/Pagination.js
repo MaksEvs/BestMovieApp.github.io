@@ -1,9 +1,12 @@
 import React from "react";
 import "./Pagination.css";
+
 const Pagination = ({ moviesPerPage, totalMovies, paginate }) => {
+	const totalPages = Math.ceil(totalMovies / moviesPerPage);
+
 	const pageNumbers = [];
 
-	for (let i = 1; i <= Math.ceil(totalMovies / moviesPerPage); i++) {
+	for (let i = 1; i <= totalPages; i++) {
 		pageNumbers.push(i);
 	}
 

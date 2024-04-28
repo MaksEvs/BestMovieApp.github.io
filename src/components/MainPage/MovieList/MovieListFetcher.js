@@ -102,8 +102,6 @@ const MovieListFetcher = () => {
 	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
 	const currentMovies = sortedMovies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
 	return (
 		<div>
 			<h2>Открой для себя мир кино</h2>
@@ -129,8 +127,8 @@ const MovieListFetcher = () => {
 					/>
 					<Pagination
 						moviesPerPage={moviesPerPage}
-						totalMovies={filteredMovies.length}
-						paginate={paginate}
+						totalMovies={sortedMovies.length}
+						paginate={setCurrentPage}
 					/>
 				</Suspense>
 			)}
