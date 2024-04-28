@@ -22,11 +22,11 @@ const FavoritesPage = (props) => {
 		<div>
 			<Header />
 			<div
-				className={`wrapper wrapper-favorites ${
+				className={`wrapper-favorites ${
 					theme === "dark" ? "dark" : "light"
 				}`}
 			>
-				<ul className="movie-list">
+				<ul className="favorites-list">
 					{favorites.map((filmID) => {
 						return <FavoriteFilmItem filmID={filmID} />;
 					})}

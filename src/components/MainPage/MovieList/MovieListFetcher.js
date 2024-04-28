@@ -107,6 +107,7 @@ const MovieListFetcher = () => {
 	return (
 		<div>
 			<h2>Открой для себя мир кино</h2>
+
 			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
 			{selectedMovie && (
 				<SelectedMovie

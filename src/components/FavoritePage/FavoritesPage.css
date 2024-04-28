@@ -2,6 +2,7 @@
     padding: 50px 120px 50px 120px;
     background: url("../../assets/Background.png") center center/cover no-repeat;
 	height: 100%;
+	
 }
 
 .wrapper-favorites.light {
@@ -15,3 +16,14 @@
 	background-color: #121829;
 	height: 100vh;
 }
+
+.favorites-list{
+	display: grid;
+	grid-template-columns: repeat(5, minmax(220px, auto));
+	grid-template-rows: repeat(2, minmax(200px, auto));
+	column-gap: 24px;
+	row-gap: 20px;
+	padding: 0;
+	min-height: 100vh;
+}
+
