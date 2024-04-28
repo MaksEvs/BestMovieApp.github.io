@@ -67,7 +67,7 @@ input {
 
 .login {
 	text-decoration: none;
-	font-size: 21px;
+	font-size: 18px;
 	border: 1px solid #ebeef5;
 	padding: 1px 6px;
 	border-radius: 8px;
@@ -100,7 +100,7 @@ input {
 
 .register {
 	text-decoration: none;
-	font-size: 21px;
+	font-size: 18px;
 	font-weight: bold;
 	border: 1px solid #ebeef5;
 	padding: 0px 6px;
