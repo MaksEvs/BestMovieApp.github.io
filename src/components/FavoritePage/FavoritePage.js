@@ -13,7 +13,6 @@ const FavoritesPage = (props) => {
 	const user = JSON.parse(userString);
 	const favorites = user.favorites;
 
-	console.log(favorites);
 	if (!props.isLoggedIn) {
 		navigate("/login");
 	}
@@ -22,9 +21,7 @@ const FavoritesPage = (props) => {
 		<div>
 			<Header />
 			<div
-				className={`wrapper-favorites ${
-					theme === "dark" ? "dark" : "light"
-				}`}
+				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
 			>
 				<ul className="favorites-list">
 					{favorites.map((filmID) => {
