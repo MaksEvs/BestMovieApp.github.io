@@ -37,6 +37,7 @@ const MovieListFetcher = () => {
   });
   
   useEffect(() => {
+	dispatch(fetchMoviesStart());
 	if (searchTerm === "") {
 	  if (topMoviesData) {
 		dispatch(fetchMoviesSuccess(topMoviesData.films));
@@ -44,9 +45,11 @@ const MovieListFetcher = () => {
 	} else {
 	  if (moviesData) {
 		dispatch(fetchMoviesSuccess(moviesData.films));
+	  } else if (error) {
+		dispatch(fetchMoviesFailure(error));
 	  }
 	}
-  }, [dispatch, searchTerm, currentPage, moviesData, topMoviesData, selectedMovie]);
+}, [dispatch, searchTerm, currentPage, moviesData, topMoviesData, error, selectedMovie]);
 
 	const handleMovieClick = (movie) => {
 		setSelectedMovie(movie);
@@ -67,17 +70,7 @@ const MovieListFetcher = () => {
 	};
 
 	let filteredMovies = [...movies];
-	if (filterType !== "all") {
-		filteredMovies = filteredMovies.filter((movie) => {
-			if (filterType === "year") {
-				return true;
-			} else if (filterType === "rating") {
-				return true;
-			} else {
-				return movie.type === filterType;
-			}
-		});
-	}
+	
 
 	const sortedMovies = filteredMovies.slice().sort((a, b) => {
 		if (filterType === "year") {
