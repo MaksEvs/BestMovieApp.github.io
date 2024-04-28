@@ -102,9 +102,12 @@ const MovieListFetcher = () => {
 	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
 	const currentMovies = sortedMovies.slice(indexOfFirstMovie, indexOfLastMovie);
 
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 	return (
 		<div>
 			<h2>Открой для себя мир кино</h2>
+
 			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
 			{selectedMovie && (
 				<SelectedMovie
@@ -127,8 +130,8 @@ const MovieListFetcher = () => {
 					/>
 					<Pagination
 						moviesPerPage={moviesPerPage}
-						totalMovies={sortedMovies.length}
-						paginate={setCurrentPage}
+						totalMovies={filteredMovies.length}
+						paginate={paginate}
 					/>
 				</Suspense>
 			)}
