@@ -5,51 +5,66 @@ import DebouncedInput from "./InputSearch/DebouncedInput";
 import SelectedMovie from "./SelectedMovie/SelectedMovie";
 import Pagination from "./Pagination/Pagination";
 import FilterButtonsContainer from "./FilterButtons/FilterButtonsContainer";
-import { useGetMoviesByKeywordQuery, useGetTopMoviesQuery } from "../../../store/apiSlice";
 import {
-  fetchMoviesStart,
-  fetchMoviesSuccess,
-  fetchMoviesFailure,
-  setFilterType,
-  setSortOrder,
+	useGetMoviesByKeywordQuery,
+	useGetTopMoviesQuery,
+} from "../../../store/apiSlice";
+import {
+	fetchMoviesStart,
+	fetchMoviesSuccess,
+	fetchMoviesFailure,
+	setFilterType,
+	setSortOrder,
 } from "../../../store/moviesSlice";
 const MovieListContent = lazy(() => import("./MovieListContent"));
 
 const MovieListFetcher = () => {
-  const filterType = useSelector((state) => state.movies.filterType);
-  const sortOrder = useSelector((state) => state.movies.sortOrder);
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies.list);
-  const isLoading = useSelector((state) => state.movies.loading);
+	const filterType = useSelector((state) => state.movies.filterType);
+	const sortOrder = useSelector((state) => state.movies.sortOrder);
+	const dispatch = useDispatch();
+	const movies = useSelector((state) => state.movies.list);
+	const isLoading = useSelector((state) => state.movies.loading);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 10;
-  const [searchTerm, setSearchTerm] = useState("");
+	const [selectedMovie, setSelectedMovie] = useState(null);
+	const [currentPage, setCurrentPage] = useState(1);
+	const moviesPerPage = 10;
+	const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: moviesData, error, isLoading: isFetching } = useGetMoviesByKeywordQuery(
-	{ keyword: searchTerm, page: currentPage },
-	{ enabled: searchTerm !== "" }
-  );
-  
-  const { data: topMoviesData } = useGetTopMoviesQuery(currentPage, {
-	enabled: searchTerm === ""
-  });
-  
-  useEffect(() => {
-	dispatch(fetchMoviesStart());
-	if (searchTerm === "") {
-	  if (topMoviesData) {
-		dispatch(fetchMoviesSuccess(topMoviesData.films));
-	  }
-	} else {
-	  if (moviesData) {
-		dispatch(fetchMoviesSuccess(moviesData.films));
-	  } else if (error) {
-		dispatch(fetchMoviesFailure(error));
-	  }
-	}
-}, [dispatch, searchTerm, currentPage, moviesData, topMoviesData, error, selectedMovie]);
+	const {
+		data: moviesData,
+		error,
+		isLoading: isFetching,
+	} = useGetMoviesByKeywordQuery(
+		{ keyword: searchTerm, page: currentPage },
+		{ enabled: searchTerm !== "" }
+	);
+
+	const { data: topMoviesData } = useGetTopMoviesQuery(currentPage, {
+		enabled: searchTerm === "",
+	});
+
+	useEffect(() => {
+		dispatch(fetchMoviesStart());
+		if (searchTerm === "") {
+			if (topMoviesData) {
+				dispatch(fetchMoviesSuccess(topMoviesData.films));
+			}
+		} else {
+			if (moviesData) {
+				dispatch(fetchMoviesSuccess(moviesData.films));
+			} else if (error) {
+				dispatch(fetchMoviesFailure(error));
+			}
+		}
+	}, [
+		dispatch,
+		searchTerm,
+		currentPage,
+		moviesData,
+		topMoviesData,
+		error,
+		selectedMovie,
+	]);
 
 	const handleMovieClick = (movie) => {
 		setSelectedMovie(movie);
@@ -70,7 +85,6 @@ const MovieListFetcher = () => {
 	};
 
 	let filteredMovies = [...movies];
-	
 
 	const sortedMovies = filteredMovies.slice().sort((a, b) => {
 		if (filterType === "year") {
