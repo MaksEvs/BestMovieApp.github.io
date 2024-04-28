@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const moviesSlice = createSlice({
   name: 'movies',
   initialState: {
-    list: [], // массив фильмов
-    loading: false, // флаг загрузки данных
-    error: null, // ошибка при загрузке данных
+    list: [], 
+    loading: false, 
+    error: null,
     filterType: 'all',
     sortOrder: 'asc',
   },

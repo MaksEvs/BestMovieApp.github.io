@@ -5,55 +5,48 @@ import DebouncedInput from "./InputSearch/DebouncedInput";
 import SelectedMovie from "./SelectedMovie/SelectedMovie";
 import Pagination from "./Pagination/Pagination";
 import FilterButtonsContainer from "./FilterButtons/FilterButtonsContainer";
+import { useGetMoviesByKeywordQuery, useGetTopMoviesQuery } from "../../../store/apiSlice";
 import {
-	fetchMoviesStart,
-	fetchMoviesSuccess,
-	fetchMoviesFailure,
-	setFilterType,
-	setSortOrder,
-} from "../../../store/movies-slice";
+  fetchMoviesStart,
+  fetchMoviesSuccess,
+  fetchMoviesFailure,
+  setFilterType,
+  setSortOrder,
+} from "../../../store/moviesSlice";
 const MovieListContent = lazy(() => import("./MovieListContent"));
 
 const MovieListFetcher = () => {
-	const filterType = useSelector((state) => state.movies.filterType);
-	const sortOrder = useSelector((state) => state.movies.sortOrder);
-	const dispatch = useDispatch();
-	const movies = useSelector((state) => state.movies.list);
-	const isLoading = useSelector((state) => state.movies.loading);
+  const filterType = useSelector((state) => state.movies.filterType);
+  const sortOrder = useSelector((state) => state.movies.sortOrder);
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies.list);
+  const isLoading = useSelector((state) => state.movies.loading);
 
-	const [selectedMovie, setSelectedMovie] = useState(null);
-	const [currentPage, setCurrentPage] = useState(1);
-	const moviesPerPage = 10;
-	const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 10;
+  const [searchTerm, setSearchTerm] = useState("");
 
-	useEffect(() => {
-		dispatch(fetchMoviesStart());
-		const fetchMovies = async () => {
-			try {
-				let url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${searchTerm}&page=${currentPage}`;
-				if (searchTerm === "") {
-					url = `https://kinopoiskapiunofficial.tech/api/v2.1/films/top?type=TOP_100_POPULAR_FILMS&page=${currentPage}`;
-				}
-				const response = await fetch(url, {
-					method: "GET",
-					headers: {
-						"X-API-KEY": "3fc2842c-a40f-463a-806b-531db07f0746",
-						"Content-Type": "application/json",
-					},
-				});
-				if (!response.ok) {
-					throw new Error("Failed to fetch movies");
-				}
-				const data = await response.json();
-				dispatch(fetchMoviesSuccess(data.films));
-			} catch (error) {
-				console.error(error);
-				dispatch(fetchMoviesFailure(error.message));
-			}
-		};
-
-		fetchMovies();
-	}, [dispatch, currentPage, searchTerm]);
+  const { data: moviesData, error, isLoading: isFetching } = useGetMoviesByKeywordQuery(
+	{ keyword: searchTerm, page: currentPage },
+	{ enabled: searchTerm !== "" }
+  );
+  
+  const { data: topMoviesData } = useGetTopMoviesQuery(currentPage, {
+	enabled: searchTerm === ""
+  });
+  
+  useEffect(() => {
+	if (searchTerm === "") {
+	  if (topMoviesData) {
+		dispatch(fetchMoviesSuccess(topMoviesData.films));
+	  }
+	} else {
+	  if (moviesData) {
+		dispatch(fetchMoviesSuccess(moviesData.films));
+	  }
+	}
+  }, [dispatch, searchTerm, currentPage, moviesData, topMoviesData, selectedMovie]);
 
 	const handleMovieClick = (movie) => {
 		setSelectedMovie(movie);
