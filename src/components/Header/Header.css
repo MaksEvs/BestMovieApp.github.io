@@ -139,3 +139,21 @@ header {
 		padding-right: 30px;
 	}
 }
+
+@media screen and (max-width: 576px) {
+	header {
+		padding: 0;
+	}
+	.header__link{
+		font-size: 14px;
+	}
+	.logout_button{
+		font-size: 14px;
+	}
+	.username{
+		font-size: 15px;
+	}
+	.header__content{
+		width: 350px;
+	}
+}

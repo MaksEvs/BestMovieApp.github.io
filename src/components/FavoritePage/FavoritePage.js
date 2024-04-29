@@ -47,25 +47,28 @@ const FavoritesPage = (props) => {
 	return (
 		<div>
 			<Header />
-			<div
-				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
-			>
-				<ul className="favorites-list">
-					{currentItems.map((filmID) => (
-						<FavoriteFilmItem filmID={filmID} key={filmID} />
-					))}
-				</ul>
-				{/* <FavoritePagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					paginate={paginate}
-				/> */}
-				<FavoritePagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					paginate={paginate}
-				/>
-			</div>
+			{favorites.length === 0 ? (
+				<div
+					className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
+				>
+					<h1>Фильмов в избранном нету</h1>
+				</div>
+			) : (
+				<div
+					className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
+				>
+					<ul className="favorites-list">
+						{currentItems.map((filmID) => (
+							<FavoriteFilmItem filmID={filmID} key={filmID} />
+						))}
+					</ul>
+					<FavoritePagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						paginate={paginate}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

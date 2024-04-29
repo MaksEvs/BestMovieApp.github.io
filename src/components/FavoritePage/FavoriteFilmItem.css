@@ -15,6 +15,9 @@
 	position: relative;
 	border-radius: 25px;
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
+
 }
 
 .favorite-item:hover {
@@ -23,10 +26,40 @@
 }
 
 .favorite-img {
-	width: 100%;
-	height: 350px;
 	cursor: pointer;
 }
 .favorite-link {
 	list-style: none;
+}
+
+.favorite-wrapper{
+	margin-right: 20px;
+}
+
+.favorite-wrapper:last-child {
+	margin-right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .favorite-title {
+        font-size: 13px;
+    }
+
+    .favorite-item {
+        border-radius: 15px; 
+		margin-bottom: 20px;
+    }
+	.favorite-wrapper{
+		margin-right: 0;
+	}
+}
+
+@media screen and (max-width: 576px) {
+    .favorite-title {
+        font-size: 12px;
+    }
+
+    .favorite-item {
+        border-radius: 10px; 
+    }
 }

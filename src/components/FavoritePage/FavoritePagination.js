@@ -15,10 +15,15 @@ const FavoritePagination = ({ currentPage, totalPages, paginate }) => {
 					<li
 						key={number}
 						className={
-							currentPage === number ? "page-item active" : "page-item"
+							currentPage === number
+								? "favoritePage-item active"
+								: "favoritePage-item"
 						}
 					>
-						<button onClick={() => paginate(number)} className="page-link">
+						<button
+							onClick={() => paginate(number)}
+							className="favoritePage-link"
+						>
 							{number}
 						</button>
 					</li>

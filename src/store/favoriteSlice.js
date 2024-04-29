@@ -24,10 +24,13 @@ const favoriteSlice = createSlice({
 		setCurrentPage(state, action) {
 			state.currentPage = action.payload;
 		},
+		setFavorites(state, action) {
+			state.favorites = action.payload;
+		  }
 	},
 });
 
-export const { addToFavorites, removeFromFavorites, setCurrentPage } =
+export const { addToFavorites, removeFromFavorites, setCurrentPage, setFavorites } =
 	favoriteSlice.actions;
 
 export const selectFavorites = (state) => state.favorite.favorites; // Селектор для получения избранных фильмов
