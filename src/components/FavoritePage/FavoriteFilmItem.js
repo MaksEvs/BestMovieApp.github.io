@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import "./FavoriteFilmItem.css";
 
 const FavoriteFilmItem = ({ filmID }) => {
-	const { data, error, isLoading, isFetching } = useGetMovieByIdQuery(filmID);
+	const { data, isLoading } = useGetMovieByIdQuery(filmID);
 
 	return (
-		<li className="favorite-link">
-			{" "}
+		<>
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -23,7 +22,7 @@ const FavoriteFilmItem = ({ filmID }) => {
 					</li>
 				</Link>
 			)}
-		</li>
+		</>
 	);
 };
 

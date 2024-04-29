@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "./FavoritesPage.css";
 import { useTheme } from "../../context/ThemeContext";
 import FavoriteFilmItem from "./FavoriteFilmItem";
 import FavoritePagination from "./FavoritePagination";
+import {
+	selectCurrentPage,
+	setCurrentPage,
+} from "../../store/selectedPageSlice";
 
 const FavoritesPage = (props) => {
 	const { theme } = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const currentPage = useSelector(selectCurrentPage);
 
 	const username = localStorage.getItem("username");
 	const userString = localStorage.getItem(username);
@@ -16,24 +23,26 @@ const FavoritesPage = (props) => {
 	const favorites = user.favorites;
 
 	const itemsPerPage = 10;
-	const [currentPage, setCurrentPage] = useState(1);
-	const [currentItems, setCurrentItems] = useState([]);
-
-	useEffect(() => {
-		const indexOfLastItem = currentPage * itemsPerPage;
-		const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-		setCurrentItems(favorites.slice(indexOfFirstItem, indexOfLastItem));
-	}, [currentPage, favorites]);
-
 	const totalPages = Math.ceil(favorites.length / itemsPerPage);
 
 	const paginate = (pageNumber) => {
-		setCurrentPage(pageNumber);
+		dispatch(setCurrentPage(pageNumber));
+		localStorage.setItem("currentPage", pageNumber);
 	};
 
-	if (!props.isLoggedIn) {
-		navigate("/login");
-	}
+	useEffect(() => {
+		const currentPageFromStorage = localStorage.getItem("currentPage");
+		if (currentPageFromStorage) {
+			dispatch(setCurrentPage(parseInt(currentPageFromStorage)));
+		}
+		if (!props.isLoggedIn) {
+			navigate("/login");
+		}
+	}, [props.isLoggedIn, navigate, dispatch]);
+
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
 
 	return (
 		<div>
@@ -42,9 +51,9 @@ const FavoritesPage = (props) => {
 				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
 			>
 				<ul className="favorites-list">
-					{currentItems.map((filmID) => {
-						return <FavoriteFilmItem filmID={filmID} key={filmID} />;
-					})}
+					{currentItems.map((filmID) => (
+						<FavoriteFilmItem filmID={filmID} key={filmID} />
+					))}
 				</ul>
 				<FavoritePagination
 					currentPage={currentPage}

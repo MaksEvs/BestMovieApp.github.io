@@ -16,6 +16,7 @@ import {
 	setFilterType,
 	setSortOrder,
 } from "../../../store/moviesSlice";
+
 const MovieListContent = lazy(() => import("./MovieListContent"));
 
 const MovieListFetcher = () => {
@@ -83,7 +84,6 @@ const MovieListFetcher = () => {
 		);
 		setCurrentPage(1);
 	};
-
 	let filteredMovies = [...movies];
 
 	const sortedMovies = filteredMovies.slice().sort((a, b) => {

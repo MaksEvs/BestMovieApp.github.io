@@ -3,9 +3,9 @@ import authReducer from "./authSlice";
 import favoriteReducer from "./favoriteSlice";
 import moviesSlice from "./moviesSlice";
 import apiSlice from "./apiSlice";
+import selectedPageSlice from "./selectedPageSlice";
 
-// Импортируем middleware для RTK-Query
-import { setupListeners } from '@reduxjs/toolkit/query';
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 const store = configureStore({
 	reducer: {
@@ -13,13 +13,12 @@ const store = configureStore({
 		favorite: favoriteReducer,
 		movies: moviesSlice.reducer,
 		api: apiSlice.reducer,
+		selectedPage: selectedPageSlice,
 	},
-	// Добавляем middleware для RTK-Query
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
-// Устанавливаем слушателей для RTK-Query
 setupListeners(store.dispatch);
 
 export default store;
