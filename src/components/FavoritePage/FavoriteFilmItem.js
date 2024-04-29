@@ -4,25 +4,24 @@ import { Link } from "react-router-dom";
 import "./FavoriteFilmItem.css";
 
 const FavoriteFilmItem = ({ filmID }) => {
-	const { data, isLoading } = useGetMovieByIdQuery(filmID);
+	const { data, error, isLoading, isFetching } = useGetMovieByIdQuery(filmID);
 
 	return (
-		<div className="favorite-wrapper">
+		<li className="favorite-item">
+			{" "}
 			{isLoading ? (
 				<Loader />
 			) : (
 				<Link to={`/film/${data.kinopoiskId}`}>
-					<li className="favorite-item" key={data.kinopoiskId}>
-						<img
-							className="favorite-img"
-							src={data.posterUrlPreview}
-							alt={data.nameRu}
-						/>
-						<p className="favorite-title">{data.nameRu}</p>
-					</li>
+					<img
+						className="favorite-img"
+						src={data.posterUrlPreview}
+						alt={data.nameRu}
+					/>
+					<p className="favorite-title">{data.nameRu}</p>
 				</Link>
 			)}
-		</div>
+		</li>
 	);
 };
 
