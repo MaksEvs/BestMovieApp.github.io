@@ -5,6 +5,7 @@ import "./SelectedMovie.css";
 import Header from "../../../Header/Header";
 import LikeButton from "./LikeButton/LikeButton";
 import { useGetMovieByIdQuery } from "../../../../store/apiSlice";
+import Loader from "../Loader/Loader";
 
 const SelectedMovie = () => {
 	const { id } = useParams();
@@ -15,7 +16,13 @@ const SelectedMovie = () => {
 		document.body.className = theme;
 	}, [theme]);
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading)
+		return (
+			<div className="selected-loader">
+				{" "}
+				<Loader />
+			</div>
+		);
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (

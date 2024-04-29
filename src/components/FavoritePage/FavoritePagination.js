@@ -1,5 +1,5 @@
 import React from "react";
-import './FavoritePagination.css'
+import "./FavoritePagination.css";
 
 const FavoritePagination = ({ currentPage, totalPages, paginate }) => {
 	const pageNumbers = [];
@@ -15,10 +15,15 @@ const FavoritePagination = ({ currentPage, totalPages, paginate }) => {
 					<li
 						key={number}
 						className={
-							currentPage === number ? "favoritePage-item active" : "favoritePage-item"
+							currentPage === number
+								? "favoritePage-item active"
+								: "favoritePage-item"
 						}
 					>
-						<button onClick={() => paginate(number)} className="favoritePage-link">
+						<button
+							onClick={() => paginate(number)}
+							className="favoritePage-link"
+						>
 							{number}
 						</button>
 					</li>

@@ -1,32 +1,29 @@
-.favorite-pagination{
-    display: flex;
-    width: 300px;
-    justify-content: center; 
-    align-items: center;
-    margin: 0 auto;
-    padding: 0;
+.favorite-pagination {
+	display: flex;
+	width: 300px;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 0;
 }
 
-.favoritePage-item{
-    list-style: none;
+.favoritePage-item {
+	list-style: none;
 }
 
-.favoritePage-link{
-    font-size: 20px;
-    background: rgba(32, 40, 62, 0.8);
-
+.favoritePage-link {
+	font-size: 20px;
+	background: rgba(32, 40, 62, 0.8);
 }
 
 @media screen and (max-width: 768px) {
-    .favorite-pagination{
-        width: 200px;
-        justify-content: center;
-        padding-left: 0;
-    }
-    .favoritePage-link{
-        font-size: 20px;
-        background: rgba(32, 40, 62, 0.8);
-
-    }
+	.favorite-pagination {
+		width: 200px;
+		justify-content: center;
+		padding-left: 0;
+	}
+	.favoritePage-link {
+		font-size: 20px;
+		background: rgba(32, 40, 62, 0.8);
+	}
 }
-

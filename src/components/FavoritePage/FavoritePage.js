@@ -27,11 +27,11 @@ const FavoritesPage = (props) => {
 
 	const paginate = (pageNumber) => {
 		dispatch(setCurrentPage(pageNumber));
-		localStorage.setItem("currentPage", pageNumber);
+		localStorage.setItem("favoriteCurrentPage", pageNumber);
 	};
 
 	useEffect(() => {
-		const currentPageFromStorage = localStorage.getItem("currentPage");
+		const currentPageFromStorage = localStorage.getItem("favoriteCurrentPage");
 		if (currentPageFromStorage) {
 			dispatch(setCurrentPage(parseInt(currentPageFromStorage)));
 		}
