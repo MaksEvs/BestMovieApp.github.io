@@ -7,7 +7,7 @@ const FavoriteFilmItem = ({ filmID }) => {
 	const { data, error, isLoading, isFetching } = useGetMovieByIdQuery(filmID);
 
 	return (
-		<li className="movie-item">
+		<li className="favorite-item">
 			{" "}
 			{isLoading ? (
 				<Loader />
