@@ -45,8 +45,16 @@ const FavoritesPage = (props) => {
 	const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
 
 	return (
-		<div>
-			<Header />
+	<div>
+		<Header />
+		{favorites.length === 0 ? <div
+				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
+			>
+				<h1>Фильмов в избранном нету</h1>
+			</div> 
+			
+			: 		
+		
 			<div
 				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
 			>
@@ -60,8 +68,8 @@ const FavoritesPage = (props) => {
 					totalPages={totalPages}
 					paginate={paginate}
 				/>
-			</div>
-		</div>
+		</div>}
+	</div>
 	);
 };
 

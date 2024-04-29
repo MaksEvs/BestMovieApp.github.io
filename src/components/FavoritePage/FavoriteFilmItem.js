@@ -7,7 +7,7 @@ const FavoriteFilmItem = ({ filmID }) => {
 	const { data, isLoading } = useGetMovieByIdQuery(filmID);
 
 	return (
-		<>
+		<div className="favorite-wrapper">
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -22,7 +22,7 @@ const FavoriteFilmItem = ({ filmID }) => {
 					</li>
 				</Link>
 			)}
-		</>
+		</div>
 	);
 };
 
