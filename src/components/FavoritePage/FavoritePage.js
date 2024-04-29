@@ -57,7 +57,7 @@ const FavoritesPage = (props) => {
 				<div
 					className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
 				>
-					<ul className="favorites-list">
+					<ul className="movie-list">
 						{currentItems.map((filmID) => (
 							<FavoriteFilmItem filmID={filmID} key={filmID} />
 						))}
