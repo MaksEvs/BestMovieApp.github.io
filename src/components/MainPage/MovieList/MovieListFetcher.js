@@ -27,45 +27,59 @@ const MovieListFetcher = () => {
 	const isLoading = useSelector((state) => state.movies.loading);
 
 	const [selectedMovie, setSelectedMovie] = useState(null);
-	const [currentPage, setCurrentPage] = useState(1);
-	const moviesPerPage = 10;
+	const [currentPage, setCurrentPage] = useState(
+		parseInt(localStorage.getItem("currentPage")) || 1
+	);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [isSearchQuery, setIsSearchQuery] = useState(false);
+	const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-	const {
-		data: moviesData,
-		error,
-		isLoading: isFetching,
-	} = useGetMoviesByKeywordQuery(
+	const { data: moviesData, error: moviesError } = useGetMoviesByKeywordQuery(
 		{ keyword: searchTerm, page: currentPage },
-		{ enabled: searchTerm !== "" }
+		{ enabled: isSearchQuery }
 	);
 
-	const { data: topMoviesData } = useGetTopMoviesQuery(currentPage, {
-		enabled: searchTerm === "",
-	});
+	const { data: topMoviesData, error: topMoviesError } = useGetTopMoviesQuery(
+		currentPage,
+		{ enabled: !isSearchQuery }
+	);
 
 	useEffect(() => {
+		if (isInitialLoad) {
+			setIsInitialLoad(false);
+			return;
+		}
+
 		dispatch(fetchMoviesStart());
-		if (searchTerm === "") {
-			if (topMoviesData) {
-				dispatch(fetchMoviesSuccess(topMoviesData.films));
-			}
-		} else {
-			if (moviesData) {
-				dispatch(fetchMoviesSuccess(moviesData.films));
-			} else if (error) {
-				dispatch(fetchMoviesFailure(error));
-			}
+		if (isSearchQuery && moviesData) {
+			dispatch(fetchMoviesSuccess(moviesData.films));
+		} else if (!isSearchQuery && topMoviesData) {
+			dispatch(fetchMoviesSuccess(topMoviesData.films));
+		} else if (moviesError || topMoviesError) {
+			dispatch(fetchMoviesFailure(moviesError || topMoviesError));
 		}
 	}, [
 		dispatch,
-		searchTerm,
-		currentPage,
+		isSearchQuery,
 		moviesData,
 		topMoviesData,
-		error,
-		selectedMovie,
+		moviesError,
+		topMoviesError,
+		isInitialLoad,
+		currentPage,
 	]);
+
+	useEffect(() => {
+		localStorage.setItem("currentPage", currentPage);
+	}, [currentPage]);
+
+	if (isLoading) {
+		return <Loader />;
+	}
+
+	if (!topMoviesData) {
+		return <div>No movies :</div>;
+	}
 
 	const handleMovieClick = (movie) => {
 		setSelectedMovie(movie);
@@ -73,6 +87,8 @@ const MovieListFetcher = () => {
 
 	const handleInputChange = (value) => {
 		setSearchTerm(value);
+		setIsSearchQuery(value !== "");
+		setCurrentPage(1);
 	};
 
 	const handleFilterChange = (type) => {
@@ -82,10 +98,17 @@ const MovieListFetcher = () => {
 				type !== "all" ? (sortOrder === "asc" ? "desc" : "asc") : "asc"
 			)
 		);
-		setCurrentPage(1);
+		// Убираем сброс currentPage при изменении фильтра
+		// setCurrentPage(1);
 	};
-	let filteredMovies = [...movies];
 
+	const isFetching =
+		(isSearchQuery && (!moviesData || isLoading)) ||
+		(!isSearchQuery && (!topMoviesData || isLoading));
+
+	const hasData = isSearchQuery ? !!moviesData : !!topMoviesData;
+
+	let filteredMovies = [...movies];
 	const sortedMovies = filteredMovies.slice().sort((a, b) => {
 		if (filterType === "year") {
 			return sortOrder === "asc" ? a.year - b.year : b.year - a.year;
@@ -98,11 +121,7 @@ const MovieListFetcher = () => {
 		}
 	});
 
-	const indexOfLastMovie = currentPage * moviesPerPage;
-	const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-	const currentMovies = sortedMovies.slice(indexOfFirstMovie, indexOfLastMovie);
-
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const currentMovies = isSearchQuery ? moviesData.films : sortedMovies;
 
 	return (
 		<div>
@@ -124,14 +143,17 @@ const MovieListFetcher = () => {
 						sortOrder={sortOrder}
 						allMovies={filteredMovies}
 					/>
-					<MovieListContent
-						movies={currentMovies}
-						onMovieClick={handleMovieClick}
-					/>
+					{hasData && (
+						<MovieListContent
+							movies={currentMovies}
+							onMovieClick={handleMovieClick}
+						/>
+					)}
 					<Pagination
-						moviesPerPage={moviesPerPage}
-						totalMovies={filteredMovies.length}
-						paginate={paginate}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						totalPages={topMoviesData.pagesCount}
+						isFetching={isFetching}
 					/>
 				</Suspense>
 			)}

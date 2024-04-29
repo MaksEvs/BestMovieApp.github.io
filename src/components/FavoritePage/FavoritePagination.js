@@ -1,4 +1,5 @@
 import React from "react";
+import "./FavoritePagination.css";
 
 const FavoritePagination = ({ currentPage, totalPages, paginate }) => {
 	const pageNumbers = [];
@@ -9,7 +10,7 @@ const FavoritePagination = ({ currentPage, totalPages, paginate }) => {
 
 	return (
 		<nav>
-			<ul className="pagination">
+			<ul className="favorite-pagination">
 				{pageNumbers.map((number) => (
 					<li
 						key={number}

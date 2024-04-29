@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const apiKey = "be9f6d65-d4ac-468a-bb70-97ac247c7cfe";
+const apiKey = "60d88c1c-9dd4-447c-a020-cbd9ef01e010";
 
 const apiSlice = createApi({
 	reducerPath: "api",
@@ -17,7 +17,7 @@ const apiSlice = createApi({
 				`/api/v2.1/films/search-by-keyword?keyword=${keyword}&page=${page}`,
 		}),
 		getTopMovies: builder.query({
-			query: (page) =>
+			query: (page = 1) =>
 				`/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=${page}`,
 		}),
 		getMovieById: builder.query({

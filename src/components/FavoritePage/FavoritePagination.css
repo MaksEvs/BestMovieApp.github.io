@@ -1,0 +1,24 @@
+.favorite-pagination {
+	display: flex;
+	width: 300px;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.page-item {
+	list-style: none;
+}
+
+.page-link {
+	font-size: 20px;
+	background: rgba(32, 40, 62, 0.8);
+	margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+	.pagination {
+		width: 200px;
+		justify-content: center;
+	}
+}
