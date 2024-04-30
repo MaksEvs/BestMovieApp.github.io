@@ -56,7 +56,7 @@ input {
 	align-items: center;
 	margin-top: auto;
 	padding: 0;
-	width: 100%;
+	width: 344px;
 }
 
 .button button,
@@ -105,6 +105,8 @@ input {
 	border: 1px solid #ebeef5;
 	padding: 0px 6px;
 	border-radius: 8px;
+	width: 200px;
+	text-align: center;
 }
 
 .register:hover {
@@ -197,5 +199,12 @@ input {
 		margin-right: 15px;
 	}
 
+
+}
+
+@media screen and (max-width: 576px) {
+	.button {
+		width: 300px;
+	}
 
 }
