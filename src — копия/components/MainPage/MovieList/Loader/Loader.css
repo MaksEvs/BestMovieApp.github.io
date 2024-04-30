@@ -1,0 +1,17 @@
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+	color: #c4c5ca;
+	animation: spin 1s linear infinite;
+	font-size: 3rem;
+	display: block;
+	margin: 0 auto;
+}
+
+.loader-container {
+	text-align: center;
+}
