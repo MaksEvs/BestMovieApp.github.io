@@ -4,9 +4,9 @@ import './DebouncedInput.css';
 import useDebounce from './useDebounce';
 import { useTheme } from "../../../../context/ThemeContext";
 
-const DebouncedInput = ({ handleInputChange, delay}) => {
+const DebouncedInput = ({ handleInputChange, searchTerm, delay }) => {
     
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(searchTerm); 
     const [, handleDebounce] = useDebounce(delay);
     const { theme } = useTheme();
 	
@@ -16,14 +16,10 @@ const DebouncedInput = ({ handleInputChange, delay}) => {
 
     const handleChange = (event) => {
         const value = event.target.value;
-        console.log(value)
+        setInputValue(value);
         if (value.trim() === '' && value.length !== 0 ) {
-            setInputValue('');
-            handleInputChange('');
-            
-            
+            handleInputChange('');  
         } else {
-            setInputValue(value); 
             handleDebounce(value, handleInputChange);
         }
     };
@@ -41,6 +37,7 @@ const DebouncedInput = ({ handleInputChange, delay}) => {
 
 DebouncedInput.propTypes = {
     handleInputChange: PropTypes.func,
+    searchTerm: PropTypes.string,
     delay: PropTypes.number
 }
 

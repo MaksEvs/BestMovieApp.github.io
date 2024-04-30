@@ -145,15 +145,21 @@ header {
 		padding: 0;
 	}
 	.header__link{
-		font-size: 14px;
+		font-size: 13px;
+		margin-left: 10px;
 	}
 	.logout_button{
-		font-size: 14px;
+		font-size: 13px;
 	}
 	.username{
-		font-size: 15px;
+		font-size: 14px;
+		margin-left: 0;
 	}
 	.header__content{
 		width: 350px;
+	}
+	.user-block {
+		width: 150px;
+
 	}
 }
