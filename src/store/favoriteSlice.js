@@ -7,7 +7,7 @@ const getInitialFavorites = () => {
 
 const initialState = {
 	favorites: getInitialFavorites(),
-	currentPage: 1, // Добавляем новое поле для хранения текущей страницы
+	currentPage: 1, 
 };
 
 const favoriteSlice = createSlice({
@@ -20,7 +20,7 @@ const favoriteSlice = createSlice({
 		removeFromFavorites(state, action) {
 			state.favorites = state.favorites.filter((id) => id !== action.payload);
 		},
-		// Новый экшен для установки текущей страницы
+
 		setCurrentPage(state, action) {
 			state.currentPage = action.payload;
 		},
@@ -33,7 +33,7 @@ const favoriteSlice = createSlice({
 export const { addToFavorites, removeFromFavorites, setCurrentPage, setFavorites } =
 	favoriteSlice.actions;
 
-export const selectFavorites = (state) => state.favorite.favorites; // Селектор для получения избранных фильмов
-export const selectCurrentPage = (state) => state.favorite.currentPage; // Селектор для получения текущей страницы
+export const selectFavorites = (state) => state.favorite.favorites; 
+export const selectCurrentPage = (state) => state.favorite.currentPage; 
 
 export default favoriteSlice.reducer;

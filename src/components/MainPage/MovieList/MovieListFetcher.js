@@ -71,6 +71,10 @@ const MovieListFetcher = () => {
 		selectedMovie,
 	]);
 
+  useEffect(() => {
+    localStorage.setItem("searchTerm", searchTerm);
+  }, [searchTerm]);
+
   const handleMovieClick = (movie) => {
     setSelectedMovie(movie);
   };
@@ -115,7 +119,7 @@ const MovieListFetcher = () => {
 		<div>
 			<h2>Открой для себя мир кино</h2>
 
-			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
+			<DebouncedInput handleInputChange={handleInputChange} delay={1000} searchTerm={searchTerm} />
 			{selectedMovie && (
 				<SelectedMovie
 					movieId={selectedMovie.filmId}
