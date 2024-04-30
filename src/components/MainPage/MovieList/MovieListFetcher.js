@@ -48,32 +48,28 @@ const MovieListFetcher = () => {
     enabled: searchTerm === "",
   });
 
-  useEffect(() => {
-    dispatch(fetchMoviesStart());
-    if (searchTerm === "") {
-      if (topMoviesData) {
-        dispatch(fetchMoviesSuccess(topMoviesData.films));
-      }
-    } else {
-      if (moviesData) {
-        dispatch(fetchMoviesSuccess(moviesData.films));
-      } else if (error) {
-        dispatch(fetchMoviesFailure(error));
-      }
-    }
-  }, [
-    dispatch,
-    searchTerm,
-    currentPage,
-    moviesData,
-    topMoviesData,
-    error,
-    selectedMovie,
-  ]);
-  
-  useEffect(() => {
-    localStorage.setItem("searchTerm", searchTerm);
-  }, [searchTerm]);
+	useEffect(() => {
+		dispatch(fetchMoviesStart());
+		if (searchTerm === "") {
+			if (topMoviesData) {
+				dispatch(fetchMoviesSuccess(topMoviesData.films));
+			}
+		} else {
+			if (moviesData) {
+				dispatch(fetchMoviesSuccess(moviesData.films));
+			} else if (error) {
+				dispatch(fetchMoviesFailure(error));
+			}
+		}
+	}, [
+		dispatch,
+		searchTerm,
+		currentPage,
+		moviesData,
+		topMoviesData,
+		error,
+		selectedMovie,
+	]);
 
   const handleMovieClick = (movie) => {
     setSelectedMovie(movie);
@@ -115,40 +111,39 @@ const MovieListFetcher = () => {
     localStorage.setItem("currentPage", pageNumber);
 };
 
-  return (
-    <div>
-      <h2>Открой для себя мир кино</h2>
-	  
+	return (
+		<div>
+			<h2>Открой для себя мир кино</h2>
 
-      <DebouncedInput handleInputChange={handleInputChange} delay={1000} searchTerm={searchTerm} />
-      {selectedMovie && (
-        <SelectedMovie
-          movieId={selectedMovie.filmId}
-          selectedMovie={selectedMovie}
-          setSelectedMovie={setSelectedMovie}
-        />
-      )}
-      {!isLoading && (
-        <Suspense fallback={<Loader />}>
-          <FilterButtonsContainer
-            handleFilterChange={handleFilterChange}
-            filterType={filterType}
-            sortOrder={sortOrder}
-            allMovies={filteredMovies}
-          />
-          <MovieListContent
-            movies={currentMovies}
-            onMovieClick={handleMovieClick}
-          />
-          <Pagination
-            moviesPerPage={moviesPerPage}
-            totalMovies={filteredMovies.length}
-            paginate={paginate}
-          />
-        </Suspense>
-      )}
-    </div>
-  );
+			<DebouncedInput handleInputChange={handleInputChange} delay={1000} />
+			{selectedMovie && (
+				<SelectedMovie
+					movieId={selectedMovie.filmId}
+					selectedMovie={selectedMovie}
+					setSelectedMovie={setSelectedMovie}
+				/>
+			)}
+			{!isLoading && (
+				<Suspense fallback={<Loader />}>
+					<FilterButtonsContainer
+						handleFilterChange={handleFilterChange}
+						filterType={filterType}
+						sortOrder={sortOrder}
+						allMovies={filteredMovies}
+					/>
+					<MovieListContent
+						movies={currentMovies}
+						onMovieClick={handleMovieClick}
+					/>
+					<Pagination
+						moviesPerPage={moviesPerPage}
+						totalMovies={filteredMovies.length}
+						paginate={paginate}
+					/>
+				</Suspense>
+			)}
+		</div>
+	);
 };
 
 

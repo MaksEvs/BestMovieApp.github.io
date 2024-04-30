@@ -9,10 +9,10 @@ const DebouncedInput = ({ handleInputChange, searchTerm, delay }) => {
     const [inputValue, setInputValue] = useState(searchTerm); 
     const [, handleDebounce] = useDebounce(delay);
     const { theme } = useTheme();
-	
-	useEffect(() => {
-		document.body.className = theme;
-	}, [theme]);
+  
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
     const handleChange = (event) => {
         const value = event.target.value;
