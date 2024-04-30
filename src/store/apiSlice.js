@@ -17,7 +17,7 @@ const apiSlice = createApi({
 				`/api/v2.1/films/search-by-keyword?keyword=${keyword}&page=${page}`,
 		}),
 		getTopMovies: builder.query({
-			query: (page = 1) =>
+			query: (page) =>
 				`/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=${page}`,
 		}),
 		getMovieById: builder.query({
