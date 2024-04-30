@@ -20,8 +20,8 @@ const RegisterPageContainer = () => {
 		setFormData({ ...formData, [name]: value });
 	};
 
-	const registerHandler = (e) => {
-		e.preventDefault();
+	const registerHandler = (event) => {
+		event.preventDefault();
 		const { username, password, repeatPassword } = formData;
 		const userExists = !!localStorage.getItem(username);
 		if (userExists) {

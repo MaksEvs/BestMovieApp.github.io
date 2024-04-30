@@ -7,70 +7,66 @@ import { useTheme } from "../../context/ThemeContext";
 import FavoriteFilmItem from "./FavoriteFilmItem";
 import FavoritePagination from "./FavoritePagination";
 import {
-  selectCurrentPage,
-  setCurrentPage,
+	selectCurrentPage,
+	setCurrentPage,
 } from "../../store/selectedPageSlice";
+import { selectIsLoggedIn } from "../../store/authSlice";
 
-const FavoritesPage = (props) => {
-  const { theme } = useTheme();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const currentPage = useSelector(selectCurrentPage);
+const FavoritesPage = () => {
+	const { theme } = useTheme();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const currentPage = useSelector(selectCurrentPage);
+	const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const username = localStorage.getItem("username");
-  const userString = localStorage.getItem(username);
-  const user = JSON.parse(userString);
-  const favorites = user.favorites;
+	console.log("favorite", isLoggedIn);
 
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(favorites.length / itemsPerPage);
+	const username = localStorage.getItem("username");
+	const userString = localStorage.getItem(username);
+	const user = JSON.parse(userString);
+	const favorites = user ? user.favorites : [];
 
-  const paginate = (pageNumber) => {
-    dispatch(setCurrentPage(pageNumber));
-    localStorage.setItem("currentPageFavorites", pageNumber);
-    };
+	const itemsPerPage = 10;
+	const totalPages = Math.ceil(favorites.length / itemsPerPage);
 
-  useEffect(() => {
-    const currentPageFromStorage = localStorage.getItem("currentPageFavorites");
-    if (currentPageFromStorage) {
-      dispatch(setCurrentPage(parseInt(currentPageFromStorage)));
-    }
-    if (!props.isLoggedIn) {
-      navigate("/login");
-    }
-    }, [props.isLoggedIn, navigate, dispatch]);
+	const paginate = (pageNumber) => {
+		dispatch(setCurrentPage(pageNumber));
+		localStorage.setItem("favoriteCurrentPage", pageNumber);
+	};
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
+	useEffect(() => {
+		const currentPageFromStorage = localStorage.getItem("favoriteCurrentPage");
+		if (currentPageFromStorage) {
+			dispatch(setCurrentPage(parseInt(currentPageFromStorage)));
+		}
+		if (!isLoggedIn) {
+			navigate("/login");
+		}
+	}, [isLoggedIn, navigate, dispatch]);
 
-  return (
-    <div>
-      <Header />
-      {favorites.length === 0 ? (
-        <div
-          className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
-        >
-          <h1>Фильмов в избранном нету</h1>
-        </div>
-      ) : (
-        <div
-          className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
-        >
-          <ul className="favorites-list">
-            {currentItems.map((filmID) => (
-              <FavoriteFilmItem filmID={filmID} key={filmID} />
-            ))}
-          </ul>
-          <FavoritePagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            paginate={paginate}
-          />
-        </div>
-      )}
-    </div>
-  );
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = favorites.slice(indexOfFirstItem, indexOfLastItem);
+
+	return (
+		<div>
+			<Header />
+			<div
+				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
+			>
+				<ul className="favorites-list">
+					{currentItems.map((filmID) => (
+						<FavoriteFilmItem filmID={filmID} key={filmID} />
+					))}
+				</ul>
+				<FavoritePagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					paginate={paginate}
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default FavoritesPage;

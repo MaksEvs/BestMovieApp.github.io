@@ -20,8 +20,10 @@ const App = () => {
 	useEffect(() => {
 		const username = localStorage.getItem("username");
 		if (username) {
+			setIsLoggedIn(true);
 			dispatch(login({ username }));
 		} else {
+			setIsLoggedIn(false);
 			dispatch(logout());
 		}
 	}, [dispatch]);

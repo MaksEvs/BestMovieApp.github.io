@@ -13,19 +13,13 @@ const Header = () => {
 	const currentPage = location.pathname;
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const username = useSelector((state) => state.auth.username);
-	const favoritesLink = isLoggedIn ? "/favorites" : "/login";
+
 	const dispatch = useDispatch();
 
 	const logoutHandler = () => {
 		dispatch(logout());
 		localStorage.removeItem("username");
 		navigate("/");
-	};
-
-	const favoritesClickHandler = () => {
-		if (!isLoggedIn) {
-			navigate("/login");
-		}
 	};
 
 	return (
@@ -55,16 +49,11 @@ const Header = () => {
 			</div>
 
 			<div className="header__content">
-				{(currentPage !== "/login" && currentPage !== "/register") ||
-				!isLoggedIn ? (
-					<Link
-						to={favoritesLink}
-						className="header__link"
-						onClick={favoritesClickHandler}
-					>
+				{currentPage !== "/login" && currentPage !== "/register" && (
+					<Link to="/favorites" className="header__link">
 						Избранное
 					</Link>
-				) : null}
+				)}
 
 				{isLoggedIn ? (
 					<div className="user-block">

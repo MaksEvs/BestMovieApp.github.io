@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import "./FavoriteFilmItem.css";
 
 const FavoriteFilmItem = ({ filmID }) => {
-	const { data, error, isLoading, isFetching } = useGetMovieByIdQuery(filmID);
+	const { data, error, isLoading } = useGetMovieByIdQuery(filmID);
 
 	return (
 		<li className="favorite-item">
-			{" "}
 			{isLoading ? (
 				<Loader />
+			) : error ? (
+				<p className="error-message">Что-то пошло не так</p>
 			) : (
 				<Link to={`/film/${data.kinopoiskId}`}>
 					<img

@@ -10,6 +10,7 @@ const LoginPageContainer = () => {
 		username: "",
 		password: "",
 	});
+	const [error, setError] = useState("");
 	const dispatch = useDispatch();
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -23,12 +24,19 @@ const LoginPageContainer = () => {
 
 	const loginHandler = (event) => {
 		event.preventDefault();
-		const { username } = formData;
-		const userExists = !!localStorage.getItem(username);
-		if (userExists) {
-			dispatch(login({ username }));
-			localStorage.setItem("username", username);
+		const { username, password } = formData;
+		const userExists = localStorage.getItem(username);
+		if (!userExists) {
+			setError("Пользователя с таким именем не существует");
+			return;
 		}
+		const userData = JSON.parse(userExists);
+		if (userData.password !== password) {
+			setError("Неверный пароль");
+			return;
+		}
+		dispatch(login({ username }));
+		localStorage.setItem("username", username);
 	};
 
 	if (isLoggedIn) {
@@ -42,6 +50,7 @@ const LoginPageContainer = () => {
 				formData={formData}
 				inputChangeHandler={inputChangeHandler}
 				loginHandler={loginHandler}
+				error={error}
 			/>
 		</>
 	);
