@@ -1,0 +1,37 @@
+.button-like{
+    width: 200px;
+    height: 56px;
+	border-radius: 12px;
+    padding: 8px;
+    border: 1px solid rgba(18, 24, 41, 0.8);
+}
+
+.button-like.light {
+	color: #333;
+
+}
+
+.button-like.dark {
+	color: #ebeef5;
+    border: 1px solid #ebeef5;
+}
+
+@media screen and (max-width: 768px) {
+    .button-like {
+        width: 150px; 
+        height: 46px; 
+        border-radius: 10px; 
+        padding: 6px; 
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .button-like {
+        width: 120px; 
+        height: 40px; 
+        border-radius: 8px;
+        padding: 4px;
+        font-size: 10px;
+    }
+}

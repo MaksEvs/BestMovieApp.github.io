@@ -1,0 +1,41 @@
+.wrapper {
+	background: url("../../assets/Background.png") center center/cover no-repeat;
+	padding: 50px 120px 10px 120px;
+	height: 100%;
+	min-height: 100vh;
+}
+
+h1 {
+	font-size: 40px;
+	margin-top: 0;
+}
+
+.light .wrapper {
+	color: #333;
+	background-color: #fff;
+}
+
+.dark .wrapper {
+	color: #ebeef5;
+	background-color: #121829;
+	height: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+	.wrapper{
+		padding: 30px 45px 10px 45px;
+	}
+	h1 {
+		font-size: 35px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.wrapper{
+		padding: 30px 45px 10px 45px;
+	}
+	h1 {
+		font-size: 21px;
+	}
+}

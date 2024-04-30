@@ -1,0 +1,70 @@
+.wrapper-registr {
+	background: url("../../assets/Background.png") center center/cover no-repeat;
+	padding: 50px 120px 10px 120px;
+	height: 100%;
+}
+
+.light .wrapper-registr {
+	color: #333;
+	background-color: #fff;
+	height: 100vh;
+}
+
+.dark .wrapper-registr {
+	color: #ebeef5;
+	background-color: #121829;
+	height: 100vh;
+}
+
+h1 {
+	margin-bottom: 50px;
+}
+
+form {
+	box-sizing: border-box;
+	display: inline-block;
+	margin-bottom: 50px;
+	height: auto;
+	width: 250px;
+}
+
+.registration {
+	margin-top: 20px;
+	font-size: 18px;
+	border: 1px solid #ebeef5;
+	border-radius: 8px;
+	height: 40px;
+	background: transparent;
+	cursor: pointer;
+	width: 100%;
+}
+
+.registration:hover {
+	transition: 0.5s all;
+	opacity: 0.7;
+}
+
+.light-theme.registration {
+	color: black;
+	border: 1px solid #000;
+}
+
+.dark-theme.registration {
+	color: white;
+	border: 1px solid #ebeef5;
+	background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper-registr {
+        padding: 30px;
+    }
+
+    form {
+        width: 200px;
+    }
+
+    .registration {
+        font-size: 18px;
+    }
+}
