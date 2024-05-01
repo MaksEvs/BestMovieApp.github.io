@@ -51,6 +51,16 @@ const FavoritesPage = () => {
 	return (
 		<div>
 			<Header />
+			{favorites.length === 0 ? 
+			
+			<div
+				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
+			>
+			<h1>Фильмов в избранном нету</h1>
+			</div>
+			
+			:
+			
 			<div
 				className={`wrapper-favorites ${theme === "dark" ? "dark" : "light"}`}
 			>
@@ -64,7 +74,11 @@ const FavoritesPage = () => {
 					totalPages={totalPages}
 					paginate={paginate}
 				/>
-			</div>
+			</div> }
+
+			
+
+			
 		</div>
 	);
 };

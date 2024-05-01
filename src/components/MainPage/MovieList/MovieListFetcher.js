@@ -138,10 +138,17 @@ const MovieListFetcher = () => {
 						sortOrder={sortOrder}
 						allMovies={filteredMovies}
 					/>
+					
+
+				{isLoading ? <Loader />
+				
+				:
 					<MovieListContent
-						movies={currentMovies}
-						onMovieClick={handleMovieClick}
-					/>
+					movies={currentMovies}
+					onMovieClick={handleMovieClick}
+					isLoading={isLoading}
+				/>}
+
 					<Pagination
 						moviesPerPage={moviesPerPage}
 						totalMovies={filteredMovies.length}
