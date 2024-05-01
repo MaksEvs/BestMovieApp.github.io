@@ -37,37 +37,50 @@ const MovieListFetcher = () => {
 
 	const {
 		data: moviesData,
-		error,
+		error: moviesError,
 		isLoading: isFetching,
 	} = useGetMoviesByKeywordQuery(
 		{ keyword: searchTerm, page: currentPage },
 		{ enabled: searchTerm !== "" }
 	);
-
-	const { data: topMoviesData } = useGetTopMoviesQuery(currentPage, {
+	
+	const {
+		data: topMoviesData,
+		error: topMoviesError,
+	} = useGetTopMoviesQuery(currentPage, {
 		enabled: searchTerm === "",
 	});
 
 	useEffect(() => {
-		dispatch(fetchMoviesStart());
-		if (searchTerm === "") {
-			if (topMoviesData) {
-				dispatch(fetchMoviesSuccess(topMoviesData.films));
+		try {
+			// throw new Error("Test error in useEffect"); 
+			dispatch(fetchMoviesStart());
+			if (searchTerm === "") {
+				if (topMoviesData) {
+					dispatch(fetchMoviesSuccess(topMoviesData.films));
+				}
+				if (topMoviesError) {
+					dispatch(fetchMoviesFailure(topMoviesError));
+				}
+			} else {
+				if (moviesData) {
+					dispatch(fetchMoviesSuccess(moviesData.films));
+				} else if (moviesError) {
+					dispatch(fetchMoviesFailure(moviesError));
+				}
 			}
-		} else {
-			if (moviesData) {
-				dispatch(fetchMoviesSuccess(moviesData.films));
-			} else if (error) {
-				dispatch(fetchMoviesFailure(error));
-			}
+		} catch (error) {
+			console.error("Error fetching movies:", error);
+			dispatch(fetchMoviesFailure(error));
 		}
 	}, [
 		dispatch,
 		searchTerm,
 		currentPage,
 		moviesData,
+		moviesError,
 		topMoviesData,
-		error,
+		topMoviesError,
 		selectedMovie,
 	]);
 
@@ -114,50 +127,68 @@ const MovieListFetcher = () => {
 		setCurrentPage(pageNumber);
 		localStorage.setItem("currentPage", pageNumber);
 	};
+
+	// const throwError = () => {
+	// 	try {
+	// 		throw new Error("This is a test error for ErrorBoundary");
+	// 	} catch (error) {
+	// 		console.error("Error caught in throwError:", error);
+	// 	}
+	// };
+
 	return (
-		<div>
-			<h2>Открой для себя мир кино</h2>
+	<div>
+		<h2>Открой для себя мир кино</h2>
 
-			<DebouncedInput
-				handleInputChange={handleInputChange}
-				delay={1000}
-				searchTerm={searchTerm}
+		<DebouncedInput
+			handleInputChange={handleInputChange}
+			delay={1000}
+			searchTerm={searchTerm}
+		/>
+		{selectedMovie && (
+			<SelectedMovie
+				movieId={selectedMovie.filmId}
+				selectedMovie={selectedMovie}
+				setSelectedMovie={setSelectedMovie}
 			/>
-			{selectedMovie && (
-				<SelectedMovie
-					movieId={selectedMovie.filmId}
-					selectedMovie={selectedMovie}
-					setSelectedMovie={setSelectedMovie}
-				/>
-			)}
-			{!isLoading && (
-				<Suspense fallback={<Loader />}>
-					<FilterButtonsContainer
-						handleFilterChange={handleFilterChange}
-						filterType={filterType}
-						sortOrder={sortOrder}
-						allMovies={filteredMovies}
-					/>
-					
+          
+		)}
+		{!isLoading && (
+			<Suspense fallback={<Loader />}>
+				{moviesError && (moviesError.status === 402 || moviesError.status === 401 ) ?  (
+					<h2>Фильмов нет, для корректной работы, пожалуйста, смените API-ключ</h2>
+				) : (
+					<>
+						{filteredMovies.length === 0? (
+							<h2>Нет доступных фильмов</h2>
+						) : (
+							<>
+								<FilterButtonsContainer
+									handleFilterChange={handleFilterChange}
+									filterType={filterType}
+									sortOrder={sortOrder}
+									allMovies={filteredMovies}
+								/>
+								<MovieListContent
+									movies={currentMovies}
+									onMovieClick={handleMovieClick}
+								/>
+								<Pagination
+									moviesPerPage={moviesPerPage}
+									totalMovies={filteredMovies.length}
+									paginate={paginate}
+									currentPage={currentPage}
+								/>
+							</>
+						)}
+					</>
+				)}
+			</Suspense>
+		)}
+				{/* <button onClick={throwError}>Generate Error</button> */}
+	</div>
+);
 
-				{isLoading ? <Loader />
-				
-				:
-					<MovieListContent
-					movies={currentMovies}
-					onMovieClick={handleMovieClick}
-					isLoading={isLoading}
-				/>}
-
-					<Pagination
-						moviesPerPage={moviesPerPage}
-						totalMovies={filteredMovies.length}
-						paginate={paginate}
-					/>
-				</Suspense>
-			)}
-		</div>
-	);
 };
 
 export default MovieListFetcher;

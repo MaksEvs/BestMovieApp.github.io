@@ -9,6 +9,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(
@@ -49,41 +50,43 @@ const App = () => {
 	return (
 		<ThemeProvider>
 			<BrowserRouter>
-				<div>
-					<Routes>
-						<Route
-							path="/"
-							element={
-								<MainPage
-									isLoggedIn={isLoggedIn}
-									onLogout={handleLogout}
-									searchValue={searchValue}
-									setSearchValue={setSearchValue}
-								/>
-							}
-						/>
-						<Route
-							path="/login"
-							element={<LoginPageContainer onLogin={handleLogin} />}
-						/>
-						<Route
-							path="/register"
-							element={<RegisterPageContainer onRegister={handleRegister} />}
-						/>
-						<Route
-							path="/favorites"
-							element={
-								<FavoritesPage
-									isLoggedIn={isLoggedIn}
-									onLogout={handleLogout}
-								/>
-							}
-						/>
-						<Route path="/film/:id" element={<SelectedMovie />} />
-						<Route path="/not-found" element={<NotFoundPage />} />
-						<Route path="*" element={<Navigate to="/not-found" />} />
-					</Routes>
-				</div>
+			    <ErrorBoundary>
+					<div>
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<MainPage
+										isLoggedIn={isLoggedIn}
+										onLogout={handleLogout}
+										searchValue={searchValue}
+										setSearchValue={setSearchValue}
+									/>
+								}
+							/>
+							<Route
+								path="/login"
+								element={<LoginPageContainer onLogin={handleLogin} />}
+							/>
+							<Route
+								path="/register"
+								element={<RegisterPageContainer onRegister={handleRegister} />}
+							/>
+							<Route
+								path="/favorites"
+								element={
+									<FavoritesPage
+										isLoggedIn={isLoggedIn}
+										onLogout={handleLogout}
+									/>
+								}
+							/>
+							<Route path="/film/:id" element={<SelectedMovie />} />
+							<Route path="/not-found" element={<NotFoundPage />} />
+							<Route path="*" element={<Navigate to="/not-found" />} />
+						</Routes>
+					</div>
+				</ErrorBoundary>
 			</BrowserRouter>
 		</ThemeProvider>
 	);

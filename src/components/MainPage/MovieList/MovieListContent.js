@@ -6,7 +6,6 @@ import "./MovieList.css";
 
 const MovieListContent = ({ movies, onMovieClick, isLoading }) => {
 
-
 	return (
 		<div>
 			{isLoading ? (
