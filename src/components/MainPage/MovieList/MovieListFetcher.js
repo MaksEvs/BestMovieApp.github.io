@@ -151,6 +151,7 @@ const MovieListFetcher = () => {
 				selectedMovie={selectedMovie}
 				setSelectedMovie={setSelectedMovie}
 			/>
+          
 		)}
 		{!isLoading && (
 			<Suspense fallback={<Loader />}>
@@ -187,6 +188,7 @@ const MovieListFetcher = () => {
 				{/* <button onClick={throwError}>Generate Error</button> */}
 	</div>
 );
+
 };
 
 export default MovieListFetcher;

@@ -49,11 +49,9 @@ const Header = () => {
 			</div>
 
 			<div className="header__content">
-				{currentPage !== "/login" && currentPage !== "/register" && (
 					<Link to="/favorites" className="header__link">
 						Избранное
 					</Link>
-				)}
 
 				{isLoggedIn ? (
 					<div className="user-block">

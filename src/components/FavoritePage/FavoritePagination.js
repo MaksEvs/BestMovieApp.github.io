@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../../store/selectedPageSlice";
-import "./FavoritePagination.css";
+import { setCurrentPage } from "../../store/favoriteSlice";
+import './FavoritePagination.css';
 
 const FavoritePagination = ({ totalPages }) => {
-	const dispatch = useDispatch();
-	const currentPage = useSelector((state) => state.selectedPage.currentPage);
+  const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.favorite.currentPage);
 
-	const paginate = (pageNumber) => {
-		dispatch(setCurrentPage(pageNumber));
-		localStorage.setItem("currentPageFavorites", pageNumber);
-	};
+  const paginate = (pageNumber) => {
+    dispatch(setCurrentPage(pageNumber));
+    localStorage.setItem("currentPageFavorites", pageNumber);
+  };
 
 	const pageNumbers = [];
 	for (let i = 1; i <= totalPages; i++) {

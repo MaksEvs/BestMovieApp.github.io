@@ -15,6 +15,7 @@ const apiKey = "3fc2842c-a40f-463a-806b-531db07f0746";
 // 7 60d88c1c-9dd4-447c-a020-cbd9ef01e010
 // 8 37c21d56-179c-4e5d-9149-af85b53e8f5f
 
+
 const apiSlice = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
