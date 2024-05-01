@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import "./MovieList.css";
 
 const MovieListContent = ({ movies, onMovieClick }) => {
-	if (!movies || movies.length === 0) {
-		return <div className="missing-movie">Нет доступных фильмов.</div>;
-	}
 
 	return (
 		<ul className="movie-list">
